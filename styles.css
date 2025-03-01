@@ -1,36 +1,37 @@
-/* 전체 페이지의 기본 스타일 (처음 페이지는 화이트 톤) */
+/* 기본 설정 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff; /* 깔끔한 화이트 배경 */
-    color: #333; /* 기본 글씨 색 */
+    background-color: #ffffff;
+    color: #333;
 }
 
 /* 헤더 스타일 */
 header {
-    background-color: #f5f5f5; /* 연한 그레이로 심플하게 */
-    color: #333;
-    padding: 20px 0;
+    background-color: #512da8;
+    color: white;
+    padding: 20px;
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    border-bottom: 2px solid #e0e0e0; /* 깔끔한 하단 라인 */
 }
 
-/* 내비게이션 메뉴 스타일 */
+/* 내비게이션 스타일 */
 nav ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
 }
 
 nav ul li a {
-    color: #444;
+    color: white;
     text-decoration: none;
     font-weight: bold;
 }
@@ -39,50 +40,58 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* 키보드 소개 섹션 (깔끔한 화이트 스타일 유지) */
-#introduction {
-    padding: 20px;
-    margin: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+/* 검색창 스타일 */
+#search {
+    text-align: center;
+    margin: 20px 0;
 }
 
-/* 키감 체험하기 섹션 (연한 주황 & 노랑 톤 추가) */
-#tactile-experience {
+#searchBar {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #6a1b9a;
+    border-radius: 5px;
+}
+
+/* 키보드 목록 스타일 */
+#keyboard-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
     padding: 20px;
-    margin: 20px;
-    background-color: #fff7e6; /* 연한 오렌지 배경 */
+}
+
+.keyboard-item {
+    text-align: center;
+    padding: 20px;
+    background: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
 }
 
-/* 푸터 스타일 */
-footer {
-    background-color: #ffcc80; /* 연한 오렌지 */
-    color: #5d4037;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
+.keyboard-item img {
     width: 100%;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: 10px;
 }
 
-/* 푸터 오른쪽 하단 디자이너 정보 */
-.designer-info {
+.keyboard-item h3 {
+    margin: 10px 0;
+}
+
+.keyboard-item p {
     font-size: 14px;
-    color: #bf360c;
-    margin-right: 20px;
+    color: #666;
 }
 
 /* 버튼 스타일 */
 button {
     padding: 10px 20px;
-    background-color: #ffa726; /* 따뜻한 오렌지 */
-    color: #fff;
+    background-color: #6a1b9a;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -91,24 +100,68 @@ button {
 }
 
 button:hover {
-    background-color: #fb8c00; /* 좀 더 진한 오렌지 */
+    background-color: #512da8;
 }
 
-/* 수제 윤활 키보드 페이지 전용 스타일 */
-body.lubed-keyboard {
-    background-color: #f8bbd0; /* 연핑크색 배경 */
-    color: #6a1b9a; /* 보라색 텍스트 */
+/* 키감 체험 버튼 */
+#tactile-experience button {
+    background-color: #ffa726;
 }
 
-body.lubed-keyboard header {
-    background-color: #7e57c2; /* 보라색 */
-    color: #fff;
+#tactile-experience button:hover {
+    background-color: #fb8c00;
 }
 
-body.lubed-keyboard #tactile-experience {
-    background-color: #f3e5f5; /* 연보라색 배경 */
+/* 메인 배너 스타일 */
+#main-banner {
+    text-align: center;
+    padding: 50px;
+    background-color: #673ab7;
+    color: white;
 }
 
-body.lubed-keyboard button {
-    background-color: #8e24aa; /* 보라색 버튼 */
+.buy-btn {
+    background-color: #8e24aa;
+    color: white;
+    padding: 15px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.buy-btn:hover {
+    background-color: #6a1b9a;
+}
+
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #512da8;
+    color: white;
+}
+
+/* 디자이너 정보 스타일 */
+.designer-info {
+    font-size: 14px;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #ffcc80; /* 강조 효과 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .keyboard-item {
+        width: 90%;
+    }
+
+    #searchBar {
+        width: 90%;
+    }
 }

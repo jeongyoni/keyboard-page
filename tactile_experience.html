@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키감 체험하기</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="tactile-page">
+    <header>
+        <h1>키감 체험하기</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈으로 돌아가기</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="keyboard-test">
+        <h2>가상 키보드</h2>
+        <p>아래 키보드를 눌러 키감을 체험해보세요!</p>
+        
+        <div class="keyboard">
+            <button onclick="playKeySound('q')">Q</button>
+            <button onclick="playKeySound('w')">W</button>
+            <button onclick="playKeySound('e')">E</button>
+            <button onclick="playKeySound('r')">R</button>
+            <button onclick="playKeySound('t')">T</button>
+        </div>
+
+        <!-- 윤활 여부 선택 -->
+        <div class="switch-mode">
+            <label>윤활 여부 선택:</label>
+            <button onclick="setLubedMode(true)">윤활</button>
+            <button onclick="setLubedMode(false)">미윤활</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+    <footer>
+        <p>&copy; 2025 키보드 체험 페이지. 모든 권리 보유.</p>
+    </footer>
+</body>
+</html>
