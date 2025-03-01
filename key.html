@@ -1,0 +1,72 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키보드 설명 홈페이지</title>
+    <!-- 스타일시트 연결 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 헤더 섹션 -->
+    <header>
+        <h1>키보드 설명 홈페이지</h1>
+        <!-- 내비게이션 메뉴 -->
+        <nav>
+            <ul>
+                <li><a href="#introduction">키보드 소개</a></li>
+                <li><a href="#tactile-experience">키감 체험하기</a></li>
+                <!-- 추가 카테고리는 여기에 넣을 수 있습니다 -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 키보드 소개 섹션 -->
+    <section id="introduction">
+        <h2>키보드 소개</h2>
+        <p>
+            키보드는 컴퓨터와 상호 작용하기 위한 주요 입력 장치 중 하나입니다.
+            다양한 종류의 키보드가 있으며, 각기 다른 디자인과 키감을 제공합니다.
+        </p>
+        <p>
+            키보드의 역사는 타자기의 발명으로 거슬러 올라가며, 현대에 이르러서는 기계식,
+            멤브레인식, 광학식 등 다양한 유형이 개발되었습니다.
+        </p>
+    </section>
+
+    <!-- 키감 체험하기 섹션 -->
+<section id="tactile-experience">
+    <h2>키감 체험하기</h2>
+    <p>
+        다양한 키보드의 키감을 직접 체험해보세요. 아래 버튼을 클릭하여 가상 키보드를 눌러볼 수 있습니다.
+    </p>
+    
+    <!-- 버튼 클릭 시 다른 페이지로 이동 -->
+    <button onclick="goToLubedKeyboard()">키 눌러보기</button>
+</section>
+<!-- JavaScript 코드 추가 -->
+<script>
+    function goToLubedKeyboard() {
+        window.location.href = "lubed_keyboard.html"; // 이동할 페이지
+    }
+</script>
+
+
+
+    <!-- 푸터 섹션 -->
+    <footer>
+        <p>&copy; 2025 키보드 설명 홈페이지. 모든 권리 보유.</p>
+        <div class="designer-info">디자이너: Jeongyeon Yun</div>
+        <!-- 소셜 미디어 링크 또는 연락처 정보 추가 가능 -->
+    </footer>
+
+    <!-- 자바스크립트 파일 연결 -->
+    <script src="script.js"></script>
+    
+</body>
+
+</html>
+
+
