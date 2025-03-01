@@ -1,0 +1,114 @@
+/* 전체 페이지의 기본 스타일 (처음 페이지는 화이트 톤) */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* 깔끔한 화이트 배경 */
+    color: #333; /* 기본 글씨 색 */
+}
+
+/* 헤더 스타일 */
+header {
+    background-color: #f5f5f5; /* 연한 그레이로 심플하게 */
+    color: #333;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid #e0e0e0; /* 깔끔한 하단 라인 */
+}
+
+/* 내비게이션 메뉴 스타일 */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #444;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* 키보드 소개 섹션 (깔끔한 화이트 스타일 유지) */
+#introduction {
+    padding: 20px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+}
+
+/* 키감 체험하기 섹션 (연한 주황 & 노랑 톤 추가) */
+#tactile-experience {
+    padding: 20px;
+    margin: 20px;
+    background-color: #fff7e6; /* 연한 오렌지 배경 */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 푸터 스타일 */
+footer {
+    background-color: #ffcc80; /* 연한 오렌지 */
+    color: #5d4037;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 푸터 오른쪽 하단 디자이너 정보 */
+.designer-info {
+    font-size: 14px;
+    color: #bf360c;
+    margin-right: 20px;
+}
+
+/* 버튼 스타일 */
+button {
+    padding: 10px 20px;
+    background-color: #ffa726; /* 따뜻한 오렌지 */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #fb8c00; /* 좀 더 진한 오렌지 */
+}
+
+/* 수제 윤활 키보드 페이지 전용 스타일 */
+body.lubed-keyboard {
+    background-color: #f8bbd0; /* 연핑크색 배경 */
+    color: #6a1b9a; /* 보라색 텍스트 */
+}
+
+body.lubed-keyboard header {
+    background-color: #7e57c2; /* 보라색 */
+    color: #fff;
+}
+
+body.lubed-keyboard #tactile-experience {
+    background-color: #f3e5f5; /* 연보라색 배경 */
+}
+
+body.lubed-keyboard button {
+    background-color: #8e24aa; /* 보라색 버튼 */
+}
