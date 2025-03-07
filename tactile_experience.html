@@ -30,7 +30,7 @@
     <script>
         // 'q' 키 입력 시 소리 재생
         document.getElementById("keyboard-input").addEventListener("keydown", function(event) {
-            if (event.key === "q" || event.key === "Q") {
+            if (event.key === "q" || event.key === "Q"|| event.key === "ㅂ") {
                 const sound = document.getElementById("q-sound");
                 sound.currentTime = 0; // 소리 반복 재생을 위해 시간을 0으로 설정
                 sound.play();
