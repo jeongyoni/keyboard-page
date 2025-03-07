@@ -16,39 +16,62 @@
         </nav>
     </header>
 
+    <!-- 키보드 선택 메뉴 -->
+    <section id="keyboard-select">
+        <h2>키보드 선택</h2>
+        <button id="milky" class="keyboard-btn">밀키축 키보드</button>
+        <button id="keyboard2" class="keyboard-btn">키보드 2</button>
+        <button id="keyboard3" class="keyboard-btn">키보드 3</button>
+    </section>
+
     <section id="keyboard-test">
         <h2>가상 키보드 체험</h2>
         <p>아래 입력창에 키보드를 눌러 타건 소리를 들어보세요!</p>
-
+        
         <!-- 입력창 -->
         <textarea id="keyboard-input" placeholder="여기에 입력해 보세요!" rows="5" cols="40"></textarea>
 
         <!-- 소리 파일 -->
-        <audio id="key-sound" src="sounds/q1.m4a"></audio>
+        <audio id="key-sound" preload="auto"></audio>
     </section>
-
-    <script>
-        let isPlaying = false; // 소리가 재생 중인지 체크하는 변수
-
-        // 모든 키 입력 시 소리 재생
-        document.getElementById("keyboard-input").addEventListener("keydown", function(event) {
-            const sound = document.getElementById("key-sound");
-
-            if (!isPlaying) {  // 소리가 이미 재생 중이 아니면
-                isPlaying = true; // 소리가 재생 중이라고 설정
-                sound.currentTime = 0; // 소리 반복 재생을 위해 시간을 0으로 설정
-                sound.play();
-                
-                // 소리가 끝나면 isPlaying을 false로 설정
-                sound.onended = function() {
-                    isPlaying = false;
-                };
-            }
-        });
-    </script>
 
     <footer>
         <p>&copy; 2025 키보드 체험 페이지. 모든 권리 보유.</p>
     </footer>
+
+    <script>
+        let currentSound = "sounds/q1.m4a";  // 기본 밀키축 키보드 소리
+        const soundElement = document.getElementById("key-sound");
+        const dropdownButtons = document.querySelectorAll(".keyboard-btn");
+        const inputField = document.getElementById("keyboard-input");
+
+        // 각 버튼 클릭 시 소리 변경
+        dropdownButtons.forEach((button) => {
+            button.addEventListener("click", function(event) {
+                // 버튼 하이라이트
+                dropdownButtons.forEach((btn) => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                const selectedKeyboard = button.id;
+
+                if (selectedKeyboard === "milky") {
+                    currentSound = "sounds/q1.m4a";  // 밀키축 키보드 소리
+                } else if (selectedKeyboard === "keyboard2") {
+                    currentSound = "sounds/keyboard2-sound.m4a";
+                } else if (selectedKeyboard === "keyboard3") {
+                    currentSound = "sounds/keyboard3-sound.m4a";
+                }
+
+                // 소리 파일 변경
+                soundElement.src = currentSound;
+            });
+        });
+
+        // 키 입력 시 소리 재생
+        document.getElementById("keyboard-input").addEventListener("keydown", function(event) {
+            soundElement.currentTime = 0;  // 소리 반복 재생을 위해 시간을 0으로 설정
+            soundElement.play();
+        });
+    </script>
 </body>
 </html>

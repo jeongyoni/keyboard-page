@@ -55,83 +55,61 @@ nav ul li a:hover {
     border-radius: 5px;
 }
 
-/* 키보드 목록 스타일 */
-#keyboard-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-}
-
-.keyboard-item {
+/* 키보드 선택 버튼 스타일 */
+#keyboard-select {
     text-align: center;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    margin: 20px 0;
 }
 
-.keyboard-item img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.keyboard-item h3 {
-    margin: 10px 0;
-}
-
-.keyboard-item p {
-    font-size: 14px;
-    color: #666;
-}
-
-/* 버튼 스타일 */
-button {
+.keyboard-btn {
     padding: 10px 20px;
-    background-color: #6a1b9a;
-    color: white;
-    border: none;
+    background-color: #ffffff;
+    color: #6a1b9a;
+    border: 1px solid #6a1b9a;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    margin: 0 10px;
 }
 
-button:hover {
-    background-color: #512da8;
+.keyboard-btn:hover {
+    background-color: #9c4dcc;
 }
 
-/* 키감 체험 버튼 */
-#tactile-experience button {
-    background-color: #ffa726;
-}
-
-#tactile-experience button:hover {
-    background-color: #fb8c00;
-}
-
-/* 메인 배너 스타일 */
-#main-banner {
-    text-align: center;
-    padding: 50px;
-    background-color: #673ab7;
+.keyboard-btn.active {
+    background-color: #9c4dcc;
     color: white;
 }
 
-.buy-btn {
-    background-color: #8e24aa;
-    color: white;
-    padding: 15px 25px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+/* 키보드 타건 체험 스타일 */
+#keyboard-test {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    margin-bottom: 40px;
 }
 
-.buy-btn:hover {
-    background-color: #6a1b9a;
+/* 메모장 스타일의 입력창 */
+textarea {
+    width: 100%;
+    height: 150px;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+    font-family: 'Courier New', Courier, monospace; /* 타자기 스타일 */
+    background-color: #f0f0f0; /* 메모장 배경 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
 }
 
 /* 푸터 스타일 */
@@ -163,5 +141,11 @@ footer {
 
     #searchBar {
         width: 90%;
+    }
+
+    /* 키보드 버튼 */
+    .keyboard-btn {
+        width: 100%;  /* 모바일에서 버튼을 세로로 나열 */
+        margin-bottom: 10px;
     }
 }
