@@ -40,21 +40,6 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* 검색창 스타일 */
-#search {
-    text-align: center;
-    margin: 20px 0;
-}
-
-#searchBar {
-    width: 80%;
-    max-width: 400px;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #6a1b9a;
-    border-radius: 5px;
-}
-
 /* 키보드 선택 버튼 스타일 */
 #keyboard-select {
     text-align: center;
