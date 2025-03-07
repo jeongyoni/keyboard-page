@@ -1,20 +1,22 @@
 /* 기본 설정 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: #f5f5f5; /* 연한 배경 */
     color: #333;
+    box-sizing: border-box;
 }
 
 /* 헤더 스타일 */
 header {
-    background-color: #512da8;
+    background-color: #5c6bc0; /* 세련된 블루 색상 */
     color: white;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: bold;
+    border-bottom: 3px solid #3f51b5; /* 강렬한 색상의 하단선 */
 }
 
 /* 내비게이션 스타일 */
@@ -34,6 +36,7 @@ nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    font-size: 18px;
 }
 
 nav ul li a:hover {
@@ -43,27 +46,28 @@ nav ul li a:hover {
 /* 키보드 선택 버튼 스타일 */
 #keyboard-select {
     text-align: center;
-    margin: 20px 0;
+    margin: 40px 0;
 }
 
 .keyboard-btn {
-    padding: 10px 20px;
-    background-color: #ffffff;
-    color: #6a1b9a;
-    border: 1px solid #6a1b9a;
-    border-radius: 5px;
+    padding: 15px 30px;
+    background-color: #3f51b5; /* 버튼 색상 */
+    color: white;
+    border: 2px solid #3f51b5;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    margin: 0 10px;
+    font-size: 18px;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .keyboard-btn:hover {
-    background-color: #9c4dcc;
+    background-color: #283593; /* 호버 시 색상 변경 */
+    transform: scale(1.05); /* 살짝 확대 효과 */
 }
 
 .keyboard-btn.active {
-    background-color: #9c4dcc;
+    background-color: #283593;
     color: white;
 }
 
@@ -74,12 +78,25 @@ nav ul li a:hover {
     justify-content: center;
     align-items: center;
     margin-top: 50px;
-    padding: 20px;
+    padding: 40px;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     width: 80%;
-    max-width: 800px;
-    margin-bottom: 40px;
+    max-width: 900px;
+    margin-bottom: 50px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+}
+
+#keyboard-test h2 {
+    font-size: 24px;
+    color: #5c6bc0;
+    margin-bottom: 10px;
+}
+
+#keyboard-test p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
 }
 
 /* 메모장 스타일의 입력창 */
@@ -89,28 +106,21 @@ textarea {
     margin-top: 20px;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
     resize: none;
     font-family: 'Courier New', Courier, monospace; /* 타자기 스타일 */
-    background-color: #f0f0f0; /* 메모장 배경 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    background-color: #f9f9f9; /* 메모장 느낌 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
 }
 
 /* 푸터 스타일 */
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #512da8;
+    padding: 20px;
+    background-color: #5c6bc0;
     color: white;
-}
-
-/* 디자이너 정보 스타일 */
-.designer-info {
-    font-size: 14px;
-    margin-top: 5px;
-    font-weight: bold;
-    color: #ffcc80; /* 강조 효과 */
+    font-size: 16px;
 }
 
 /* 반응형 디자인 */
@@ -120,17 +130,20 @@ footer {
         text-align: center;
     }
 
-    .keyboard-item {
-        width: 90%;
+    #keyboard-select {
+        margin: 20px 0;
     }
 
-    #searchBar {
-        width: 90%;
-    }
-
-    /* 키보드 버튼 */
     .keyboard-btn {
-        width: 100%;  /* 모바일에서 버튼을 세로로 나열 */
-        margin-bottom: 10px;
+        width: 90%;  /* 버튼을 세로로 나열하고 모바일에 맞게 크기 조정 */
+        margin-bottom: 15px;
+    }
+
+    #keyboard-test {
+        width: 90%;
+    }
+
+    textarea {
+        font-size: 14px; /* 작은 화면에서 텍스트 크기 조정 */
     }
 }
