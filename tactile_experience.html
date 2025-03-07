@@ -28,11 +28,22 @@
     </section>
 
     <script>
+        let isPlaying = false; // 소리가 재생 중인지 체크하는 변수
+
         // 모든 키 입력 시 소리 재생
         document.getElementById("keyboard-input").addEventListener("keydown", function(event) {
             const sound = document.getElementById("key-sound");
-            sound.currentTime = 0; // 소리 반복 재생을 위해 시간을 0으로 설정
-            sound.play();
+
+            if (!isPlaying) {  // 소리가 이미 재생 중이 아니면
+                isPlaying = true; // 소리가 재생 중이라고 설정
+                sound.currentTime = 0; // 소리 반복 재생을 위해 시간을 0으로 설정
+                sound.play();
+                
+                // 소리가 끝나면 isPlaying을 false로 설정
+                sound.onended = function() {
+                    isPlaying = false;
+                };
+            }
         });
     </script>
 
