@@ -1,19 +1,19 @@
 /* 기본 설정 */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     color: #333;
 }
 
 /* 헤더 스타일 */
 header {
-    background-color: #5f4b8b;
+    background-color: #512da8;
     color: white;
     padding: 20px;
     text-align: center;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
 }
 
@@ -23,7 +23,7 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 nav ul li {
@@ -40,96 +40,128 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* 키보드 선택 버튼 스타일 */
-#keyboard-select {
+/* 검색창 스타일 */
+#search {
     text-align: center;
-    margin-top: 30px;
+    margin: 20px 0;
 }
 
-.keyboard-btn {
-    padding: 12px 25px;
-    margin: 0 15px;
-    background-color: #5f4b8b;
+#searchBar {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #6a1b9a;
+    border-radius: 5px;
+}
+
+/* 키보드 목록 스타일 */
+#keyboard-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.keyboard-item {
+    text-align: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.keyboard-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.keyboard-item h3 {
+    margin: 10px 0;
+}
+
+.keyboard-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 버튼 스타일 */
+button {
+    padding: 10px 20px;
+    background-color: #6a1b9a;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-.keyboard-btn:hover {
-    background-color: #7e6bbf;
+button:hover {
+    background-color: #512da8;
 }
 
-/* 입력창 스타일 */
-#keyboard-input {
-    width: 80%;
-    max-width: 500px;
-    padding: 12px;
-    font-size: 16px;
-    border: 2px solid #6a5b8c;
-    border-radius: 8px;
-    margin: 20px 0;
-    display: block;
-    background-color: #fff;
+/* 키감 체험 버튼 */
+#tactile-experience button {
+    background-color: #ffa726;
 }
 
-/* 가상 키보드 스타일 */
-.keyboard {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 30px;
+#tactile-experience button:hover {
+    background-color: #fb8c00;
 }
 
-.key {
-    width: 60px;
-    height: 60px;
-    margin: 5px;
-    background-color: #e0d8f1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: bold;
-    color: #5f4b8b;
+/* 메인 배너 스타일 */
+#main-banner {
+    text-align: center;
+    padding: 50px;
+    background-color: #673ab7;
+    color: white;
+}
+
+.buy-btn {
+    background-color: #8e24aa;
+    color: white;
+    padding: 15px 25px;
+    font-size: 18px;
+    border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.key:hover {
-    background-color: #d0c7f3;
-}
-
-.key.pressed {
-    transform: translateY(4px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+.buy-btn:hover {
+    background-color: #6a1b9a;
 }
 
 /* 푸터 스타일 */
 footer {
     text-align: center;
-    padding: 15px;
-    background-color: #5f4b8b;
+    padding: 10px;
+    background-color: #512da8;
     color: white;
+}
+
+/* 디자이너 정보 스타일 */
+.designer-info {
     font-size: 14px;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #ffcc80; /* 강조 효과 */
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-    .keyboard {
+    nav ul {
         flex-direction: column;
-        align-items: center;
+        text-align: center;
     }
 
-    .key {
-        margin: 5px;
+    .keyboard-item {
+        width: 90%;
     }
 
-    #keyboard-input {
+    #searchBar {
         width: 90%;
     }
 }
