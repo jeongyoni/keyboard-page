@@ -24,7 +24,6 @@
         <button id="keyboard3" class="keyboard-btn">키보드 3</button>
     </section>
 
-    <!-- 키감 체험 -->
     <section id="keyboard-test">
         <h2>가상 키보드 체험</h2>
         <p>아래 입력창에 키보드를 눌러 타건 소리를 들어보세요!</p>
@@ -33,35 +32,34 @@
         <textarea id="keyboard-input" placeholder="여기에 입력해 보세요!" rows="5" cols="40"></textarea>
 
         <!-- 소리 파일 -->
-        <audio id="key-sound" preload="auto">
-            <source src="sounds/q1.m4a" type="audio/m4a">
-            Your browser does not support the audio element.
-        </audio>
+        <audio id="key-sound" preload="auto"></audio>
     </section>
 
     <footer>
-        <p>&copy; 2025 Groovestone 키보드. 모든 권리 보유. Designer: Jeong Yeon</p>
+        <p>&copy; 2025 키보드 체험 페이지. 모든 권리 보유. Designer: Jeong Yeon</p>
     </footer>
 
     <script>
-        let currentSound = "sounds/q1.m4a";  // 기본 밀키축 키보드 소리
+        let currentSound = "sounds/q1.mp3";  // 기본 밀키축 키보드 소리
         const soundElement = document.getElementById("key-sound");
+        const dropdownButtons = document.querySelectorAll(".keyboard-btn");
+        const inputField = document.getElementById("keyboard-input");
 
         // 각 버튼 클릭 시 소리 변경
-        document.querySelectorAll('.keyboard-btn').forEach((button) => {
-            button.addEventListener('click', function() {
+        dropdownButtons.forEach((button) => {
+            button.addEventListener("click", function(event) {
                 // 버튼 하이라이트
-                document.querySelectorAll('.keyboard-btn').forEach((btn) => btn.classList.remove('active'));
-                button.classList.add('active');
+                dropdownButtons.forEach((btn) => btn.classList.remove("active"));
+                button.classList.add("active");
 
                 const selectedKeyboard = button.id;
 
                 if (selectedKeyboard === "milky") {
-                    currentSound = "sounds/q1.m4a";  // 밀키축 키보드 소리
+                    currentSound = "sounds/q1.mp3";  // 밀키축 키보드 소리
                 } else if (selectedKeyboard === "keyboard2") {
-                    currentSound = "sounds/keyboard2-sound.m4a";
+                    currentSound = "sounds/keyboard2-sound.mp3";
                 } else if (selectedKeyboard === "keyboard3") {
-                    currentSound = "sounds/keyboard3-sound.m4a";
+                    currentSound = "sounds/keyboard3-sound.mp3";
                 }
 
                 // 소리 파일 변경
