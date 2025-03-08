@@ -27,14 +27,22 @@
     <!-- 키감 체험 -->
     <section id="keyboard-test">
         <h2>가상 키보드 체험</h2>
-        <p>아래 이미지에서 키를 클릭하여 타건 소리를 들어보세요!</p>
+        <p>아래 입력창에 키보드를 눌러 타건 소리를 들어보세요!</p>
         
+        <!-- 입력창 -->
+        <textarea id="keyboard-input" placeholder="여기에 입력해 보세요!" rows="5" cols="40"></textarea>
+
         <!-- 가상 키보드 -->
         <div class="keyboard">
             <div class="key" id="key-q">Q</div>
             <div class="key" id="key-w">W</div>
             <div class="key" id="key-e">E</div>
-            <!-- 추가적인 키를 더 넣을 수 있습니다 -->
+            <div class="key" id="key-r">R</div>
+            <div class="key" id="key-t">T</div>
+            <div class="key" id="key-y">Y</div>
+            <div class="key" id="key-u">U</div>
+            <div class="key" id="key-i">I</div>
+            <!-- 여기에 추가로 다른 키도 넣을 수 있습니다 -->
         </div>
 
         <audio id="key-sound" preload="auto">
