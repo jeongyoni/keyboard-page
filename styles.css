@@ -1,19 +1,19 @@
 /* 기본 설정 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f3f4f6;
+    background-color: #f7f7f7;
     color: #333;
 }
 
 /* 헤더 스타일 */
 header {
-    background-color: #512da8;
+    background-color: #5f4b8b;
     color: white;
     padding: 20px;
     text-align: center;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: bold;
 }
 
@@ -23,7 +23,7 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 
 nav ul li {
@@ -47,69 +47,89 @@ nav ul li a:hover {
 }
 
 .keyboard-btn {
-    padding: 10px 20px;
-    margin: 0 10px;
-    background-color: #512da8;
+    padding: 12px 25px;
+    margin: 0 15px;
+    background-color: #5f4b8b;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .keyboard-btn:hover {
-    background-color: #6a1b9a;
+    background-color: #7e6bbf;
 }
 
-/* 키보드 영역 스타일 */
+/* 입력창 스타일 */
+#keyboard-input {
+    width: 80%;
+    max-width: 500px;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #6a5b8c;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: block;
+    background-color: #fff;
+}
+
+/* 가상 키보드 스타일 */
 .keyboard {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    flex-wrap: wrap;
     margin-top: 30px;
 }
 
-/* 각 키 스타일 */
 .key {
-    width: 50px;
-    height: 50px;
-    background-color: #d1c4e9;
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    background-color: #e0d8f1;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
     font-weight: bold;
-    color: #512da8;
-    border-radius: 8px;
+    color: #5f4b8b;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .key:hover {
-    background-color: #ab98e6;
+    background-color: #d0c7f3;
 }
 
 .key.pressed {
     transform: translateY(4px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* 푸터 스타일 */
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #512da8;
+    padding: 15px;
+    background-color: #5f4b8b;
     color: white;
-    margin-top: 30px;
+    font-size: 14px;
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .keyboard {
         flex-direction: column;
+        align-items: center;
     }
 
     .key {
         margin: 5px;
+    }
+
+    #keyboard-input {
+        width: 90%;
     }
 }
