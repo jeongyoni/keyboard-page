@@ -1,32 +1,29 @@
 /* 기본 설정 */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f7f9fc;
+    background-color: #ffffff;
     color: #333;
-    box-sizing: border-box;
 }
 
 /* 헤더 스타일 */
 header {
-    background-color: #5c6bc0;
+    background-color: #512da8;
     color: white;
-    padding: 20px 20px;
+    padding: 20px;
     text-align: center;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bold;
-    letter-spacing: 2px;
-    border-bottom: 4px solid #3949ab;
 }
 
+/* 내비게이션 스타일 */
 nav ul {
     list-style: none;
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin-top: 20px;
+    gap: 20px;
 }
 
 nav ul li {
@@ -36,78 +33,44 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 20px;
-    transition: color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
 }
 
 nav ul li a:hover {
-    color: #fbc02d;
-    transform: scale(1.1);
+    text-decoration: underline;
 }
 
 /* 검색창 스타일 */
 #search {
     text-align: center;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 #searchBar {
-    width: 70%;
-    padding: 12px;
-    font-size: 18px;
-    border: 2px solid #7986cb;
-    border-radius: 25px;
-    outline: none;
-    transition: border-color 0.3s ease;
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #6a1b9a;
+    border-radius: 5px;
 }
 
-#searchBar:focus {
-    border-color: #5c6bc0;
-}
-
-/* 키보드 소개 섹션 */
-#introduction {
-    padding: 40px 20px;
-    margin: 0 20px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-#introduction h2 {
-    font-size: 26px;
-    color: #5c6bc0;
-    margin-bottom: 20px;
-}
-
-#introduction p {
-    font-size: 18px;
-    color: #666;
-}
-
-/* 키보드 목록 */
+/* 키보드 목록 스타일 */
 #keyboard-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     justify-content: center;
-    padding: 30px;
+    padding: 20px;
 }
 
 .keyboard-item {
     text-align: center;
     padding: 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 280px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.keyboard-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
 }
 
 .keyboard-item img {
@@ -116,80 +79,78 @@ nav ul li a:hover {
 }
 
 .keyboard-item h3 {
-    margin-top: 15px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
+    margin: 10px 0;
 }
 
 .keyboard-item p {
-    font-size: 16px;
+    font-size: 14px;
     color: #666;
 }
 
-.keyboard-item button {
-    background-color: #5c6bc0;
-    color: white;
+/* 버튼 스타일 */
+button {
     padding: 10px 20px;
-    font-size: 16px;
+    background-color: #6a1b9a;
+    color: white;
     border: none;
-    border-radius: 25px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-.keyboard-item button:hover {
-    background-color: #3949ab;
+button:hover {
+    background-color: #512da8;
 }
 
-/* 키감 체험하기 섹션 */
-#tactile-experience {
+/* 키보드 이미지 클릭 시 효과 */
+.pressed {
+    transform: translateY(4px);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 메인 배너 스타일 */
+#main-banner {
     text-align: center;
-    padding: 50px 20px;
-    background-color: #3949ab;
+    padding: 50px;
+    background-color: #673ab7;
     color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-#tactile-experience button {
-    background-color: #fbc02d;
-    color: black;
-    padding: 15px 30px;
+.buy-btn {
+    background-color: #8e24aa;
+    color: white;
+    padding: 15px 25px;
     font-size: 18px;
     border: none;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-#tactile-experience button:hover {
-    background-color: #f57f17;
+.buy-btn:hover {
+    background-color: #6a1b9a;
 }
 
 /* 푸터 스타일 */
 footer {
     text-align: center;
-    padding: 30px 20px;
-    background-color: #5c6bc0;
+    padding: 10px;
+    background-color: #512da8;
     color: white;
-    font-size: 16px;
 }
 
 /* 디자이너 정보 스타일 */
 .designer-info {
     font-size: 14px;
-    margin-top: 10px;
-    font-weight: 600;
-    color: #fbc02d; /* 강조 효과 */
+    margin-top: 5px;
+    font-weight: bold;
+    color: #ffcc80; /* 강조 효과 */
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
-        gap: 15px;
         text-align: center;
     }
 
@@ -199,9 +160,5 @@ footer {
 
     #searchBar {
         width: 90%;
-    }
-
-    #tactile-experience {
-        padding: 40px 20px;
     }
 }

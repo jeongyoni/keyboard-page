@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>그루브스톤 체험하기</title>
+    <title>키감 체험하기</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
 
     <!-- 키보드 선택 메뉴 -->
     <section id="keyboard-select">
-        <h2>키보드 선택</h2>
+        <h2>가상 키보드 선택</h2>
         <button id="milky" class="keyboard-btn">밀키축</button>
         <button id="keyboard2" class="keyboard-btn">키보드 2</button>
         <button id="keyboard3" class="keyboard-btn">키보드 3</button>
@@ -26,12 +26,14 @@
 
     <section id="keyboard-test">
         <h2>가상 키보드 체험</h2>
-        <p>아래 입력창에 키보드를 눌러 타건 소리를 들어보세요!</p>
+        <p>아래 이미지에서 키를 클릭하여 타건 소리를 들어보세요!</p>
         
-        <!-- 입력창 -->
-        <textarea id="keyboard-input" placeholder="여기에 입력해 보세요!" rows="5" cols="40"></textarea>
+        <!-- 가상 키보드 이미지 -->
+        <div class="keyboard-images">
+            <img src="keyboard-image.png" alt="가상 키보드" class="virtual-keyboard" id="keyboard-image">
+        </div>
 
-        <!-- 소리 파일 -->
+        <!-- 클릭된 버튼의 스타일을 위한 오디오 -->
         <audio id="key-sound" preload="auto"></audio>
     </section>
 
@@ -43,7 +45,7 @@
         let currentSound = "sounds/q1.mp3";  // 기본 밀키축 키보드 소리
         const soundElement = document.getElementById("key-sound");
         const dropdownButtons = document.querySelectorAll(".keyboard-btn");
-        const inputField = document.getElementById("keyboard-input");
+        const keyboardImage = document.getElementById("keyboard-image");
 
         // 각 버튼 클릭 시 소리 변경
         dropdownButtons.forEach((button) => {
@@ -67,10 +69,16 @@
             });
         });
 
-        // 키 입력 시 소리 재생
-        document.getElementById("keyboard-input").addEventListener("keydown", function(event) {
-            soundElement.currentTime = 0;  // 소리 반복 재생을 위해 시간을 0으로 설정
-            soundElement.play();
+        // 키보드 이미지 클릭 시 효과
+        keyboardImage.addEventListener('click', function(event) {
+            this.classList.add('pressed');  // 키를 눌렀을 때 효과
+            soundElement.currentTime = 0;
+            soundElement.play();  // 클릭 시 소리 재생
+
+            // 클릭 후 잠시 뒤에 눌림 효과 제거
+            setTimeout(() => {
+                this.classList.remove('pressed');
+            }, 200);
         });
     </script>
 </body>
