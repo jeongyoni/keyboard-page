@@ -44,7 +44,7 @@
     </footer>
 
     <script>
-        let currentSound = "sounds/q1.m4a";  // 기본 밀키축 키보드 소리
+        let currentSound = "sounds/q1.mp3";  // 기본 밀키축 키보드 소리
         const soundElement = document.getElementById("key-sound");
         const dropdownButtons = document.querySelectorAll(".keyboard-btn");
         const inputField = document.getElementById("keyboard-input");
@@ -59,11 +59,11 @@
                 const selectedKeyboard = button.id;
 
                 if (selectedKeyboard === "milky") {
-                    currentSound = "sounds/q1.m4a";  // 밀키축 키보드 소리
+                    currentSound = "sounds/q1.mp3";  // 밀키축 키보드 소리
                 } else if (selectedKeyboard === "keyboard2") {
-                    currentSound = "sounds/keyboard2-sound.m4a";
+                    currentSound = "sounds/keyboard2-sound.mp3";
                 } else if (selectedKeyboard === "keyboard3") {
-                    currentSound = "sounds/keyboard3-sound.m4a";
+                    currentSound = "sounds/keyboard3-sound.mp3";
                 }
 
                 // 소리 파일 변경
