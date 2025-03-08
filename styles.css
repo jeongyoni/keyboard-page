@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: #f3f4f6;
     color: #333;
 }
 
@@ -40,95 +40,58 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* 검색창 스타일 */
-#search {
+/* 키보드 선택 버튼 스타일 */
+#keyboard-select {
     text-align: center;
-    margin: 20px 0;
+    margin-top: 30px;
 }
 
-#searchBar {
-    width: 80%;
-    max-width: 400px;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #6a1b9a;
-    border-radius: 5px;
-}
-
-/* 키보드 목록 스타일 */
-#keyboard-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-}
-
-.keyboard-item {
-    text-align: center;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-.keyboard-item img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.keyboard-item h3 {
-    margin: 10px 0;
-}
-
-.keyboard-item p {
-    font-size: 14px;
-    color: #666;
-}
-
-/* 버튼 스타일 */
-button {
+.keyboard-btn {
     padding: 10px 20px;
-    background-color: #6a1b9a;
+    margin: 0 10px;
+    background-color: #512da8;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #512da8;
-}
-
-/* 키보드 이미지 클릭 시 효과 */
-.pressed {
-    transform: translateY(4px);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* 메인 배너 스타일 */
-#main-banner {
-    text-align: center;
-    padding: 50px;
-    background-color: #673ab7;
-    color: white;
-}
-
-.buy-btn {
-    background-color: #8e24aa;
-    color: white;
-    padding: 15px 25px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.buy-btn:hover {
+.keyboard-btn:hover {
     background-color: #6a1b9a;
+}
+
+/* 키보드 영역 스타일 */
+.keyboard {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* 각 키 스타일 */
+.key {
+    width: 50px;
+    height: 50px;
+    background-color: #d1c4e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #512da8;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.key:hover {
+    background-color: #ab98e6;
+}
+
+.key.pressed {
+    transform: translateY(4px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* 푸터 스타일 */
@@ -137,28 +100,16 @@ footer {
     padding: 10px;
     background-color: #512da8;
     color: white;
-}
-
-/* 디자이너 정보 스타일 */
-.designer-info {
-    font-size: 14px;
-    margin-top: 5px;
-    font-weight: bold;
-    color: #ffcc80; /* 강조 효과 */
+    margin-top: 30px;
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-    nav ul {
+    .keyboard {
         flex-direction: column;
-        text-align: center;
     }
 
-    .keyboard-item {
-        width: 90%;
-    }
-
-    #searchBar {
-        width: 90%;
+    .key {
+        margin: 5px;
     }
 }

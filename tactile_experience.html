@@ -18,67 +18,55 @@
 
     <!-- 키보드 선택 메뉴 -->
     <section id="keyboard-select">
-        <h2>가상 키보드 선택</h2>
+        <h2>키보드 선택</h2>
         <button id="milky" class="keyboard-btn">밀키축</button>
         <button id="keyboard2" class="keyboard-btn">키보드 2</button>
         <button id="keyboard3" class="keyboard-btn">키보드 3</button>
     </section>
 
+    <!-- 키감 체험 -->
     <section id="keyboard-test">
         <h2>가상 키보드 체험</h2>
         <p>아래 이미지에서 키를 클릭하여 타건 소리를 들어보세요!</p>
         
-        <!-- 가상 키보드 이미지 -->
-        <div class="keyboard-images">
-            <img src="keyboard-image.png" alt="가상 키보드" class="virtual-keyboard" id="keyboard-image">
+        <!-- 가상 키보드 -->
+        <div class="keyboard">
+            <div class="key" id="key-q">Q</div>
+            <div class="key" id="key-w">W</div>
+            <div class="key" id="key-e">E</div>
+            <!-- 추가적인 키를 더 넣을 수 있습니다 -->
         </div>
 
-        <!-- 클릭된 버튼의 스타일을 위한 오디오 -->
-        <audio id="key-sound" preload="auto"></audio>
+        <audio id="key-sound" preload="auto">
+            <source src="sounds/q1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </section>
 
     <footer>
-        <p>&copy; 2025 키보드 체험 페이지. 모든 권리 보유. Designer: Jeong Yeon</p>
+        <p>&copy; 2025 Groovestone 키보드. 모든 권리 보유. Designer: Jeong Yeon</p>
     </footer>
 
     <script>
         let currentSound = "sounds/q1.mp3";  // 기본 밀키축 키보드 소리
         const soundElement = document.getElementById("key-sound");
-        const dropdownButtons = document.querySelectorAll(".keyboard-btn");
-        const keyboardImage = document.getElementById("keyboard-image");
 
-        // 각 버튼 클릭 시 소리 변경
-        dropdownButtons.forEach((button) => {
-            button.addEventListener("click", function(event) {
-                // 버튼 하이라이트
-                dropdownButtons.forEach((btn) => btn.classList.remove("active"));
-                button.classList.add("active");
-
-                const selectedKeyboard = button.id;
-
-                if (selectedKeyboard === "milky") {
-                    currentSound = "sounds/q1.mp3";  // 밀키축 키보드 소리
-                } else if (selectedKeyboard === "keyboard2") {
-                    currentSound = "sounds/keyboard2-sound.mp3";
-                } else if (selectedKeyboard === "keyboard3") {
-                    currentSound = "sounds/keyboard3-sound.mp3";
-                }
-
-                // 소리 파일 변경
+        // 키 클릭 시 눌림 효과 및 소리 변경
+        document.querySelectorAll('.key').forEach(key => {
+            key.addEventListener('click', function() {
+                // 소리 재생
                 soundElement.src = currentSound;
+                soundElement.currentTime = 0;
+                soundElement.play();
+
+                // 눌림 효과 추가
+                this.classList.add('pressed');
+                
+                // 눌림 효과 제거 (0.2초 뒤)
+                setTimeout(() => {
+                    this.classList.remove('pressed');
+                }, 200);
             });
-        });
-
-        // 키보드 이미지 클릭 시 효과
-        keyboardImage.addEventListener('click', function(event) {
-            this.classList.add('pressed');  // 키를 눌렀을 때 효과
-            soundElement.currentTime = 0;
-            soundElement.play();  // 클릭 시 소리 재생
-
-            // 클릭 후 잠시 뒤에 눌림 효과 제거
-            setTimeout(() => {
-                this.classList.remove('pressed');
-            }, 200);
         });
     </script>
 </body>
