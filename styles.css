@@ -3,14 +3,14 @@ body {
     font-family: 'Segoe UI', Tahoma, Verdana, Geneva, Tahoma, sans-serif, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #8de8ff;
+    background-color: #c1e4ed;  
     color: #333;
     box-sizing: border-box;
 }
 
 /* 헤더 스타일 */
 header h1 {
-    background-image: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); /* 무지개 색깔 그라디언트 */
+    background-image: linear-gradient(30deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); /* 무지개 색깔 그라디언트 */
     background-clip: text;
     color: transparent;
     font-size: 28px;
@@ -19,7 +19,7 @@ header h1 {
     letter-spacing: 2px;
     padding: 20px 10%;
     border-bottom: 4px solid #f6a4ea;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 5px rgba(0.2, 0.2, 0.2, 0.3);
 }
 
 nav ul {
