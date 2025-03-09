@@ -35,7 +35,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: #ff5722;
     text-decoration: none;
     font-weight: 600;
     font-size: 20px;
@@ -43,7 +43,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #fbc02d;
+    color: #4a2301;
     transform: scale(1.1);
 }
 
