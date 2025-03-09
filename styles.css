@@ -3,14 +3,14 @@ body {
     font-family: 'Segoe UI', Tahoma, Verdana, Geneva, Tahoma, sans-serif, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #c1e4ed;  
+    background-color: #fff8e1;  
     color: #333;
     box-sizing: border-box;
 }
 
 /* 헤더 스타일 */
 header h1 {
-    background-image: linear-gradient(30deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); /* 무지개 색깔 그라디언트 */
+    background-color:#f88f5e; 
     background-clip: text;
     color: transparent;
     font-size: 28px;
@@ -18,8 +18,7 @@ header h1 {
     text-align: center;
     letter-spacing: 2px;
     padding: 20px 10%;
-    border-bottom: 4px solid #f6a4ea;
-    text-shadow: 2px 2px 5px rgba(0.2, 0.2, 0.2, 0.3);
+    border-bottom: 4px solid #ff5722;
 }
 
 nav ul {
@@ -58,14 +57,14 @@ nav ul li a:hover {
     width: 70%;
     padding: 12px;
     font-size: 18px;
-    border: 2px solid #7986cb;
+    border: 2px solid #ff7043;
     border-radius: 25px;
     outline: none;
     transition: border-color 0.3s ease;
 }
 
 #searchBar:focus {
-    border-color: #5c6bc0;
+    border-color: #ff5722;
 }
 
 /* 키보드 소개 섹션 */
@@ -79,7 +78,7 @@ nav ul li a:hover {
 
 #introduction h2 {
     font-size: 26px;
-    color: #5c6bc0;
+    color: #ff7043;
     margin-bottom: 20px;
 }
 
@@ -130,7 +129,7 @@ nav ul li a:hover {
 }
 
 .keyboard-item button {
-    background-color: #5c6bc0;
+    background-color: #ff7043;
     color: white;
     padding: 10px 20px;
     font-size: 16px;
@@ -142,7 +141,7 @@ nav ul li a:hover {
 }
 
 .keyboard-item button:hover {
-    background-color: #3949ab;
+    background-color: #ff5722;
 }
 
 /* 키감 체험하기 섹션 */
@@ -152,7 +151,7 @@ nav ul li a:hover {
     flex-direction: column;
     align-items: center;
     padding: 50px 20px;
-    background-color: #3949ab; /* 변경: 배경색을 더 어두운 색으로 */
+    background-color: #ff7043; /* 변경: 배경색을 더 어두운 색으로 */
     color: white;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -160,8 +159,8 @@ nav ul li a:hover {
 }
 
 #tactile-experience button {
-    background-color: #fbc02d;
-    color: black;
+    background-color: #fff8e1;
+    color: #ff7043;
     padding: 15px 30px;
     font-size: 18px;
     border: none;
