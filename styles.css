@@ -146,15 +146,15 @@ nav ul li a:hover {
 /* 키감 체험하기 섹션 */
 #tactile-experience {
     display: flex;
-    text-align: center;
+    justify-content: center;
     flex-direction: column;
+    align-items: center;
     padding: 50px 20px;
-    background-color: #ffffff;
+    background-color: #3949ab; /* 변경: 배경색을 더 어두운 색으로 */
     color: white;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1)
-    
-    
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 0 20px;
 }
 
 #tactile-experience button {
