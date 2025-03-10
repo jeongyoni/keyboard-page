@@ -242,7 +242,14 @@ footer {
 
 .key.active {
     background-color: #fbc02d;
+
 }
+/* 눌렸을 때 강조되는 버튼 스타일 */
+.keyboard-btn.active {
+    background-color: #f57f17; /* 눌린 버튼에 주황색 강조 */
+    color: white; /* 글자색은 흰색 */
+}
+
 /* 키감 체험하기 스타일 */
 #tactile-experience {
     text-align: center;
