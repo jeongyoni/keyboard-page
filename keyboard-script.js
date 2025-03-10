@@ -15,11 +15,10 @@ document.querySelectorAll('#virtual-keyboard button').forEach(button => {
 });
 
 // 키 입력 시 소리 재생 및 텍스트 입력
-document.getElementById("keyboard-input").addEventListener("keypress", function(event) {
-    const key = event.key.toUpperCase();
+const inputField = document.getElementById("keyboard-input");
+
+inputField.addEventListener("input", function(event) {
+    const key = event.data;  // 입력된 데이터
     const sound = new Audio(`sounds/${key.toLowerCase()}.mp3`);
     sound.play();
-
-    // 입력창에 타이핑된 글자가 추가됩니다.
-    inputField.value += key;
 });
