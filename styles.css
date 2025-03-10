@@ -220,8 +220,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+    
 }
 
 .keyboard-row {
@@ -235,24 +234,32 @@ footer {
     width: 40px;
     height: 40px;
     font-size: 18px;
-    background-color: #f0f0f0;
-    border: 2px solid #ccc;
+    background-color: #e1bee7;
+    border: 2px solid #9c27b0;
     border-radius: 5px;
     cursor: pointer;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.2s ease;
 }
 
 .key:hover {
-    background-color: #d3d3d3;
+    background-color: #9c27b0;
 }
 
 .key.active {
-    background-color: #fbc02d;
+    background-color:#ff7043;
 
+}
+/* Spacebar 크기 확장 */
+.spacebar {
+    width: 200px;
 }
 /* 눌렸을 때 강조되는 버튼 스타일 */
 .keyboard-btn.active {
-    background-color: #f57f17; /* 눌린 버튼에 주황색 강조 */
+    background-color: #ff5722;/* 눌린 버튼에 주황색 강조 */
     color: white; /* 글자색은 흰색 */
 }
 
