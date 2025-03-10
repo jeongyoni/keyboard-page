@@ -210,3 +210,37 @@ footer {
         padding: 40px 20px;
     }
 }
+/* 키보드 스타일 */
+.virtual-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.key {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.key:active {
+    background-color: #ddd;
+    transform: scale(0.95); /* 눌린 효과 */
+}
+
+/* 키감 체험하기 스타일 */
+#tactile-experience {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #3949ab;
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
