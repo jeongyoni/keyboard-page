@@ -24,6 +24,7 @@
         <button id="keyboard3" class="keyboard-btn">키보드 3</button>
     </section>
 
+    <!-- 가상 키보드 체험 섹션 -->
     <section id="keyboard-test">
         <h2>가상 키보드 체험</h2>
         <p>아래 입력창에 키보드를 눌러 타건 소리를 들어보세요!</p>
@@ -33,6 +34,22 @@
 
         <!-- 소리 파일 -->
         <audio id="key-sound" preload="auto"></audio>
+
+        <!-- 가상 키보드 -->
+        <div id="virtual-keyboard">
+            <!-- 가상 키보드 버튼 -->
+            <button data-key="Q">Q</button>
+            <button data-key="W">W</button>
+            <button data-key="E">E</button>
+            <button data-key="R">R</button>
+            <button data-key="T">T</button>
+            <button data-key="Y">Y</button>
+            <button data-key="U">U</button>
+            <button data-key="I">I</button>
+            <button data-key="O">O</button>
+            <button data-key="P">P</button>
+            <!-- 추가로 더 많은 키들을 추가해주세요 -->
+        </div>
     </section>
 
     <footer>
@@ -72,7 +89,24 @@
             soundElement.currentTime = 0;  // 소리 반복 재생을 위해 시간을 0으로 설정
             soundElement.play();
         });
+
+        // 가상 키보드 버튼 클릭 시 이벤트 처리
+        document.querySelectorAll('#virtual-keyboard button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                let key = button.getAttribute('data-key');  // 눌린 키 값
+                const sound = new Audio(`sounds/${key.toLowerCase()}.mp3`);
+                sound.play();
+
+                // 입력창에 키 추가
+                inputField.value += key;
+
+                // 버튼 하이라이트 효과
+                button.classList.add('active');
+                setTimeout(() => button.classList.remove('active'), 100); // 100ms 뒤에 원상복귀
+            });
+        });
     </script>
+
     <script src="keyboard-script.js"></script>
 
 </body>
