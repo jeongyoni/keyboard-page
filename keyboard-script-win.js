@@ -100,12 +100,12 @@ inputField.addEventListener("input", function(event) {
         if (decomposed.initial) {
           const soundFile = getMilkySound(decomposed.initial);
           if (soundFile) setTimeout(() => playCachedSound(soundFile), delay);
-          delay += 10;
+          delay += 100;
         }
         if (decomposed.medial) {
           const soundFile = getMilkySound(decomposed.medial);
           if (soundFile) setTimeout(() => playCachedSound(soundFile), delay);
-          delay += 10;
+          delay += 100;
         }
         if (decomposed.final && decomposed.final !== "") {
           const soundFile = getMilkySound(decomposed.final);
