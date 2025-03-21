@@ -82,57 +82,6 @@
         <p>&copy; 2025 키보드 체험 페이지. 모든 권리 보유. Designer: Jeong Yeon</p>
     </footer>
 
-    <script>
-        let currentSound = "sounds/q1.mp3";  // 기본 밀키축 키보드 소리
-        const soundElement = document.getElementById("key-sound");
-        const dropdownButtons = document.querySelectorAll(".keyboard-btn");
-        const inputField = document.getElementById("keyboard-input");
-
-        // 각 버튼 클릭 시 소리 변경
-        dropdownButtons.forEach((button) => {
-            button.addEventListener("click", function(event) {
-                // 버튼 하이라이트
-                dropdownButtons.forEach((btn) => btn.classList.remove("active"));
-                button.classList.add("active");
-
-                const selectedKeyboard = button.id;
-
-                if (selectedKeyboard === "milky") {
-                    currentSound = "sounds/q1.mp3";  // 밀키축 키보드 소리
-                } else if (selectedKeyboard === "keyboard2") {
-                    currentSound = "sounds/keyboard2-sound.mp3";
-                } else if (selectedKeyboard === "keyboard3") {
-                    currentSound = "sounds/keyboard3-sound.mp3";
-                }
-
-                // 소리 파일 변경
-                soundElement.src = currentSound;
-            });
-        });
-
-        // 키 입력 시 소리 재생
-        document.getElementById("keyboard-input").addEventListener("keydown", function(event) {
-            soundElement.currentTime = 0;  // 소리 반복 재생을 위해 시간을 0으로 설정
-            soundElement.play();
-        });
-
-        // 가상 키보드 버튼 클릭 시 이벤트 처리
-        document.querySelectorAll('#virtual-keyboard button').forEach(button => {
-            button.addEventListener('click', function(event) {
-                let key = button.getAttribute('data-key');  // 눌린 키 값
-                const sound = new Audio(`sounds/${key.toLowerCase()}.mp3`);
-                sound.play();
-
-                // 입력창에 키 추가
-                inputField.value += key;
-
-                // 버튼 하이라이트 효과
-                button.classList.add('active');
-                setTimeout(() => button.classList.remove('active'), 100); // 100ms 뒤에 원상복귀
-            });
-        });
-    </script>
-
     <script src="keyboard-script.js"></script>
 
 </body>
