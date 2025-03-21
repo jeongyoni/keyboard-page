@@ -32,9 +32,6 @@
             키보드는 컴퓨터와 상호 작용하기 위한 주요 입력 장치 중 하나입니다.
             다양한 종류의 키보드가 있으며, 각기 다른 디자인과 키감을 제공합니다.
         </p>
-        <p>
-            키보드의 역사는 타자기의 발명으로 거슬러 올라가며, 현대에 이르러서는 기계식 등 다양한 유형이 개발되었습니다.
-        </p>
     </section>
 
     <!-- 키보드 목록 -->
@@ -45,15 +42,6 @@
             <h3>수제윤할 퍼플크레용 v2 (밀키축)</h3>
             <p>부드러운 윤활 처리, 완벽한 타건감</p>
             <a href="https://www.rooky.co.kr/shop/product_detail.html?pd_no=18701" target="_blank">
-                <button>제품 보기</button>
-            </a>
-        </div>
-
-        <div class="keyboard-item">
-            <img src="https://raw.githubusercontent.com/jeongyoni/keyboard-page/main/hanilight.jpg" alt="Groovestone Keyboard">
-            <h3>표준윤활 GS85 라이트 (하늬축)</h3>
-            <p>고효율 배터리로 무선모드에서도 실외에서도 걱정없이</p>
-            <a href="https://www.rooky.co.kr/shop/product_detail.html?pd_no=18487" target="_blank">
                 <button>제품 보기</button>
             </a>
         </div>
@@ -68,31 +56,23 @@
 
     <footer>
         <p>&copy; 2025 Groovestone 키보드</p>
-        <p class="designer-info">디자인 & 개발: <strong>Yun Jeong Yeon</strong></p>
     </footer>
 
     <script>
         function goToTactileExperience() {
-            window.location.href = "tactile_experience.html"; // 새로운 페이지로 이동
+            window.location.href = "./tactile_experience.html"; // ✅ 올바른 경로 설정
         }
 
-        // 키보드 검색 기능
         function searchKeyboard() {
-            let input = document.getElementById("searchBar").value.toLowerCase();
+            let input = document.getElementById("searchBar").value.toLowerCase().trim();
             let items = document.getElementsByClassName("keyboard-item");
 
             for (let i = 0; i < items.length; i++) {
                 let name = items[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
-                if (name.includes(input)) {
-                    items[i].style.display = "block";
-                } else {
-                    items[i].style.display = "none";
-                }
+                items[i].style.display = name.includes(input) ? "block" : "none";
             }
         }
     </script>
-    
-    <script src="keyboard-script.js"></script>
 
 </body>
 </html>
