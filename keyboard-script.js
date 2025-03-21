@@ -23,17 +23,17 @@ document.addEventListener("keydown", function (event) {
     const pressedKey = event.key;
     let soundToPlay = keySoundMap.default;
 
-    if (pressedKey === " ") {
+    if (key === "Space") {
         soundToPlay = keySoundMap.space; // ✅ 스페이스바 소리 적용
-    } else if (numberKeys.includes(pressedKey)) {
+    } else if (numberKeys.includes(key)) {
         soundToPlay = keySoundMap.number;
-    } else if (functionKeys.includes(pressedKey)) {
+    } else if (functionKeys.includes(key)) {
         soundToPlay = keySoundMap.function;
-    } else if (r3Keys.includes(pressedKey)) {
+    } else if (r3Keys.includes(key)) {
         soundToPlay = keySoundMap.r3;
-    } else if (r2Keys.includes(pressedKey)) {
+    } else if (r2Keys.includes(key)) {
         soundToPlay = keySoundMap.r2;
-    } else if (r1Keys.includes(pressedKey)) {
+    } else if (r1Keys.includes(key)) {
         soundToPlay = keySoundMap.r1;
     }
 
@@ -41,9 +41,9 @@ document.addEventListener("keydown", function (event) {
     sound.currentTime = 0;
     sound.play();
 
-    // 입력창에 문자 추가
+    // 입력창에 공백 추가
     if (inputField) {
-        inputField.value += pressedKey === " " ? " " : pressedKey;
+        inputField.value += key === " " ? " " : key;
     }
 });
 
