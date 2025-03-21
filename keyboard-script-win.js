@@ -96,17 +96,20 @@ inputField.addEventListener("input", function(event) {
     for (let char of newChars) {
       if (isHangulSyllable(char)) {
         const decomposed = decomposeHangul(char);
+        let delay = 0;
         if (decomposed.initial) {
           const soundFile = getMilkySound(decomposed.initial);
-          if (soundFile) playCachedSound(soundFile);
+          if (soundFile) setTimeout(() => playCachedSound(soundFile), delay);
+          delay += 10;
         }
         if (decomposed.medial) {
           const soundFile = getMilkySound(decomposed.medial);
-          if (soundFile) playCachedSound(soundFile);
+          if (soundFile) setTimeout(() => playCachedSound(soundFile), delay);
+          delay += 10;
         }
         if (decomposed.final && decomposed.final !== "") {
           const soundFile = getMilkySound(decomposed.final);
-          if (soundFile) playCachedSound(soundFile);
+          if (soundFile) setTimeout(() => playCachedSound(soundFile), delay);
         }
       } else {
         const soundFile = getMilkySound(char);
@@ -116,6 +119,7 @@ inputField.addEventListener("input", function(event) {
   }
   lastValue = currentValue;
 });
+
 
 preloadAllAudio();
 document.addEventListener("click", function firstClick() {
