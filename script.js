@@ -1,5 +1,5 @@
 const inputField = document.getElementById("keyboard-input");
-let isVirtualKeyboard = false; // ✅ 가상 키보드 클릭 여부 체크
+let isVirtualKeyboard = false; // ✅ 가상 키보드 클릭 여부 감지
 
 // 키 소리 재생 함수
 function playKeySound(key) {
@@ -31,11 +31,17 @@ document.querySelectorAll('.key').forEach(button => {
 // ✅ 실제 키보드 입력 시 이벤트 처리
 document.addEventListener("keydown", function(event) {
     if (isVirtualKeyboard) {
-        isVirtualKeyboard = false; // ✅ 가상 키보드 입력 후 한 번만 실행되도록 설정
-        return; // ✅ 여기서 종료되면 중복 입력 방지됨
+        event.preventDefault(); // ✅ 기본 입력 차단
+        isVirtualKeyboard = false; // ✅ 다음 입력부터 정상적으로 동작하도록 리셋
+        return; // ✅ 가상 키보드 입력 시, 실제 키보드 이벤트를 막음
     }
 
-    event.preventDefault(); // ✅ 기본 입력 동작 방지
+    // ✅ IME (한글 입력 등) 방지 처리
+    if (event.isComposing || event.keyCode === 229) {
+        return; // ✅ 한글 입력 등 IME 입력 방식 방지
+    }
+
+    event.preventDefault(); // ✅ 기본 입력 방지
 
     const key = event.key.toUpperCase();
 
