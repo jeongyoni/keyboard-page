@@ -1,5 +1,5 @@
 const inputField = document.getElementById("keyboard-input");
-let isVirtualKeyboard = false; // ✅ 가상 키보드 클릭 여부 감지
+let lastKeyPressed = null;  // ✅ 마지막으로 입력된 키 저장
 
 // 키 소리 재생 함수
 function playKeySound(key) {
@@ -12,7 +12,10 @@ function playKeySound(key) {
 document.querySelectorAll('.key').forEach(button => {
     button.addEventListener('click', function () {
         const key = button.dataset.key;
-        isVirtualKeyboard = true; // ✅ 가상 키보드 클릭 감지
+
+        // ✅ 가상 키보드 입력 시, 중복 방지
+        if (lastKeyPressed === key) return;
+        lastKeyPressed = key;
 
         // 소리 재생
         playKeySound(key);
@@ -25,25 +28,27 @@ document.querySelectorAll('.key').forEach(button => {
         // 버튼 하이라이트 효과
         button.classList.add('active');
         setTimeout(() => button.classList.remove('active'), 100);
+
+        // 0.1초 뒤에 키 초기화 (중복 방지)
+        setTimeout(() => {
+            lastKeyPressed = null;
+        }, 100);
     });
 });
 
 // ✅ 실제 키보드 입력 시 이벤트 처리
 document.addEventListener("keydown", function(event) {
-    if (isVirtualKeyboard) {
-        event.preventDefault(); // ✅ 기본 입력 차단
-        isVirtualKeyboard = false; // ✅ 다음 입력부터 정상적으로 동작하도록 리셋
-        return; // ✅ 가상 키보드 입력 시, 실제 키보드 이벤트를 막음
-    }
-
-    // ✅ IME (한글 입력 등) 방지 처리
     if (event.isComposing || event.keyCode === 229) {
-        return; // ✅ 한글 입력 등 IME 입력 방식 방지
+        return; // ✅ IME (한글 입력 등) 방지
     }
-
-    event.preventDefault(); // ✅ 기본 입력 방지
 
     const key = event.key.toUpperCase();
+
+    // ✅ 중복 입력 방지: 같은 키를 너무 빠르게 연속 입력하면 무시
+    if (lastKeyPressed === key) return;
+    lastKeyPressed = key;
+
+    event.preventDefault(); // ✅ 기본 입력 방지
 
     // 소리 재생
     playKeySound(key);
@@ -52,4 +57,9 @@ document.addEventListener("keydown", function(event) {
     if (inputField) {
         inputField.value += key === " " ? " " : key;
     }
+
+    // 0.1초 뒤에 키 초기화 (중복 방지)
+    setTimeout(() => {
+        lastKeyPressed = null;
+    }, 100);
 });
