@@ -1,5 +1,6 @@
 const inputField = document.getElementById("keyboard-input");
 const audioCache = {};
+let isComposing = false;
 
 function preloadSound(key) {
     let soundFile = `./sounds/${key.toLowerCase()}.mp3`;
@@ -9,22 +10,32 @@ function preloadSound(key) {
 }
 
 function playKeySound(key) {
-    let soundFile = `./sounds/${key.toLowerCase()}.mp3`;
+    let formattedKey = key.toLowerCase();
 
-    if (!audioCache[key]) {
-        preloadSound(key);
+    if (!audioCache[formattedKey]) {
+        preloadSound(formattedKey);
     }
 
-    let audio = audioCache[key].cloneNode();
+    let audio = audioCache[formattedKey].cloneNode();
     audio.currentTime = 0;
     audio.play().catch(error => console.warn("소리 재생 오류:", error));
 }
 
+// ✅ 한글 조합이 시작될 때 (IME 입력 감지)
+inputField.addEventListener("compositionstart", function() {
+    isComposing = true;
+});
+
+// ✅ 한글 조합이 완료될 때 (완성된 글자 소리 재생)
+inputField.addEventListener("compositionend", function(event) {
+    isComposing = false;
+    const lastChar = event.data[event.data.length - 1];
+    playKeySound(lastChar);
+});
+
 // ✅ 영어 및 특수문자 입력 시 소리 재생 (한글 조합 중에는 실행 안 함)
 document.addEventListener("keydown", function(event) {
-    if (event.isComposing) {
-        return;
-    }
+    if (isComposing) return;
 
     const key = event.key;
 
@@ -33,10 +44,4 @@ document.addEventListener("keydown", function(event) {
     } else {
         playKeySound(key);
     }
-});
-
-// ✅ 한글 조합이 끝난 후 (완성된 문자) 타건 소리 재생
-inputField.addEventListener("compositionend", function(event) {
-    const lastChar = event.data[event.data.length - 1];
-    playKeySound(lastChar);
 });
