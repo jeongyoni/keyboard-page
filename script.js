@@ -39,12 +39,11 @@ inputField.addEventListener("compositionstart", function() {
     isComposing = true;
 });
 
-// ✅ 한글 조합이 완료될 때 (완성된 글자 소리 재생)
+// ✅ 한글 조합이 완료될 때 (완성된 글자만 소리 재생)
 inputField.addEventListener("compositionend", function(event) {
     isComposing = false;
-    const lastChar = event.data[event.data.length - 1];
-
-    if (lastChar !== " ") {  // ✅ 스페이스바 입력 방지
-        playKeySound(lastChar);
-    }
+    
+    
+    const lastChar = event.data.slice(-1);
+    playKeySound(lastChar);
 });
