@@ -46,14 +46,14 @@ function forceLoadAudio() {
 
 function getMilkySound(key) {
   if (functionKeys.includes(key)) return milkySounds.function;
-  if (numberKeys.includes(key)) return milkySounds.number;
-  if (r3Keys.includes(key)) return milkySounds.r3;
-  if (r2Keys.includes(key)) return milkySounds.r2;
-  if (r1Keys.includes(key)) return milkySounds.r1;
-  if (controlKeys.includes(key)) return milkySounds.control;
-  if (key === " ") return milkySounds.space;
-  if (key === "Enter") return milkySounds.enter;
-  if (key === "Backspace") return milkySounds.backspace;
+  if (numberKeys.includes(key))   return milkySounds.number;
+  if (r3Keys.includes(key))       return milkySounds.r3;
+  if (r2Keys.includes(key))       return milkySounds.r2;
+  if (r1Keys.includes(key))       return milkySounds.r1;
+  if (controlKeys.includes(key))  return milkySounds.control;
+  if (key === " ")                return milkySounds.space;
+  if (key === "Enter")            return milkySounds.enter;
+  if (key === "Backspace")        return milkySounds.backspace;
   return null;
 }
 
@@ -88,8 +88,6 @@ function decomposeHangul(syllable) {
   return { initial, medial, final };
 }
 
-// Windows 환경에서 텍스트 필드의 변화(input 이벤트)를 감지하여,
-// 이전 값과 비교 후 새로 추가된 문자를 대상으로 소리를 재생하는 방식
 let lastValue = "";
 inputField.addEventListener("input", function(event) {
   let currentValue = inputField.value;
@@ -124,12 +122,3 @@ document.addEventListener("click", function firstClick() {
   forceLoadAudio();
   document.removeEventListener("click", firstClick);
 });
-document.addEventListener("keydown", function(event) {
-  // event.isComposing 체크를 하지 않음
-  const pressedKey = event.key;
-  const soundFile = getMilkySound(pressedKey);
-  if (soundFile) {
-    playCachedSound(soundFile);
-  }
-});
-
