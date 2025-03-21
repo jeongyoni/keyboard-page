@@ -89,7 +89,6 @@ function decomposeHangul(syllable) {
 }
 
 document.addEventListener("keydown", function(event) {
-  if (event.isComposing) return;
   const pressedKey = event.key;
   if (isHangulSyllable(pressedKey)) {
     const decomposed = decomposeHangul(pressedKey);
