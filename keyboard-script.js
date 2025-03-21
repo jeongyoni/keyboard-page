@@ -7,22 +7,25 @@ const r3Keys = ['ㅂ','ㅈ','ㄷ','ㄱ','ㅅ','ㅛ','ㅕ','ㅑ','ㅐ','ㅔ','[',
 const r2Keys = ['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ',';',"'" ];
 const r1Keys = ['ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ',',','.','/'];
 
-// 키별 사운드 매핑
+// 키별 사운드 매핑 (스페이스바 추가됨!)
 const keySoundMap = {
     number: 'sounds/02_R4-숫자열.mp3',
     function: 'sounds/01_R4-F1열.mp3',
     r3: 'sounds/03_R3-ㅂㅈㄷ열.mp3',
     r2: 'sounds/04_R2-ㅁㄴㅇ열.mp3',
     r1: 'sounds/05_R1-ㅋㅌㅊ열.mp3',
-    default: 'sounds/q1.mp3' // 기본값
+    space: 'sounds/스페이스바.mp3', 
+    default: 'sounds/q1.mp3'
 };
 
-// 키 입력 이벤트 처리
+// 키 입력 이벤트 처리 (스페이스바 추가됨!)
 document.addEventListener("keydown", function (event) {
     const pressedKey = event.key;
     let soundToPlay = keySoundMap.default;
 
-    if (numberKeys.includes(pressedKey)) {
+    if (pressedKey === " ") {
+        soundToPlay = keySoundMap.space; 
+    } else if (numberKeys.includes(pressedKey)) {
         soundToPlay = keySoundMap.number;
     } else if (functionKeys.includes(pressedKey)) {
         soundToPlay = keySoundMap.function;
@@ -38,9 +41,9 @@ document.addEventListener("keydown", function (event) {
     sound.currentTime = 0;
     sound.play();
 
-    // 입력창에 문자 추가
+    // 입력창에 공백 추가
     if (inputField) {
-        inputField.value += pressedKey;
+        inputField.value += pressedKey === " " ? " " : pressedKey;
     }
 });
 
@@ -50,7 +53,9 @@ document.querySelectorAll('.key').forEach(button => {
         const key = button.dataset.key;
         let soundToPlay = keySoundMap.default;
 
-        if (numberKeys.includes(key)) {
+        if (key === "Space") {
+            soundToPlay = keySoundMap.space; //
+        } else if (numberKeys.includes(key)) {
             soundToPlay = keySoundMap.number;
         } else if (functionKeys.includes(key)) {
             soundToPlay = keySoundMap.function;
@@ -67,11 +72,4 @@ document.querySelectorAll('.key').forEach(button => {
 
         // 입력창에 문자 추가
         if (inputField) {
-            inputField.value += key;
-        }
-
-        // 버튼 하이라이트 효과
-        button.classList.add('active');
-        setTimeout(() => button.classList.remove('active'), 100);
-    });
-});
+            inputField
