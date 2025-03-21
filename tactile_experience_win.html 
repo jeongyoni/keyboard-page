@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>키감 체험하기 (Windows 전용)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>키감 체험하기</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">홈으로 돌아가기</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 키보드 선택 섹션 (윈도우용도 동일하게 유지, 필요시 Windows 전용 로직 적용) -->
+    <section id="keyboard-select">
+      <h2>키보드 선택</h2>
+      <button id="milky" class="keyboard-btn active">밀키축</button>
+      <button id="keyboard2" class="keyboard-btn">키보드 2</button>
+      <button id="keyboard3" class="keyboard-btn">키보드 3</button>
+    </section>
+
+    <!-- 키감 체험 섹션 -->
+    <section id="keyboard-test">
+      <h2>키감 체험</h2>
+      <p>아래 입력창에 키보드를 눌러 타건 소리를 들어보세요!</p>
+      <textarea id="keyboard-input" placeholder="여기에 입력해 보세요!"></textarea>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 키보드 체험 페이지. 모든 권리 보유. Designer: Jeong Yeon</p>
+    </footer>
+  </div>
+  <script src="keyboard-script-win.js"></script>
+</body>
+</html>
