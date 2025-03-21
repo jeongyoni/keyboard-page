@@ -15,8 +15,11 @@ document.querySelectorAll('.key').forEach(button => {
         // 소리 재생
         playKeySound(key);
 
-        // ✅ 가상 키보드 클릭 시 입력창에 직접 입력하지 않음 (중복 방지)
-        
+        // ✅ 입력창에 문자 추가 (가상 키보드만 입력 가능)
+        if (inputField) {
+            inputField.value += key === "Space" ? " " : key;
+        }
+
         // 버튼 하이라이트 효과
         button.classList.add('active');
         setTimeout(() => button.classList.remove('active'), 100);
@@ -25,13 +28,15 @@ document.querySelectorAll('.key').forEach(button => {
 
 // ✅ 실제 키보드 입력 시 이벤트 처리
 document.addEventListener("keydown", function(event) {
-    const key = event.key.toUpperCase();  // 키 값을 대문자로 변환
+    event.preventDefault(); // ✅ 중복 입력 방지
+
+    const key = event.key.toUpperCase();
 
     // 소리 재생
     playKeySound(key);
 
     // ✅ 실제 키보드 입력 시에만 입력창에 문자 추가
     if (inputField) {
-        inputField.value += event.key;
+        inputField.value += key === " " ? " " : key;
     }
 });
