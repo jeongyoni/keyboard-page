@@ -88,10 +88,9 @@ function decomposeHangul(syllable) {
   return { initial, medial, final };
 }
 
-document.addEventListener("keydown", function(event) {
-  const pressedKey = event.key;
-  if (isHangulSyllable(pressedKey)) {
-    const decomposed = decomposeHangul(pressedKey);
+document.addEventListener("keyup", function(event) {
+  if (isHangulSyllable(event.key)) {
+    const decomposed = decomposeHangul(event.key);
     if (decomposed.initial) {
       const soundFile = getMilkySound(decomposed.initial);
       if (soundFile) playCachedSound(soundFile);
@@ -105,10 +104,11 @@ document.addEventListener("keydown", function(event) {
       if (soundFile) playCachedSound(soundFile);
     }
   } else {
-    const soundFile = getMilkySound(pressedKey);
+    const soundFile = getMilkySound(event.key);
     if (soundFile) playCachedSound(soundFile);
   }
 });
+
 
 preloadAllAudio();
 document.addEventListener("click", function firstClick() {
