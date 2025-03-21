@@ -124,3 +124,12 @@ document.addEventListener("click", function firstClick() {
   forceLoadAudio();
   document.removeEventListener("click", firstClick);
 });
+document.addEventListener("keydown", function(event) {
+  // event.isComposing 체크를 하지 않음
+  const pressedKey = event.key;
+  const soundFile = getMilkySound(pressedKey);
+  if (soundFile) {
+    playCachedSound(soundFile);
+  }
+});
+
