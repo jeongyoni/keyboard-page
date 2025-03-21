@@ -1,5 +1,9 @@
 const inputField = document.getElementById("keyboard-input");
 
+// Web Audio API 초기화
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const audioBuffers = {};
+
 // 키 배열
 const numberKeys = ['1','2','3','4','5','6','7','8','9','0'];
 const functionKeys = ['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11','F12'];
@@ -8,7 +12,7 @@ const r2Keys = ['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ',';',"'" ];
 const r1Keys = ['ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ',',','.','/'];
 const controlKeys = ['Ctrl','Shift','Alt'];
 
-// 밀키축 전용 mp3 매핑
+// 밀키축 전용 mp3 매핑 (소리 파일 경로)
 const milkySounds = {
     function: 'sounds/01_R4-F1열.mp3',
     number:   'sounds/02_R4-숫자열.mp3',
@@ -21,18 +25,7 @@ const milkySounds = {
     backspace:'sounds/백스페이스.mp3',
 };
 
-// 오디오 캐시 객체
-const audioCache = {};
-
-// 밀키축에 사용되는 모든 소리 파일을 미리 로드
-for (const key in milkySounds) {
-    const soundFile = milkySounds[key];
-    const audio = new Audio(soundFile);
-    audio.preload = 'auto';
-    audioCache[soundFile] = audio;
-}
-
-// 입력한 키에 맞는 밀키축 소리 파일 경로 리턴 함수
+// pressedKey에 해당하는 소리 파일 경로 리턴 함수
 function getMilkySound(key) {
     if (functionKeys.includes(key)) return milkySounds.function;
     if (numberKeys.includes(key))   return milkySounds.number;
@@ -46,25 +39,44 @@ function getMilkySound(key) {
     return null;
 }
 
-// 실제 키보드 입력 이벤트 처리 (IME 조합 중이면 무시)
+// 오디오 버퍼 로드 함수
+function loadAudioBuffer(url) {
+    return fetch(url)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => new Promise((resolve, reject) => {
+            audioContext.decodeAudioData(arrayBuffer, resolve, reject);
+        }));
+}
+
+// 소리 재생 함수 (오디오 버퍼 캐시 활용)
+function playSound(url) {
+    if (!audioBuffers[url]) {
+        loadAudioBuffer(url)
+            .then(buffer => {
+                audioBuffers[url] = buffer;
+                const source = audioContext.createBufferSource();
+                source.buffer = buffer;
+                source.connect(audioContext.destination);
+                source.start(0);
+            })
+            .catch(err => console.error("Sound load error:", err));
+    } else {
+        const source = audioContext.createBufferSource();
+        source.buffer = audioBuffers[url];
+        source.connect(audioContext.destination);
+        source.start(0);
+    }
+}
+
+// 실제 키보드 입력 시 이벤트 처리
 document.addEventListener("keydown", function(event) {
+    // 한글 조합 중이면(IME 조합) 입력을 무시해서 브라우저가 정상적으로 조합하게 함
     if (event.isComposing) return;
 
     const pressedKey = event.key;
     const soundFile = getMilkySound(pressedKey);
     if (soundFile) {
-        // 캐시된 오디오를 클론하여 재생 (빠른 연타에도 딜레이 최소화)
-        const cachedAudio = audioCache[soundFile];
-        if (cachedAudio) {
-            const audioClone = cachedAudio.cloneNode();
-            audioClone.currentTime = 0;
-            audioClone.play().catch(error => console.warn("소리 재생 오류:", error));
-        } else {
-            // 예외 처리
-            const audio = new Audio(soundFile);
-            audio.currentTime = 0;
-            audio.play();
-        }
+        playSound(soundFile);
     }
-
+    // 여기서는 inputField.value 업데이트는 브라우저 기본 입력에 맡김
 });
