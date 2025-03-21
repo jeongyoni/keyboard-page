@@ -10,7 +10,7 @@ function preloadSound(key) {
 
 function playKeySound(key) {
     let soundFile = `./sounds/${key.toLowerCase()}.mp3`;
-    
+
     if (!audioCache[key]) {
         preloadSound(key);
     }
@@ -32,11 +32,15 @@ document.addEventListener("keydown", function(event) {
     } else {
         playKeySound(key);
     }
+});
 
-    if (!event.isComposing) {
-        event.preventDefault();
-        if (inputField) {
-            inputField.value += key === " " ? " " : key;
-        }
+inputField.addEventListener("input", function(event) {
+    if (event.isComposing) {
+        return;
+    }
+
+    const key = event.data;
+    if (key) {
+        playKeySound(key);
     }
 });
