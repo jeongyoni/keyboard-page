@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>키감 체험하기 버전 선택</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+      background-color: #fff8e1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .version-select {
+      text-align: center;
+      padding: 20px;
+      border: 2px solid #ff7043;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .version-select h1 {
+      margin-bottom: 20px;
+      color: #ff5722;
+      font-size: 28px;
+    }
+    .version-select button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .mac-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .win-btn {
+      background-color: #2196F3;
+      color: white;
+    }
+    .version-select button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="version-select">
+    <h1>키감 체험하기 버전 선택</h1>
+    <button class="mac-btn" onclick="window.location.href='tactile_experience_mac.html'">
+      Mac용 키감 체험하기
+    </button>
+    <button class="win-btn" onclick="window.location.href='tactile_experience_win.html'">
+      Windows용 키감 체험하기
+    </button>
+  </div>
+</body>
+</html>
