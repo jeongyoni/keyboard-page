@@ -66,6 +66,5 @@ document.addEventListener("keydown", function(event) {
             audio.play();
         }
     }
-    // 여기서는 inputField.value 업데이트를 하지 않으므로,
-    // 브라우저의 기본 IME 입력이 그대로 처리됨
+
 });
