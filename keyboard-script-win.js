@@ -88,27 +88,36 @@ function decomposeHangul(syllable) {
   return { initial, medial, final };
 }
 
-document.addEventListener("keyup", function(event) {
-  if (isHangulSyllable(event.key)) {
-    const decomposed = decomposeHangul(event.key);
-    if (decomposed.initial) {
-      const soundFile = getMilkySound(decomposed.initial);
-      if (soundFile) playCachedSound(soundFile);
+// Windows 환경에서 텍스트 필드의 변화(input 이벤트)를 감지하여,
+// 이전 값과 비교 후 새로 추가된 문자를 대상으로 소리를 재생하는 방식
+let lastValue = "";
+inputField.addEventListener("input", function(event) {
+  let currentValue = inputField.value;
+  if (currentValue.length > lastValue.length) {
+    let newChars = currentValue.slice(lastValue.length);
+    for (let char of newChars) {
+      if (isHangulSyllable(char)) {
+        const decomposed = decomposeHangul(char);
+        if (decomposed.initial) {
+          const soundFile = getMilkySound(decomposed.initial);
+          if (soundFile) playCachedSound(soundFile);
+        }
+        if (decomposed.medial) {
+          const soundFile = getMilkySound(decomposed.medial);
+          if (soundFile) playCachedSound(soundFile);
+        }
+        if (decomposed.final && decomposed.final !== "") {
+          const soundFile = getMilkySound(decomposed.final);
+          if (soundFile) playCachedSound(soundFile);
+        }
+      } else {
+        const soundFile = getMilkySound(char);
+        if (soundFile) playCachedSound(soundFile);
+      }
     }
-    if (decomposed.medial) {
-      const soundFile = getMilkySound(decomposed.medial);
-      if (soundFile) playCachedSound(soundFile);
-    }
-    if (decomposed.final && decomposed.final !== "") {
-      const soundFile = getMilkySound(decomposed.final);
-      if (soundFile) playCachedSound(soundFile);
-    }
-  } else {
-    const soundFile = getMilkySound(event.key);
-    if (soundFile) playCachedSound(soundFile);
   }
+  lastValue = currentValue;
 });
-
 
 preloadAllAudio();
 document.addEventListener("click", function firstClick() {
