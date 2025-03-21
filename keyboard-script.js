@@ -51,9 +51,9 @@ function getMilkySound(key) {
   if (r2Keys.includes(key))       return milkySounds.r2;
   if (r1Keys.includes(key))       return milkySounds.r1;
   if (controlKeys.includes(key))  return milkySounds.control;
-  if (key === " ")       return milkySounds.space;
-  if (key === "Enter")   return milkySounds.enter;
-  if (key === "Backspace") return milkySounds.backspace;
+  if (key === " ")        return milkySounds.space;
+  if (key === "Enter")    return milkySounds.enter;
+  if (key === "Backspace")return milkySounds.backspace;
   return null;
 }
 
@@ -67,8 +67,14 @@ function playCachedSound(url) {
   }
 }
 
+function isKoreanJamo(char) {
+  if (char.length === 0) return false;
+  const code = char.charCodeAt(0);
+  return (code >= 0x3131 && code <= 0x314E);
+}
+
 document.addEventListener("keydown", function(event) {
-  if (event.isComposing) return;
+  if (event.isComposing && !isKoreanJamo(event.key)) return;
   const pressedKey = event.key;
   const soundFile = getMilkySound(pressedKey);
   if (soundFile) {
@@ -80,23 +86,4 @@ preloadAllAudio();
 document.addEventListener("click", function firstClick() {
   forceLoadAudio();
   document.removeEventListener("click", firstClick);
-});
-
-let lastComposition = "";
-inputField.addEventListener("compositionupdate", function(event) {
-  const current = event.data;
-  if (current.length > lastComposition.length) {
-    const newChars = current.slice(lastComposition.length);
-    for (const char of newChars) {
-      const soundFile = getMilkySound(char);
-      if (soundFile) {
-        playCachedSound(soundFile);
-      }
-    }
-  }
-  lastComposition = current;
-});
-
-inputField.addEventListener("compositionend", function(event) {
-  lastComposition = "";
 });
