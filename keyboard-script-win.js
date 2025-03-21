@@ -1,0 +1,85 @@
+const inputField = document.getElementById("keyboard-input");
+const audioCache = {};
+
+const milkySounds = {
+  function: 'sounds/01_R4-F1열.mp3',
+  number: 'sounds/02_R4-숫자열.mp3',
+  r3: 'sounds/03_R3-ㅂㅈㄷ열.mp3',
+  r2: 'sounds/04_R2-ㅁㄴㅇ열.mp3',
+  r1: 'sounds/05_R1-ㅋㅌㅊ열.mp3',
+  control: 'sounds/06_R1-Ctrl열06.mp3',
+  space: 'sounds/스페이스바.mp3',
+  enter: 'sounds/엔터키-숫자패드+키.mp3',
+  backspace: 'sounds/백스페이스.mp3'
+};
+
+const numberKeys = ['1','2','3','4','5','6','7','8','9','0','₩','-','='];
+const functionKeys = ['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11','F12'];
+const r3Keys = ['ㅂ','ㅈ','ㄷ','ㄱ','ㅅ','ㅛ','ㅕ','ㅑ','ㅐ','ㅔ','q','w','e','r','t','y','u','i','o','p','[',']','|','\\'];
+const r2Keys = ['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ','a','s','d','f','g','h','j','k','l',';',"'"];
+const r1Keys = ['ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ','z','x','c','v','b','n','m',",",'.','/'];
+const controlKeys = ['Ctrl','Shift','Alt'];
+
+const allSoundFiles = Object.values(milkySounds);
+
+function preloadAllAudio() {
+  for (const file of allSoundFiles) {
+    const audio = new Audio(file);
+    audio.preload = "auto";
+    audio.volume = 1;
+    audioCache[file] = audio;
+  }
+}
+
+function forceLoadAudio() {
+  for (const file in audioCache) {
+    const audio = audioCache[file].cloneNode();
+    audio.volume = 0;
+    audio.play().catch(e => {});
+    setTimeout(() => {
+      audio.pause();
+      audio.volume = 1;
+      audio.currentTime = 0;
+    }, 200);
+  }
+}
+
+function getMilkySound(key) {
+  if (functionKeys.includes(key)) return milkySounds.function;
+  if (numberKeys.includes(key))   return milkySounds.number;
+  if (r3Keys.includes(key))       return milkySounds.r3;
+  if (r2Keys.includes(key))       return milkySounds.r2;
+  if (r1Keys.includes(key))       return milkySounds.r1;
+  if (controlKeys.includes(key))  return milkySounds.control;
+  if (key === " ")        return milkySounds.space;
+  if (key === "Enter")    return milkySounds.enter;
+  if (key === "Backspace")return milkySounds.backspace;
+  return null;
+}
+
+function playCachedSound(url) {
+  const baseAudio = audioCache[url];
+  if (baseAudio) {
+    const clone = baseAudio.cloneNode();
+    clone.volume = 1;
+    clone.currentTime = 0;
+    clone.play().catch(e => {});
+  }
+}
+
+document.addEventListener("keydown", function(event) {
+  // Windows에서는 IME 조합 중인 경우, keydown 이벤트가 거의 발생하지 않으므로
+  // event.isComposing 체크를 하되, 거의 false가 될 것임.
+  if (event.isComposing) return;
+  const pressedKey = event.key;
+  const soundFile = getMilkySound(pressedKey);
+  if (soundFile) {
+    playCachedSound(soundFile);
+  }
+});
+
+preloadAllAudio();
+document.addEventListener("click", function firstClick() {
+  forceLoadAudio();
+  document.removeEventListener("click", firstClick);
+});
