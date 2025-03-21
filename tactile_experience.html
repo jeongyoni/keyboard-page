@@ -19,63 +19,17 @@
     <!-- 키보드 선택 메뉴 -->
     <section id="keyboard-select">
         <h2>키보드 선택</h2>
-        <button id="milky" class="keyboard-btn">밀키축</button>
+        <button id="milky" class="keyboard-btn active">밀키축</button>
         <button id="keyboard2" class="keyboard-btn">키보드 2</button>
         <button id="keyboard3" class="keyboard-btn">키보드 3</button>
     </section>
 
-    <!-- 가상 키보드 체험 섹션 -->
+    <!-- 키감 체험 -->
     <section id="keyboard-test">
-        <h2>가상 키보드 체험</h2>
+        <h2>키감 체험</h2>
         <p>아래 입력창에 키보드를 눌러 타건 소리를 들어보세요!</p>
         
-        <!-- 입력창 -->
         <textarea id="keyboard-input" placeholder="여기에 입력해 보세요!" rows="5" cols="40"></textarea>
-
-        <!-- 소리 파일 -->
-        <audio id="key-sound" preload="auto"></audio>
-
-        <!-- 가상 키보드 -->
-        <div id="virtual-keyboard">
-            <div class="keyboard-row">
-                <button class="key" data-key="Q">Q</button>
-                <button class="key" data-key="W">W</button>
-                <button class="key" data-key="E">E</button>
-                <button class="key" data-key="R">R</button>
-                <button class="key" data-key="T">T</button>
-                <button class="key" data-key="Y">Y</button>
-                <button class="key" data-key="U">U</button>
-                <button class="key" data-key="I">I</button>
-                <button class="key" data-key="O">O</button>
-                <button class="key" data-key="P">P</button>
-            </div>
-            <div class="keyboard-row">
-                <button class="key" data-key="A">A</button>
-                <button class="key" data-key="S">S</button>
-                <button class="key" data-key="D">D</button>
-                <button class="key" data-key="F">F</button>
-                <button class="key" data-key="G">G</button>
-                <button class="key" data-key="H">H</button>
-                <button class="key" data-key="J">J</button>
-                <button class="key" data-key="K">K</button>
-                <button class="key" data-key="L">L</button>
-            </div>
-            <div class="keyboard-row">
-                <button class="key" data-key="Shift">Shift</button>
-                <button class="key" data-key="Z">Z</button>
-                <button class="key" data-key="X">X</button>
-                <button class="key" data-key="C">C</button>
-                <button class="key" data-key="V">V</button>
-                <button class="key" data-key="B">B</button>
-                <button class="key" data-key="N">N</button>
-                <button class="key" data-key="M">M</button>
-            </div>
-            <div class="keyboard-row">
-                <button class="key spacebar" data-key="Space">Space</button>
-                <button class="key" data-key="Enter">Enter</button>
-            </div>
-        </div>
-    
     </section>
 
     <footer>
@@ -83,6 +37,5 @@
     </footer>
 
     <script src="keyboard-script.js"></script>
-
 </body>
 </html>
