@@ -8,7 +8,7 @@ const r2Keys = ['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ',';',"'" ];
 const r1Keys = ['ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ',',','.','/'];
 const controlKeys = ['Ctrl','Shift','Alt'];
 
-// 밀키축 열별 mp3
+// 밀키축 전용 mp3 매핑
 const milkySounds = {
     function: 'sounds/01_R4-F1열.mp3',
     number:   'sounds/02_R4-숫자열.mp3',
@@ -21,7 +21,18 @@ const milkySounds = {
     backspace:'sounds/백스페이스.mp3',
 };
 
-// 현재는 밀키축만 사용
+// 오디오 캐시 객체
+const audioCache = {};
+
+// 밀키축에 사용되는 모든 소리 파일을 미리 로드
+for (const key in milkySounds) {
+    const soundFile = milkySounds[key];
+    const audio = new Audio(soundFile);
+    audio.preload = 'auto';
+    audioCache[soundFile] = audio;
+}
+
+// 입력한 키에 맞는 밀키축 소리 파일 경로 리턴 함수
 function getMilkySound(key) {
     if (functionKeys.includes(key)) return milkySounds.function;
     if (numberKeys.includes(key))   return milkySounds.number;
@@ -35,18 +46,26 @@ function getMilkySound(key) {
     return null;
 }
 
-// 실제 키보드 입력
+// 실제 키보드 입력 이벤트 처리 (IME 조합 중이면 무시)
 document.addEventListener("keydown", function(event) {
-    // 한글 조합 중이면 중복 입력 방지
     if (event.isComposing) return;
 
     const pressedKey = event.key;
     const soundFile = getMilkySound(pressedKey);
-
     if (soundFile) {
-        const sound = new Audio(soundFile);
-        sound.currentTime = 0;
-        sound.play();
+        // 캐시된 오디오를 클론하여 재생 (빠른 연타에도 딜레이 최소화)
+        const cachedAudio = audioCache[soundFile];
+        if (cachedAudio) {
+            const audioClone = cachedAudio.cloneNode();
+            audioClone.currentTime = 0;
+            audioClone.play().catch(error => console.warn("소리 재생 오류:", error));
+        } else {
+            // 예외 처리
+            const audio = new Audio(soundFile);
+            audio.currentTime = 0;
+            audio.play();
+        }
     }
-    // ⚠️ inputField.value += pressedKey; 제거 → "ㅇ안녕하세요" 중복 방지
+    // 여기서는 inputField.value 업데이트를 하지 않으므로,
+    // 브라우저의 기본 IME 입력이 그대로 처리됨
 });
