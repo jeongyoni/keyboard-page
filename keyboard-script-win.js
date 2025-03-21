@@ -67,14 +67,47 @@ function playCachedSound(url) {
   }
 }
 
+function isHangulSyllable(char) {
+  const code = char.charCodeAt(0);
+  return code >= 0xAC00 && code <= 0xD7A3;
+}
+
+function decomposeHangul(syllable) {
+  const SBase = 0xAC00, LBase = 0x1100, VBase = 0x1161, TBase = 0x11A7;
+  const LCount = 19, VCount = 21, TCount = 28;
+  const SIndex = syllable.charCodeAt(0) - SBase;
+  const LIndex = Math.floor(SIndex / (VCount * TCount));
+  const VIndex = Math.floor((SIndex % (VCount * TCount)) / TCount);
+  const TIndex = SIndex % TCount;
+  const initials = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+  const medials = ["ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"];
+  const finals = ["", "ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+  const initial = initials[LIndex];
+  const medial = medials[VIndex];
+  const final = finals[TIndex];
+  return { initial, medial, final };
+}
+
 document.addEventListener("keydown", function(event) {
-  // Windows에서는 IME 조합 중인 경우, keydown 이벤트가 거의 발생하지 않으므로
-  // event.isComposing 체크를 하되, 거의 false가 될 것임.
   if (event.isComposing) return;
   const pressedKey = event.key;
-  const soundFile = getMilkySound(pressedKey);
-  if (soundFile) {
-    playCachedSound(soundFile);
+  if (isHangulSyllable(pressedKey)) {
+    const decomposed = decomposeHangul(pressedKey);
+    if (decomposed.initial) {
+      const soundFile = getMilkySound(decomposed.initial);
+      if (soundFile) playCachedSound(soundFile);
+    }
+    if (decomposed.medial) {
+      const soundFile = getMilkySound(decomposed.medial);
+      if (soundFile) playCachedSound(soundFile);
+    }
+    if (decomposed.final && decomposed.final !== "") {
+      const soundFile = getMilkySound(decomposed.final);
+      if (soundFile) playCachedSound(soundFile);
+    }
+  } else {
+    const soundFile = getMilkySound(pressedKey);
+    if (soundFile) playCachedSound(soundFile);
   }
 });
 
