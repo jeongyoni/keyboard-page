@@ -26,6 +26,19 @@
       <button id="keyboard3" class="keyboard-btn">키보드 3</button>
     </section>
 
+    <script>
+      document.querySelectorAll('.keyboard-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+              // 기존 선택된 버튼에서 클래스 제거
+              document.querySelectorAll('.keyboard-btn.active').forEach(active => {
+                  active.classList.remove('active');
+              });
+              // 클릭된 버튼에 클래스 추가
+              btn.classList.add('active');
+          });
+      });
+    </script>
+    
     <!-- 키감 체험 섹션 -->
     <section id="keyboard-test">
       <h2>키감 체험</h2>
