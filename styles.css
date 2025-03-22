@@ -18,7 +18,7 @@ body {
 
 /* 헤더 스타일 */
 header h1 {
-    background-color: #ffc1cc;; 
+    background-color: #ffe4e1;; 
     background-clip: text;
     color: transparent;
     font-size: 32px;
@@ -26,7 +26,7 @@ header h1 {
     text-align: center;
     letter-spacing: 2px;
     padding: 20px 10%;
-    border-bottom: 4px solid #ff99aa;
+    border-bottom: 4px solid #ffc1cc;
     animation: fadeIn 1s ease-in-out;
 
 }
@@ -66,21 +66,23 @@ nav ul li a:hover {
     width: 70%;
     padding: 12px;
     font-size: 18px;
-    border: 2px solid #ff7043;
+    border: 2px solid #ffc1cc;
     border-radius: 25px;
     outline: none;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 #searchBar:focus {
-    border-color: #ff5722;
+    border-color: #ff99aa;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* 키보드 소개 섹션 */
 #introduction {
     padding: 40px 20px;
     margin: 0 20px;
-    background-color: white;
+    background-color: #fffaf3;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
@@ -139,7 +141,7 @@ nav ul li a:hover {
 }
 
 button {
-    background-color: #ff7043;
+    background-color: #ffc1cc;
     color: white;
     padding: 10px 20px;
     font-size: 16px;
