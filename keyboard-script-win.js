@@ -126,3 +126,5 @@ document.addEventListener("click", function firstClick() {
   forceLoadAudio();
   document.removeEventListener("click", firstClick);
 });
+
+//아직수정필요
