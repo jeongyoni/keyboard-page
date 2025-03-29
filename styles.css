@@ -343,37 +343,64 @@ header, section {
     }
 }
 
-#virtual-keyboard {
+#keyboard-options {
     text-align: center;
-    margin: 30px 0;
+    margin: 30px 0 10px;
 }
 
-.keyboard {
-    display: inline-block;
-    margin-top: 20px;
-}
-
-.keyboard .row {
-    display: flex;
-    justify-content: center;
-    margin: 5px 0;
-    flex-wrap: wrap;
-}
-
-.keyboard .key {
-    font-size: 18px;
+#keyboard-options select {
     padding: 10px 15px;
-    margin: 3px;
-    border: 1px solid #ffc1cc;
-    border-radius: 6px;
+    font-size: 16px;
+    margin: 0 10px;
+    border: 2px solid #ffc1cc;
+    border-radius: 8px;
     background-color: #fff0f5;
+    color: #444;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+#keyboard-options select:hover {
+    border-color: #ff99aa;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+/* 키보드 테마 색상들 */
+.keyboard.gray   { background-color: #dcdcdc; }
+.keyboard.black  { background-color: #333333; color: #fff; }
+.keyboard.white  { background-color: #ffffff; color: #222; }
+.keyboard.silver { background-color: #c0c0c0; }
+.keyboard.beige  { background-color: #f5f5dc; }
+.keyboard.rose-gold { background-color: #ffc0cb; }
+.keyboard.light-gold { background-color: #f8e7a2; }
+
+/* 키 버튼에도 테마 적용 */
+.keyboard .key {
+    background-color: #fff0f5;
+    color: inherit;
+}
+
+.keyboard.black .key {
+    background-color: #555;
+    color: #fff;
+}
+
+.keyboard.white .key {
+    background-color: #f9f9f9;
+    color: #333;
+}
 .keyboard .key:hover {
-    background-color: #ffccd5;
-    transform: scale(1.05);
+    background-color: #ffdce5; /* 기본 */
+}
+
+.keyboard.black .key:hover {
+    background-color: #666;
+}
+
+.keyboard.white .key:hover {
+    background-color: #eaeaea;
+}
+.keyboard.active {
+    box-shadow: 0 0 15px #ff99aa;
+    transition: box-shadow 0.3s ease-in-out;
 }
 

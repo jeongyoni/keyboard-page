@@ -42,12 +42,31 @@
       </nav>
     </header>
 
-    <section id="keyboard-select">
-      <h2>키보드 선택</h2>
-      <button id="milky" class="keyboard-btn active">밀키축</button>
-      <button id="keyboard2" class="keyboard-btn">키보드 2</button>
-      <button id="keyboard3" class="keyboard-btn">키보드 3</button>
+    <section id="keyboard-options">
+      <h3>옵션 선택</h3>
+      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+        <div>
+          <label for="switch-select">축 선택</label><br />
+          <select id="switch-select">
+            <option value="milky">밀키축</option>
+            <option value="red">코랄축</option>
+            <option value="brown">하니축</option>
+            <option value="blue">재잘축</option>
+          </select>
+        </div>
+        <div>
+          <label for="color-select">색상 선택</label><br />
+          <select id="color-select">
+            <option value="gray">Gray</option>
+            <option value="white">White</option>
+            <option value="black">Black</option>
+            <option value="beige">Beige</option>
+            <option value="rose-gold">Rose Gold</option>
+          </select>
+        </div>
+      </div>
     </section>
+    
 
     <script>
       document.querySelectorAll('.keyboard-btn').forEach(btn => {
@@ -68,6 +87,7 @@
       <p>아래 입력창에 키보드를 눌러 타건 소리를 들어보세요!</p>
       <textarea id="keyboard-input" placeholder="여기에 입력해 보세요!"></textarea>
     </section>
+    
 <!-- 가상 키보드 추가 -->
     <section id="virtual-keyboard">
       <h2>가상 키보드</h2>
@@ -127,7 +147,7 @@
       });
     });
   </script>
-  
+
   <script src="keyboard-script-mac.js"></script>
 </body>
 </html>
