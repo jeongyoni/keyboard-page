@@ -4,6 +4,7 @@ import Keyboard from './components/Keyboard';
 
 function App() {
   const [key, setKey] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const handleMouseDown = (keyName) => {
     setKey(keyName);
