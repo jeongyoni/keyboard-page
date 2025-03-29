@@ -23,7 +23,7 @@ function playKeySound(key) {
 // ✅ `keydown` 이벤트에서 한글 입력 차단
 document.addEventListener("keydown", function(event) {
     if (event.isComposing || event.key.length > 1) {
-        return; // 한글 조합 중일 때는 실행 안 함
+        return; 
     }
 
     event.preventDefault(); // 기본 입력 방지
