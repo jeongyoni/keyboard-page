@@ -6,7 +6,7 @@ const App = () => {
 
   const handleMouseDown = (keyName) => {
     setKey(keyName);
-    const audio = new Audio(`./sounds/${keyName}.mp3`);
+    const audio = new Audio(`/sounds/${keyName}.mp3`);
     audio.play();
 
     const textarea = document.getElementById('keyboard-input');
