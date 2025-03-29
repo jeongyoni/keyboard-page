@@ -88,53 +88,105 @@
       
     
 <!-- 가상 키보드 추가 -->
-    <div id="virtual-keyboard">
+    <section id="virtual-keyboard">
       <h3>가상 키보드</h3>
       <div class="keyboard">
         <div class="row">
-          <button class="key">ㅂ</button>
-          <button class="key">ㅈ</button>
-          <button class="key">ㄷ</button>
-          <button class="key">ㄱ</button>
-          <button class="key">ㅅ</button>
-          <button class="key">ㅛ</button>
-          <button class="key">ㅕ</button>
-          <button class="key">ㅑ</button>
-          <button class="key">ㅐ</button>
-          <button class="key">ㅔ</button>
+          <button class="key">Esc</button>
+          <button class="key">F1</button>
+          <button class="key">F2</button>
+          <button class="key">F3</button>
+          <button class="key">F4</button>
+          <button class="key">F5</button>
+          <button class="key">F6</button>
+          <button class="key">F7</button>
+          <button class="key">F8</button>
+          <button class="key">F9</button>
+          <button class="key">F10</button>
+          <button class="key">F11</button>
+          <button class="key">F12</button>
         </div>
         <div class="row">
-          <button class="key">ㅁ</button>
-          <button class="key">ㄴ</button>
-          <button class="key">ㅇ</button>
-          <button class="key">ㄹ</button>
-          <button class="key">ㅎ</button>
-          <button class="key">ㅗ</button>
-          <button class="key">ㅓ</button>
-          <button class="key">ㅏ</button>
-          <button class="key">ㅣ</button>
+          <button class="key">~</button>
+          <button class="key">1</button>
+          <button class="key">2</button>
+          <button class="key">3</button>
+          <button class="key">4</button>
+          <button class="key">5</button>
+          <button class="key">6</button>
+          <button class="key">7</button>
+          <button class="key">8</button>
+          <button class="key">9</button>
+          <button class="key">0</button>
+          <button class="key">-</button>
+          <button class="key">=</button>
+          <button class="key">Backspace</button>
+        </div>
+
+        <div class="row"> 
+          <button class="key">Tab</button>
+          <button class="key">Q</button>
+          <button class="key">W</button>
+          <button class="key">E</button>
+          <button class="key">R</button>
+          <button class="key">T</button>
+          <button class="key">Y</button>
+          <button class="key">U</button>
+          <button class="key">I</button>
+          <button class="key">O</button>
+          <button class="key">P</button>
+          <button class="key">[</button>
+          <button class="key">]</button>
+          <button class="key">\</button>
         </div>
         <div class="row">
-          <button class="key">ㅋ</button>
-          <button class="key">ㅌ</button>
-          <button class="key">ㅊ</button>
-          <button class="key">ㅍ</button>
-          <button class="key">ㅠ</button>
-          <button class="key">ㅜ</button>
-          <button class="key">ㅡ</button>
-          <button class="key">Space</button>
+          <button class="key">Caps</button>
+          <button class="key">A</button>
+          <button class="key">S</button>
+          <button class="key">D</button>
+          <button class="key">F</button>
+          <button class="key">G</button>
+          <button class="key">H</button>
+          <button class="key">J</button>
+          <button class="key">K</button>
+          <button class="key">L</button>
+          <button class="key">;</button>
+          <button class="key">'</button>
+          <button class="key">Enter</button>
+          </div>
+        <div class="row">
+          <button class="key">Shift</button>
+          <button class="key">Z</button>
+          <button class="key">X</button>
+          <button class="key">C</button>
+          <button class="key">V</button>
+          <button class="key">B</button>
+          <button class="key">N</button>
+          <button class="key">M</button>
+          <button class="key">,</button>
+          <button class="key">.</button>
+          <button class="key">/</button>
+          <button class="key">Shift</button>
         </div>
+        <div class="row">
+          <button class="key">Ctrl</button>
+          <button class="key">Alt</button>
+          <button class="key" style="width: 300px;">Space</button>
+          <button class="key">Alt</button>
+          <button class="key">Ctrl</button>
       </div>
     </div>
+  </section>
 
+  <section id="keyboard-test">
+    <h2>텍스트 입력</h2>
     <textarea id="keyboard-input" placeholder="여기에 입력해 보세요!"></textarea>
   </section>
 
-
-    <footer>
+  <footer>
       <p>&copy; 2025 키보드 체험 페이지. 모든 권리 보유. Designer: Jeong Yeon</p>
-    </footer>
-  </div>
+  </footer>
+</div>
 
   <script>
     document.querySelectorAll('.key').forEach(button => {
