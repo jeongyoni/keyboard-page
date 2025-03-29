@@ -58,6 +58,7 @@ function getMilkySound(key) {
 }
 
 function playCachedSound(url) {
+  if (!url) return; // ensure url is not null
   const baseAudio = audioCache[url];
   if (baseAudio) {
     const clone = baseAudio.cloneNode();
