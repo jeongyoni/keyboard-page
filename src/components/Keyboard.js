@@ -60,14 +60,14 @@ const Keyboard = ({ layoutKey = '9009_wkltkl', pressedKey = '', handleMouseDown,
     });
   });
 
-  return (
+  return (   
     <div
       style={{
         position: 'relative',
         width: 'calc(24 * 54px)',
         height: 'auto',
         margin: '0 auto',
-      }}
+      }}   
     >
       {keys}
     </div>
