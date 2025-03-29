@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Home from './Home';
 import Keyboard from './components/Keyboard'; // 경로 주의!
 
 const App = () => {
@@ -24,6 +25,8 @@ const App = () => {
 
   return (
     <>
+      <Home /> {/* 홈 페이지 */}
+      <hr />
       <h2>가상 키보드</h2>
       <Keyboard
         layoutKey="9009_wkltkl"
@@ -34,6 +37,6 @@ const App = () => {
       <textarea id="keyboard-input" placeholder="여기에 입력해보세요!" />
     </>
   );
-};
+}
 
 export default App;
