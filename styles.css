@@ -342,3 +342,38 @@ header, section {
         font-size:14px;
     }
 }
+
+#virtual-keyboard {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.keyboard {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.keyboard .row {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+    flex-wrap: wrap;
+}
+
+.keyboard .key {
+    font-size: 18px;
+    padding: 10px 15px;
+    margin: 3px;
+    border: 1px solid #ffc1cc;
+    border-radius: 6px;
+    background-color: #fff0f5;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.keyboard .key:hover {
+    background-color: #ffccd5;
+    transform: scale(1.05);
+}
+
