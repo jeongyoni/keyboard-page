@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Home from './Home';
-import Keyboard from './components/Keyboard'; // 경로 주의!
+import Keyboard from './components/Keyboard';
 
-const App = () => {
+function App() {
   const [key, setKey] = useState('');
 
   const handleMouseDown = (keyName) => {
@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <>
-      <Home /> {/* 홈 페이지 */}
+      <Home />
       <hr />
       <h2>가상 키보드</h2>
       <Keyboard
