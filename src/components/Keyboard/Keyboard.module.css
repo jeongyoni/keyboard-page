@@ -1,5 +1,15 @@
+/* 가용 폭 측정용 래퍼. 안의 케이스를 transform:scale 로 줄여 항상 폭 안에 맞춘다. */
+.fit {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
 /* 케이스(알루미늄 하우징) — 디자인의 --case 색 위에 명암을 얹어 베젤을 만든다 */
 .case {
+  /* flex 컨테이너(.fit) 안에서 쭈그러들지 않게 — 자연폭을 유지해야 scale 계산이 맞다 */
+  flex: none;
   display: inline-block;
   margin: 0 auto;
   padding: clamp(10px, 1.4vw, 16px);
@@ -13,7 +23,8 @@
     0 -3px 8px rgba(0, 0, 0, 0.3) inset,
     0 22px 44px -18px rgba(0, 0, 0, 0.7),
     0 2px 6px rgba(0, 0, 0, 0.4);
-  max-width: 100%;
+  /* max-width 를 두면 자연폭이 부모로 캡되어 scale 계산이 틀어진다.
+     대신 .fit 이 overflow:hidden + transform:scale 로 폭에 맞춘다. */
 }
 
 /* 키가 얹히는 상판(플레이트). 살짝 파인 홈처럼 안쪽 그림자를 준다 */
