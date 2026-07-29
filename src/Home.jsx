@@ -6,13 +6,13 @@ function Home() {
   const items = [
     {
       name: '수제윤할 퍼플크레용 v2 (밀키축)',
-      img: 'https://github.com/jeongyoni/keyboard-page/raw/main/v2밀키크레용.png',
+      img: './milky-crayon-v2.png',
       desc: '부드러운 윤활 처리, 완벽한 타건감',
       link: 'https://www.rooky.co.kr/shop/product_detail.html?pd_no=18701',
     },
     {
       name: '표준윤활 GS85 라이트 (하늬축)',
-      img: 'https://raw.githubusercontent.com/jeongyoni/keyboard-page/main/hanilight.jpg',
+      img: './hanilight.jpg',
       desc: '고효율 배터리로 무선모드에서도 실외에서도 걱정없이',
       link: 'https://www.rooky.co.kr/shop/product_detail.html?pd_no=18487',
     },
@@ -30,7 +30,7 @@ function Home() {
           <ul>
             <li><a href="#introduction">키보드 소개</a></li>
             <li><a href="#keyboard-list">제품 목록</a></li>
-            <li><a href="/keyboard-experience.html">키감 체험하기</a></li>
+            <li><a href="#tactile-experience">키감 체험하기</a></li>
             <li><a href="https://www.groovestone.co.kr/" target="_blank" rel="noreferrer">공식 스토어</a></li>
           </ul>
         </nav>
@@ -68,7 +68,7 @@ function Home() {
       <section id="tactile-experience">
         <h2>키감 체험하기</h2>
         <p>Groovestone 키보드의 타건감을 직접 체험해보세요!</p>
-        <button onClick={() => (window.location.href = '/keyboard-experience.html')}>체험하기</button>
+        <button onClick={() => document.getElementById('keyboard-input')?.focus()}>체험하기</button>
       </section>
 
       <footer>

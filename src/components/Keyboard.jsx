@@ -1,11 +1,8 @@
 // src/components/Keyboard.js
 import React from 'react'
-import Key from '../key/Key'
-import { keyPresets } from '../keyModules/keyPresets'
-import { parseEscapedChars, parseLegends } from '../keyModules/parseModules'
-
-// key 사이즈 정의 (Key.js와 동일하게 54)
-const keysize = 54;
+import Key from './Key'
+import { keyPresets } from '../KeyModules/keyPresets'
+import { parseEscapedChars } from '../KeyModules/parseModules'
 
 const Keyboard = ({ layoutKey = '9009_wkltkl', pressedKey = '', handleMouseDown, handleMouseUp }) => {
   const layout = keyPresets.find(preset => preset.key === layoutKey)
@@ -14,7 +11,7 @@ const Keyboard = ({ layoutKey = '9009_wkltkl', pressedKey = '', handleMouseDown,
     return <div>❌ 레이아웃 "{layoutKey}"을 찾을 수 없습니다.</div>
   }
 
-  const kle = JSON.parse(`[${layout.kle}]`)
+  const kle = JSON.parse(layout.kle)
   let x = 0, y = 0;
   let defaultWidth = 1, defaultHeight = 1;
   let currentStyle = {};

@@ -20,7 +20,7 @@ const Key = ({
   mouseDown,
   mouseUp
 }) => (
-  <div className={styles.keycap} onMouseDown={() => mouseDown(className)} onMouseUp={mouseUp}>
+  <div className={styles.keycap} onMouseDown={() => mouseDown(legend)} onMouseUp={mouseUp}>
     <div
       className={styles.keyborder}
       style={{
