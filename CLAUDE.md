@@ -34,22 +34,35 @@ Node 18+ / Vite 6 / React 18.
 ```
 src/
 ├── main.jsx                    엔트리
-├── App.jsx                     상태 소유 + 전역 키 이벤트 리스너
+├── App.jsx                     라우터 셸 (해시로 페이지 선택)
+├── router.js                   초경량 해시 라우터 (#/ , #/experience)
+├── pages/
+│   ├── HomePage.jsx            메인 — 소개 + 제품 목록
+│   └── ExperiencePage.jsx      ★ 키감 체험 (상태·소리·키 리스너 소유)
 ├── sections/                   페이지 세로 구획 (1:1로 <section> 대응)
 │   ├── SiteHeader.jsx
-│   ├── Introduction.jsx
+│   ├── Introduction.jsx        히어로 + CTA
 │   ├── ProductList.jsx         제품 카드 + 검색
-│   ├── ExperienceSection.jsx   ★ 핵심 섹션
+│   ├── ExperienceSection.jsx   체험 UI (축/배열/디자인/OS + 키보드 + 타이핑)
 │   └── SiteFooter.jsx
 ├── components/                 재사용 UI (각자 .module.css 동반)
-│   ├── Keyboard/               Keyboard.jsx, Key.jsx
-│   ├── SwitchSelector/
-│   └── TypingArea/
+│   ├── Keyboard/               Keyboard.jsx(케이스+색상+OS각인), Key.jsx(사실적 키캡)
+│   ├── SwitchSelector/         축 드롭다운
+│   ├── DesignSelector/         키보드 디자인(색상 조합) 칩 선택
+│   ├── LayoutSelector/         배열(풀104/컴팩트84) 드롭다운
+│   ├── OsToggle/               Win/Mac 각인 토글
+│   ├── ModeToggle/             자유 타이핑 / 타자연습 전환
+│   ├── TypingArea/             자유 타이핑 (빈 입력창)
+│   └── TypingPractice/         필사(타자연습) — 좋은 글 한 줄씩 + 타수/정확도
 ├── data/                       순수 데이터 + 매핑. React 의존 없음
 │   ├── switches.js             축 레지스트리
+│   ├── keyboardDesigns.js      키보드 디자인(색상 조합) 레지스트리
+│   ├── keyLayouts.js           KLE 배열 프리셋 (full-104=GS104-R, compact-84=GS85-R)
+│   ├── koreanLegends.js        두벌식 한글 각인 (영문 legend -> 자모)
+│   ├── keyCodes.js             물리 code -> 키캡 legend (눌림 하이라이트용)
+│   ├── practiceTexts.js        필사 작품(시) — 제목/작가/행
 │   ├── products.js             제품 목록
-│   ├── soundMap.js             키 -> 사운드 파일명
-│   └── keyLayouts.js           KLE 레이아웃 프리셋
+│   └── soundMap.js             키/코드 -> 사운드 파일명
 ├── hooks/
 │   └── useKeySound.js          오디오 프리로드/캐시/재생
 ├── utils/
@@ -70,13 +83,31 @@ docs/SPEC.md                    요구사항 / 로드맵
 
 ## 아키텍처에서 알아야 할 것
 
-### 상태는 App.jsx가 전부 소유한다
+### 페이지는 해시 라우터로 나뉜다
 
-`switchId`, `pressedKey`, `text` 세 개가 전부. 하위 컴포넌트는 props로만 받는다. 상태 관리 라이브러리는 없고, 지금 규모에서는 필요 없다.
+`App.jsx`는 라우터 셸이고, `router.js`가 `location.hash`로 두 페이지를 고른다: `#/`(홈), `#/experience`(키감 체험). 서버 리라이트가 필요 없어 정적 호스팅(GitHub Pages 등)에서 안전하다. 홈 안의 앵커(`#introduction` 등)는 `/experience`로 시작하지 않으므로 홈으로 취급되고 브라우저 스크롤은 그대로 동작한다. 진입 파라미터는 `#/experience?switch=..&design=..`.
+
+### 상태와 소리는 ExperiencePage가 소유한다
+
+`switchId`, `designId`, `layoutKey`, `os`, `mode`, `pressedKey`, `text`는 `ExperiencePage`가 갖는다. 홈은 정적이라 상태가 없다. 상태 관리 라이브러리는 없고, 지금 규모에서는 필요 없다.
+
+`mode`는 `free`(빈 입력창)와 `practice`(필사) 두 가지. 필사는 `TypingPractice`가 `practiceTexts.js`의 작품을 한 줄씩 따라 치게 하고 타수(타/분)·정확도를 낸다. 타수는 실제 물리 타건 수(한글 조합 중 `e.key==='Process'`도 1타)로 센다. 소리·키캡 눌림은 두 모드 다 전역 keydown 리스너가 담당한다.
 
 ### 물리 키보드 입력이 주된 상호작용
 
-`App.jsx`의 `useEffect`가 `window`에 `keydown`/`keyup`을 건다. 화면의 키캡 클릭은 보조 수단이다. 이 우선순위를 뒤집지 말 것 — 사용자가 자기 키보드를 두드리는 게 이 사이트의 요점이다.
+`ExperiencePage`의 `useEffect`가 `window`에 `keydown`/`keyup`을 건다. **소리 리스너는 체험 페이지에서만 산다** — 홈에서 키를 눌러도 소리가 나지 않는다. 화면의 키캡 클릭은 보조 수단이다. 이 우선순위를 뒤집지 말 것 — 사용자가 자기 키보드를 두드리는 게 이 사이트의 요점이다.
+
+### 키보드 = 배열 × 디자인 × OS 각인 (서로 직교)
+
+`Keyboard`는 세 축을 조합해 그린다. 셋은 독립이라 아무 조합이나 가능하다.
+
+- **배열(layoutKey)**: `keyLayouts.js`의 KLE 프리셋. `full-104`(GS104-R, 넘패드 포함), `compact-84`(GS85-R, 75%). 색은 여기 넣지 않는다 — 폭/위치만. 키 색은 디자인이 정한다.
+- **디자인(designId)**: `keyboardDesigns.js`. 케이스 색 + base/mod/accent 세 키캡 색. `resolveKeyColors(design, legend)`가 legend 분류(accent > mod > base)로 키 색을 정한다. **새 디자인은 `KEYBOARD_DESIGNS`에 항목만 추가**하면 자동 반영. 실제 제품 색은 `public/images`에서 실측했다.
+- **OS 각인(os)**: `win`/`mac`. 모디파이어 표기만 바꾼다(Win→Opt, Alt→Cmd). **위치·매칭은 원본 legend 로 유지하고 '보이는 글자'만 교체** — 눌림 매칭(`isPressed`)과 색 분류는 원본 legend 로 한다.
+
+`Key`는 사실적 키캡(윗면 하이라이트 + 벽면 음영 + 키 간격 + 눌림 침강)을 그리고, `getKoreanLegend()`로 알파 키에 두벌식 한글을 sublegend(우하단)로 얹는다. 눌림 하이라이트는 소리와 마찬가지로 **물리 키(`codeToLegend(e.code)`) 기준** — IME 중 `e.key`가 `'Process'`라 e.key로는 눌린 키가 안 보인다.
+
+풀배열 104는 넓어서 체험 패널(`#tactile-experience`)을 `min(98vw, 1560px)`로 넓혀 잘리지 않게 한다. `KEY_SIZE`(px/유닛)를 바꾸면 전체 크기가 스케일된다.
 
 ### 한글 IME 처리 — 소리는 물리 키(e.code) 하나로만 결정한다
 

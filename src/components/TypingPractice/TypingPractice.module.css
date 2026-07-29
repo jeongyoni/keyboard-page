@@ -1,0 +1,231 @@
+.wrapper {
+  width: min(100%, 720px);
+  margin: 20px auto 0;
+  text-align: left;
+}
+
+/* 작품 선택 칩 */
+.picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.pieceChip {
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.pieceChip:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+.pieceActive {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.pieceChip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* 필사 원고지 느낌의 종이 */
+.paper {
+  padding: 26px 28px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.author {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.poem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 19px;
+  line-height: 1.9;
+  word-break: keep-all;
+}
+
+/* 이미 친 행 / 지금 칠 행 / 아직 안 온 행 */
+.lineDone {
+  color: var(--text-dim);
+}
+
+.linePending {
+  color: var(--muted);
+  opacity: 0.55;
+}
+
+.lineActive {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* 지금 행의 글자별 상태 */
+.pending {
+  color: var(--muted);
+}
+
+.correct {
+  color: var(--text);
+}
+
+.wrong {
+  color: #f2b8b8;
+  background: rgba(229, 115, 107, 0.22);
+  border-radius: 3px;
+}
+
+.cursor {
+  color: var(--accent-bright);
+  border-bottom: 2px solid var(--accent);
+}
+
+.input {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px 16px;
+  font-size: 17px;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--muted);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--card-hover);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* 통계 바 */
+.statbar {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 16px;
+  padding: 0 4px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.statNum {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent-bright);
+}
+
+.statLabel {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.skip {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  padding: 9px 16px;
+}
+
+.skip:hover {
+  border-color: var(--accent);
+  color: var(--accent-bright);
+}
+
+/* 완성 카드 */
+.resultCard {
+  margin-top: 18px;
+  padding: 22px;
+  text-align: center;
+  background: radial-gradient(500px 200px at 50% 0%, rgba(217, 154, 78, 0.12), transparent 60%),
+    var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+}
+
+.resultTitle {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.resultStats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 15px;
+  color: var(--text-dim);
+}
+
+.resultStats strong {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--accent-bright);
+}
+
+.again {
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent);
+  padding: 11px 22px;
+}
+
+.again:hover {
+  background: var(--accent-bright);
+}

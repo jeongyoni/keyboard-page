@@ -1,0 +1,77 @@
+.wrapper {
+  text-align: center;
+  margin: 6px 0 4px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px 7px 8px;
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease,
+    transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.chip:hover {
+  color: var(--text);
+  border-color: var(--muted);
+  transform: translateY(-1px);
+}
+
+.chip.selected {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--card-hover);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* 케이스 색 위에 키캡 3색 점을 얹은 미니 프리뷰 */
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 6px;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) inset;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2.5px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+.name {
+  white-space: nowrap;
+}
