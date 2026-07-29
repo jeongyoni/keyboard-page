@@ -1,0 +1,11 @@
+.keyboard {
+  position: relative;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.error {
+  text-align: center;
+  padding: 24px;
+  color: #b00020;
+}

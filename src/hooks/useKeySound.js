@@ -1,11 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
-import {
-  getSoundFile,
-  getSoundFileByCode,
-  ALL_SOUND_FILES,
-  getSwitch,
-  DEFAULT_SWITCH_ID,
-} from '../KeyModules/soundMap';
+import { getSoundFile, getSoundFileByCode, ALL_SOUND_FILES } from '../data/soundMap';
+import { getSwitch, DEFAULT_SWITCH_ID } from '../data/switches';
 
 /**
  * 키 사운드 재생 훅.

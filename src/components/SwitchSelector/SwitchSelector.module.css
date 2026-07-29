@@ -1,0 +1,33 @@
+.wrapper {
+  text-align: center;
+  margin: 20px 0 24px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #666;
+}
+
+.select {
+  padding: 9px 16px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.select:focus-visible {
+  outline: 2px solid #ffc107;
+  outline-offset: 1px;
+}
+
+.description {
+  margin: 10px auto 0;
+  max-width: 460px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #777;
+}

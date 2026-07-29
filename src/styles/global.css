@@ -213,33 +213,8 @@ button:hover {
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
-#keyboard-test {
-    text-align: center;
-    margin: 0 auto;
-    width: 80%;
-    padding: 20px;
-}
 
 
-#keyboard-test textarea {
-    width: 100%; 
-    max-width: 600px; 
-    margin: 20px auto;
-    display: block;  
-    height: 200px; 
-    font-size: 16px; 
-    padding: 10px;   
-    border-radius: 8px; 
-    resize: none;   
-    border: 2px solid #ff99aa;
-    transition: border-color 0.3s ease,box-shadow 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-#keyboard-test textarea:focus {
-    border-color:#ff7043;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    outline: none;
-}
 .card {
     text-align: center;
     padding: 20px;
@@ -343,34 +318,9 @@ header, section {
     }
 }
 
-#keyboard-options {
-    text-align: center;
-    margin: 30px 0 10px;
-}
 
-#keyboard-options select {
-    padding: 10px 15px;
-    font-size: 16px;
-    margin: 0 10px;
-    border: 2px solid #ffc1cc;
-    border-radius: 8px;
-    background-color: #fff0f5;
-    color: #444;
-    cursor: pointer;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
 
-#keyboard-options select:hover {
-    border-color: #ff99aa;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
 /* 키보드 테마 색상들 */
-.keyboard.gray   { background-color: #dcdcdc; }
-.keyboard.black  { background-color: #333333; color: #fff; }
-.keyboard.white  { background-color: #ffffff; color: #222; }
-.keyboard.silver { background-color: #c0c0c0; }
-.keyboard.beige  { background-color: #f5f5dc; }
-.keyboard.rose-gold { background-color: #ffc0cb; }
 .keyboard.light-gold { background-color: #f8e7a2; }
 
 /* 키 버튼에도 테마 적용 */
@@ -379,26 +329,12 @@ header, section {
     color: inherit;
 }
 
-.keyboard.black .key {
-    background-color: #555;
-    color: #fff;
-}
 
-.keyboard.white .key {
-    background-color: #f9f9f9;
-    color: #333;
-}
 .keyboard .key:hover {
     background-color: #ffdce5; /* 기본 */
 }
 
-.keyboard.black .key:hover {
-    background-color: #666;
-}
 
-.keyboard.white .key:hover {
-    background-color: #eaeaea;
-}
 .keyboard.active {
     box-shadow: 0 0 15px #ff99aa;
     transition: box-shadow 0.3s ease-in-out;
@@ -406,25 +342,27 @@ header, section {
 
 
 /* 축 선택 */
-.switch-select {
-  text-align: center;
-  margin: 16px 0 24px;
+
+
+/* 제품 카드 - 축 태그 / 액션 */
+.switch-tag {
+  display: inline-block;
+  margin: 4px 0 8px;
+  padding: 2px 10px;
+  font-size: 12px;
+  color: #8a6d00;
+  background: #fff5d6;
+  border-radius: 999px;
 }
-.switch-select label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #555;
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.switch-select select {
-  padding: 8px 14px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-  cursor: pointer;
-}
-.switch-select select:focus {
-  outline: 2px solid #ffc107;
-  outline-offset: 1px;
+
+.card-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }

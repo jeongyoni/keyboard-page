@@ -1,0 +1,44 @@
+.keycap {
+  position: absolute;
+  padding: 0;
+  border: none;
+  background: #d4d4d4;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 60ms ease, filter 60ms ease;
+}
+
+.keytop {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+  font-family: inherit;
+  user-select: none;
+  transition: box-shadow 60ms ease, filter 60ms ease;
+}
+
+.legend {
+  font-size: 13px;
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.sublegend {
+  font-size: 10px;
+  line-height: 1.1;
+  opacity: 0.65;
+}
+
+.keycap.pressed {
+  transform: translateY(1px);
+}
+
+.keycap.pressed .keytop {
+  box-shadow: none;
+  filter: brightness(0.88);
+}
