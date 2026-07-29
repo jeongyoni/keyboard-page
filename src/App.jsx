@@ -6,6 +6,7 @@ import ExperienceSection from './sections/ExperienceSection';
 import SiteFooter from './sections/SiteFooter';
 import { useKeySound } from './hooks/useKeySound';
 import { DEFAULT_SWITCH_ID, getSwitch } from './data/switches';
+import { shouldIgnoreKeydown, createPlayGate, diffComposition } from './utils/ime';
 
 function App() {
   const [switchId, setSwitchId] = useState(DEFAULT_SWITCH_ID);
@@ -28,11 +29,15 @@ function App() {
 
   const handleKeyUp = useCallback(() => setPressedKey(''), []);
 
+  // keydown 과 compositionupdate 양쪽에서 잡힐 때 두 번 울리는 것을 막는 게이트
+  const gateRef = useRef(createPlayGate());
+
   // 물리 키보드 입력 — 이 사이트의 핵심 상호작용
   useEffect(() => {
     const onDown = (e) => {
-      if (e.repeat) return; // 길게 누를 때 연속 재생 방지
-      if (e.isComposing) return; // 한글 조합 중 중복 방지
+      // 조합 중이라도 자모가 실려 오면 재생한다. utils/ime.js 참고
+      if (shouldIgnoreKeydown(e)) return;
+      if (!gateRef.current()) return;
       play(e.key, e.code);
       setPressedKey(e.key);
     };
@@ -43,6 +48,33 @@ function App() {
     return () => {
       window.removeEventListener('keydown', onDown);
       window.removeEventListener('keyup', onUp);
+    };
+  }, [play]);
+
+  // 한글 IME: keydown 의 e.key 가 'Process' 로 오는 환경을 위한 보조 경로
+  useEffect(() => {
+    const el = inputRef.current;
+    if (!el) return undefined;
+
+    let prev = '';
+    const onUpdate = (e) => {
+      const added = diffComposition(prev, e.data || '');
+      prev = e.data || '';
+      if (!added) return;
+      if (!gateRef.current()) return;
+      play(added);
+      setPressedKey(added);
+    };
+    const onEnd = () => {
+      prev = '';
+      setPressedKey('');
+    };
+
+    el.addEventListener('compositionupdate', onUpdate);
+    el.addEventListener('compositionend', onEnd);
+    return () => {
+      el.removeEventListener('compositionupdate', onUpdate);
+      el.removeEventListener('compositionend', onEnd);
     };
   }, [play]);
 

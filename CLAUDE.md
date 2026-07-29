@@ -22,9 +22,10 @@ npm install
 npm run dev      # http://localhost:5173
 npm run build    # dist/
 npm run preview  # 빌드 결과 확인
+npm test         # IME 로직 테스트
 ```
 
-Node 18+ / Vite 6 / React 18. 테스트 러너는 아직 없다.
+Node 18+ / Vite 6 / React 18.
 
 ---
 
@@ -77,10 +78,21 @@ docs/SPEC.md                    요구사항 / 로드맵
 
 `App.jsx`의 `useEffect`가 `window`에 `keydown`/`keyup`을 건다. 화면의 키캡 클릭은 보조 수단이다. 이 우선순위를 뒤집지 말 것 — 사용자가 자기 키보드를 두드리는 게 이 사이트의 요점이다.
 
-두 개의 가드가 반드시 필요하다:
+### 한글 IME 처리 — 여기서 제일 많이 깨진다
 
-- `e.repeat` — 키를 길게 누를 때 소리가 연속 재생되는 것 방지
-- `e.isComposing` — 한글 조합 중 중복 재생 방지 (한국어 사이트라 필수)
+**`if (e.isComposing) return` 로 막으면 안 된다.** macOS 두벌식 IME 는 첫 자모부터 `isComposing` 이 계속 true 라, 이렇게 짜면 맥에서 한글 타이핑 중 소리가 전혀 안 난다. 실제로 그렇게 짰다가 맥에서 무음이 되는 문제가 있었다.
+
+판정은 `utils/ime.js` 의 `shouldIgnoreKeydown()` 이 담당한다:
+
+- 조합 중이어도 **자모와 특수키(Backspace, Space, Enter…)는 통과**시킨다
+- 실제 키를 알 수 없는 경우(`Process`, `Unidentified`)만 무시하고 `compositionupdate` 에 맡긴다
+- `e.repeat` 은 항상 차단 (길게 누를 때 연속 재생 방지)
+
+두 경로가 다 열려 있으므로 같은 입력이 두 번 울릴 수 있다. `createPlayGate()` 가 40ms 안의 중복을 막는다.
+
+`diffComposition()` 은 자모 수가 늘었을 때만 소리를 낸다. 글자 수로 세면 안 된다 — "마"→"만" 과 "만"→"마" 가 둘 다 1글자라 추가인지 삭제인지 구분되지 않는다. NFD 로 분해하되 **겹자모(ㄶ, ㅘ 등)는 2로 세야** 한다. `countJamo()` 참고.
+
+이 로직은 브라우저·OS 마다 동작이 달라 눈으로 확인하기 어렵다. `npm test` 로 검증한다.
 
 ### 사운드는 키 단위가 아니라 행 단위
 

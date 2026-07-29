@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node src/utils/__tests__/ime.test.mjs"
   },
   "dependencies": {
     "prop-types": "^15.8.1",
