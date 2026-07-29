@@ -13,6 +13,7 @@ import { getSwitch, DEFAULT_SWITCH_ID } from '../data/switches';
 export function useKeySound({ switchId = DEFAULT_SWITCH_ID, volume = 1 } = {}) {
   const ctxRef = useRef(null);
   const gainRef = useRef(null);
+  const compressorRef = useRef(null);
   const buffersRef = useRef({});
 
   const [ready, setReady] = useState(false);
@@ -29,17 +30,31 @@ export function useKeySound({ switchId = DEFAULT_SWITCH_ID, volume = 1 } = {}) {
       return undefined;
     }
     const ctx = new Ctx();
+
+    // source -> masterGain -> compressor -> destination
+    // 빠르게 칠 때 소리가 겹치면 진폭이 더해져 클리핑이 난다.
+    // 컴프레서가 피크를 눌러줘 연타해도 찢어지지 않는다.
+    const compressor = ctx.createDynamicsCompressor();
+    compressor.threshold.value = -18;
+    compressor.knee.value = 12;
+    compressor.ratio.value = 8;
+    compressor.attack.value = 0.002;
+    compressor.release.value = 0.12;
+    compressor.connect(ctx.destination);
+
     const gain = ctx.createGain();
     gain.gain.value = volume;
-    gain.connect(ctx.destination);
+    gain.connect(compressor);
 
     ctxRef.current = ctx;
     gainRef.current = gain;
+    compressorRef.current = compressor;
 
     return () => {
       ctx.close();
       ctxRef.current = null;
       gainRef.current = null;
+      compressorRef.current = null;
     };
     // volume 은 아래 별도 effect 에서 반영
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,8 +131,20 @@ export function useKeySound({ switchId = DEFAULT_SWITCH_ID, volume = 1 } = {}) {
 
     const source = ctx.createBufferSource();
     source.buffer = buffer;
-    source.connect(gain);
+
+    // 개별 노트는 살짝 낮춰서 헤드룸을 둔다
+    const noteGain = ctx.createGain();
+    noteGain.gain.value = 0.85;
+
+    source.connect(noteGain);
+    noteGain.connect(gain);
     source.start(0);
+
+    // 재생이 끝나면 노드를 끊어 누적을 막는다
+    source.onended = () => {
+      source.disconnect();
+      noteGain.disconnect();
+    };
   }, []);
 
   return { play, unlock, ready, error };

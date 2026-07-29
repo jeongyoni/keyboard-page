@@ -82,12 +82,51 @@ export function shouldIgnoreKeydown(event) {
  * 사람이 아무리 빨라도 한 키에 40ms 는 걸리므로 그 안의 중복은 같은 입력으로 본다.
  */
 export function createPlayGate(windowMs = 40) {
-  let last = 0;
+  // 0 으로 두면 performance.now() 가 아직 windowMs 미만인
+  // 페이지 로드 직후의 첫 입력이 삼켜진다
+  let last = Number.NEGATIVE_INFINITY;
   return function allow() {
     const now = performance.now();
     if (now - last < windowMs) return false;
     last = now;
     return true;
+  };
+}
+
+/**
+ * 한글 입력을 keydown 과 compositionupdate 중 어느 쪽으로 처리할지 정하는 라우터.
+ *
+ * 두 이벤트는 같은 키 입력에 대해 함께 발생할 수 있다. 양쪽 다 재생하면
+ * 같은 샘플이 동시에 두 번 울려 진폭이 두 배가 되고 소리가 찢어진다.
+ * (맥 한글 입력에서 실제로 발생했다. 영어는 compositionupdate 가 없어 멀쩡했다.)
+ *
+ * 어느 쪽이 쓸 만한지는 브라우저·OS 가 정하므로 런타임에 한 번 판별한 뒤 고정한다.
+ *   - keydown 이 자모를 실어 주면      -> keydown 만 사용
+ *   - keydown 이 Process 만 주면       -> compositionupdate 만 사용
+ */
+export function createImeRouter() {
+  let mode = null; // null | 'keydown' | 'composition'
+
+  return {
+    /** 조합 중 keydown 을 재생해도 되는지 */
+    acceptKeydown(event) {
+      if (!event.isComposing) return true; // 영어 등 비조합 입력
+      if (shouldIgnoreKeydown(event)) return false;
+      if (mode === null) mode = 'keydown';
+      return mode === 'keydown';
+    },
+
+    /** compositionupdate 를 재생해도 되는지 */
+    acceptComposition() {
+      if (mode === 'keydown') return false; // keydown 이 이미 처리하고 있다
+      if (mode === null) mode = 'composition';
+      return mode === 'composition';
+    },
+
+    /** 테스트/디버깅용 */
+    get mode() {
+      return mode;
+    },
   };
 }
 

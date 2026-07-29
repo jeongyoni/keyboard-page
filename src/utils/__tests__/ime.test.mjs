@@ -1,4 +1,4 @@
-import { isKoreanJamo, shouldIgnoreKeydown, createPlayGate, diffComposition, countJamo } from '../ime.js';
+import { isKoreanJamo, shouldIgnoreKeydown, createPlayGate, diffComposition, countJamo, createImeRouter } from '../ime.js';
 let pass=0, fail=0;
 const t=(name,got,want)=>{ const ok=JSON.stringify(got)===JSON.stringify(want); ok?pass++:fail++; if(!ok)console.log(`  FAIL ${name}: got ${JSON.stringify(got)} want ${JSON.stringify(want)}`); };
 
@@ -38,6 +38,31 @@ t('첫 호출 통과', gate(), true);
 t('즉시 재호출 차단', gate(), false);
 await new Promise(r=>setTimeout(r,55));
 t('55ms 후 통과', gate(), true);
+
+
+// --- IME 라우터: 같은 입력이 두 경로로 새어 두 번 울리는 것을 막는가 ---
+{
+  // 맥: keydown 이 자모를 준다 -> keydown 만 사용
+  const r = createImeRouter();
+  t('맥 첫 자모 keydown 수락', r.acceptKeydown({isComposing:true, key:'ㅁ', repeat:false}), true);
+  t('맥 compositionupdate 차단', r.acceptComposition(), false);
+  t('맥 이후 keydown 계속 수락', r.acceptKeydown({isComposing:true, key:'ㅏ', repeat:false}), true);
+  t('맥 모드 고정', r.mode, 'keydown');
+}
+{
+  // Process 만 주는 환경 -> compositionupdate 만 사용
+  const r = createImeRouter();
+  t('Process keydown 거부', r.acceptKeydown({isComposing:true, key:'Process', repeat:false}), false);
+  t('composition 수락', r.acceptComposition(), true);
+  t('이후 composition 계속 수락', r.acceptComposition(), true);
+  t('모드 고정', r.mode, 'composition');
+}
+{
+  // 영어는 조합이 없으므로 항상 통과
+  const r = createImeRouter();
+  t('영어 keydown 수락', r.acceptKeydown({isComposing:false, key:'a', repeat:false}), true);
+  t('영어는 모드 미결정', r.mode, null);
+}
 
 console.log(`\n통과 ${pass} / 실패 ${fail}`);
 process.exit(fail?1:0);

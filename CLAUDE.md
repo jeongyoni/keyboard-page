@@ -88,7 +88,9 @@ docs/SPEC.md                    요구사항 / 로드맵
 - 실제 키를 알 수 없는 경우(`Process`, `Unidentified`)만 무시하고 `compositionupdate` 에 맡긴다
 - `e.repeat` 은 항상 차단 (길게 누를 때 연속 재생 방지)
 
-두 경로가 다 열려 있으므로 같은 입력이 두 번 울릴 수 있다. `createPlayGate()` 가 40ms 안의 중복을 막는다.
+**두 경로를 동시에 쓰면 안 된다.** 맥 한글 입력에서는 keydown 과 compositionupdate 가 같은 키에 대해 함께 발생해, 양쪽 다 재생하면 같은 샘플이 겹쳐 진폭이 두 배가 되고 소리가 찢어진다. 영어는 compositionupdate 가 없어 멀쩡하므로 증상이 한글에서만 나타난다.
+
+`createImeRouter()` 가 런타임에 어느 경로를 쓸지 한 번 판별해 고정한다. keydown 이 자모를 실어 주면 keydown 만, `Process` 만 주면 compositionupdate 만 쓴다. `createPlayGate()` 는 그래도 새어나오는 중복을 막는 최후 방어선이다.
 
 `diffComposition()` 은 자모 수가 늘었을 때만 소리를 낸다. 글자 수로 세면 안 된다 — "마"→"만" 과 "만"→"마" 가 둘 다 1글자라 추가인지 삭제인지 구분되지 않는다. NFD 로 분해하되 **겹자모(ㄶ, ㅘ 등)는 2로 세야** 한다. `countJamo()` 참고.
 
@@ -119,6 +121,7 @@ mp3 를 한 번만 디코드해 `AudioBuffer` 로 들고 있다가, 재생할 �
 - **자동재생 정책 해제는 `ctx.resume()`.** 브라우저는 사용자 상호작용 전에 AudioContext 를 `suspended` 상태로 둔다. 최초 `pointerdown`/`keydown` 에서 resume 한다.
 - **에러를 조용히 삼키지 말 것.** `.catch(() => {})` 로 묻으면 소리가 안 날 때 원인을 찾을 수 없다. 훅이 `ready` / `error` 를 반환하고 UI 가 이를 표시한다.
 - 축을 바꾸면 해당 폴더를 다시 fetch/decode 한다 (`baseDir` 이 deps 에 있음).
+- **컴프레서를 빼지 말 것.** 그래프는 `source -> noteGain(0.85) -> masterGain -> compressor -> destination` 이다. 빠르게 칠 때 소리가 겹치면 진폭이 더해져 클리핑이 나는데, 컴프레서가 피크를 눌러준다.
 
 ---
 

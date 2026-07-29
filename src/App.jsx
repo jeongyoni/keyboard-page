@@ -6,7 +6,7 @@ import ExperienceSection from './sections/ExperienceSection';
 import SiteFooter from './sections/SiteFooter';
 import { useKeySound } from './hooks/useKeySound';
 import { DEFAULT_SWITCH_ID, getSwitch } from './data/switches';
-import { shouldIgnoreKeydown, createPlayGate, diffComposition } from './utils/ime';
+import { createImeRouter, createPlayGate, diffComposition } from './utils/ime';
 
 function App() {
   const [switchId, setSwitchId] = useState(DEFAULT_SWITCH_ID);
@@ -29,14 +29,17 @@ function App() {
 
   const handleKeyUp = useCallback(() => setPressedKey(''), []);
 
-  // keydown 과 compositionupdate 양쪽에서 잡힐 때 두 번 울리는 것을 막는 게이트
+  // 한글 입력을 keydown / compositionupdate 중 한 경로로만 보낸다.
+  // 양쪽 다 재생하면 같은 소리가 겹쳐 찢어진다. utils/ime.js 참고
+  const imeRef = useRef(createImeRouter());
+  // 그래도 새어나오는 중복을 막는 최후 방어선
   const gateRef = useRef(createPlayGate());
 
   // 물리 키보드 입력 — 이 사이트의 핵심 상호작용
   useEffect(() => {
     const onDown = (e) => {
-      // 조합 중이라도 자모가 실려 오면 재생한다. utils/ime.js 참고
-      if (shouldIgnoreKeydown(e)) return;
+      if (e.repeat) return; // 길게 누를 때 연속 재생 방지
+      if (!imeRef.current.acceptKeydown(e)) return;
       if (!gateRef.current()) return;
       play(e.key, e.code);
       setPressedKey(e.key);
@@ -61,6 +64,7 @@ function App() {
       const added = diffComposition(prev, e.data || '');
       prev = e.data || '';
       if (!added) return;
+      if (!imeRef.current.acceptComposition()) return;
       if (!gateRef.current()) return;
       play(added);
       setPressedKey(added);
