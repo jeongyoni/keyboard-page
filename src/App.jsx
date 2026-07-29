@@ -14,7 +14,7 @@ function App() {
 
   const experienceRef = useRef(null);
   const inputRef = useRef(null);
-  const { play } = useKeySound({ switchId });
+  const { play, ready, error } = useKeySound({ switchId });
 
   // 화면 키캡 클릭
   const handleKeyDown = useCallback(
@@ -70,6 +70,8 @@ function App() {
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
         inputRef={inputRef}
+        soundReady={ready}
+        soundError={error}
       />
       <SiteFooter />
     </>

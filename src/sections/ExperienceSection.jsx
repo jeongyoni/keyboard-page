@@ -9,7 +9,18 @@ import TypingArea from '../components/TypingArea/TypingArea';
  * 사용자가 실제 키보드를 두드리면 선택한 축의 타건음이 재생된다.
  */
 const ExperienceSection = forwardRef(function ExperienceSection(
-  { switchId, onSwitchChange, pressedKey = '', text, onTextChange, onKeyDown, onKeyUp, inputRef = null },
+  {
+    switchId,
+    onSwitchChange,
+    pressedKey = '',
+    text,
+    onTextChange,
+    onKeyDown,
+    onKeyUp,
+    inputRef = null,
+    soundReady = false,
+    soundError = null,
+  },
   ref
 ) {
   return (
@@ -20,6 +31,14 @@ const ExperienceSection = forwardRef(function ExperienceSection(
       </p>
 
       <SwitchSelector value={switchId} onChange={onSwitchChange} />
+
+      {soundError ? (
+        <p className="sound-status sound-status--error">
+          사운드를 불러오지 못했습니다: {soundError}
+        </p>
+      ) : !soundReady ? (
+        <p className="sound-status">사운드 불러오는 중...</p>
+      ) : null}
 
       <Keyboard
         layoutKey="9009_wkltkl"
@@ -42,6 +61,8 @@ ExperienceSection.propTypes = {
   onKeyDown: PropTypes.func.isRequired,
   onKeyUp: PropTypes.func.isRequired,
   inputRef: PropTypes.shape({ current: PropTypes.any }),
+  soundReady: PropTypes.bool,
+  soundError: PropTypes.string,
 };
 
 

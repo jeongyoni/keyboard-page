@@ -366,3 +366,15 @@ header, section {
   opacity: 0.45;
   cursor: not-allowed;
 }
+
+/* 사운드 로딩/에러 상태 */
+.sound-status {
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 12px;
+}
+
+.sound-status--error {
+  color: #b00020;
+}

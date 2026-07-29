@@ -97,12 +97,16 @@ space / enter / backspace / tab / capslock / shift-left / shift-right
 
 ### 오디오 재생 규칙
 
-`hooks/useKeySound.js`가 담당한다. 건드릴 때 지켜야 할 것:
+`hooks/useKeySound.js` 가 담당한다. **Web Audio API(AudioContext) 기반**이다.
 
-- **키 누를 때마다 `new Audio()`를 만들지 말 것.** 프리로드해서 캐시한다.
-- **재생은 `cloneNode()`로** 한다. 같은 엘리먼트를 재사용하면 연타 시 소리가 잘린다.
-- **자동재생 정책 unlock이 필요하다.** 브라우저는 사용자 상호작용 전에는 재생을 막는다. 최초 `pointerdown`/`keydown` 때 무음으로 한 번 재생해 잠금을 푼다.
-- 축을 바꾸면 캐시를 새로 만든다 (`baseDir`이 deps에 있음).
+mp3 를 한 번만 디코드해 `AudioBuffer` 로 들고 있다가, 재생할 때마다 `BufferSource` 를 새로 만들어 물린다. 지연이 거의 없고 동시 재생도 자유롭다.
+
+건드릴 때 지켜야 할 것:
+
+- **`HTMLAudioElement` + `cloneNode()` 방식으로 되돌리지 말 것.** 연타 시 소리가 잘리고, 사파리에서 재생이 실패한다. 실제로 그 방식으로 짰다가 소리가 아예 안 나서 갈아엎었다.
+- **자동재생 정책 해제는 `ctx.resume()`.** 브라우저는 사용자 상호작용 전에 AudioContext 를 `suspended` 상태로 둔다. 최초 `pointerdown`/`keydown` 에서 resume 한다.
+- **에러를 조용히 삼키지 말 것.** `.catch(() => {})` 로 묻으면 소리가 안 날 때 원인을 찾을 수 없다. 훅이 `ready` / `error` 를 반환하고 UI 가 이를 표시한다.
+- 축을 바꾸면 해당 폴더를 다시 fetch/decode 한다 (`baseDir` 이 deps 에 있음).
 
 ---
 
