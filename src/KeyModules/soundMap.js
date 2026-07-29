@@ -1,5 +1,25 @@
 // keyboard-script-mac.js 의 매핑 로직을 옮긴 것.
-// 축(스위치)마다 폴더를 하나씩 두는 구조로 확장할 수 있게 baseDir을 분리해 둠.
+// 축(스위치)별로 public/sounds/<dir>/ 아래에 같은 파일명 세트를 두는 구조.
+// 새 축을 추가하려면 SWITCHES 에 항목 하나 넣고 폴더만 떨구면 됨.
+
+export const SWITCHES = [
+  {
+    id: 'milky-v2-45g',
+    label: '밀키축 V2',
+    weight: '45g',
+    dir: 'milky-v2-45g',
+    available: true,
+  },
+  { id: 'coral', label: '코랄축', weight: null, dir: 'coral', available: false },
+  { id: 'hani', label: '하니축', weight: null, dir: 'hani', available: false },
+  { id: 'jaejal', label: '재잘축', weight: null, dir: 'jaejal', available: false },
+];
+
+export const DEFAULT_SWITCH_ID = 'milky-v2-45g';
+
+export function getSwitch(id) {
+  return SWITCHES.find((s) => s.id === id) || SWITCHES[0];
+}
 
 const SOUNDS = {
   function: 'row-function.mp3',

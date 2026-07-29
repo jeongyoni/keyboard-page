@@ -404,3 +404,27 @@ header, section {
     transition: box-shadow 0.3s ease-in-out;
 }
 
+
+/* 축 선택 */
+.switch-select {
+  text-align: center;
+  margin: 16px 0 24px;
+}
+.switch-select label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #555;
+}
+.switch-select select {
+  padding: 8px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+.switch-select select:focus {
+  outline: 2px solid #ffc107;
+  outline-offset: 1px;
+}

@@ -2,11 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Home from './Home';
 import Keyboard from './components/Keyboard';
 import { useKeySound } from './hooks/useKeySound';
+import { SWITCHES, DEFAULT_SWITCH_ID } from './KeyModules/soundMap';
 
 function App() {
   const [pressedKey, setPressedKey] = useState('');
   const [text, setText] = useState('');
-  const { play } = useKeySound();
+  const [switchId, setSwitchId] = useState(DEFAULT_SWITCH_ID);
+  const { play } = useKeySound({ switchId });
 
   // 가상 키보드 클릭
   const handleMouseDown = useCallback(
@@ -43,6 +45,24 @@ function App() {
       <Home />
       <hr />
       <h2>가상 키보드</h2>
+
+      <div className="switch-select">
+        <label htmlFor="switch-select">축 선택</label>
+        <select
+          id="switch-select"
+          value={switchId}
+          onChange={(e) => setSwitchId(e.target.value)}
+        >
+          {SWITCHES.map((sw) => (
+            <option key={sw.id} value={sw.id} disabled={!sw.available}>
+              {sw.label}
+              {sw.weight ? ` (${sw.weight})` : ''}
+              {sw.available ? '' : ' — 준비중'}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <Keyboard
         layoutKey="9009_wkltkl"
         pressedKey={pressedKey}

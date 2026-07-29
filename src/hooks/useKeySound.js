@@ -1,27 +1,36 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { getSoundFile, getSoundFileByCode, ALL_SOUND_FILES } from '../KeyModules/soundMap';
-
-const BASE = `${import.meta.env.BASE_URL}sounds/`;
+import {
+  getSoundFile,
+  getSoundFileByCode,
+  ALL_SOUND_FILES,
+  getSwitch,
+  DEFAULT_SWITCH_ID,
+} from '../KeyModules/soundMap';
 
 /**
  * 키 사운드 재생 훅.
- * - 파일을 미리 로드해 캐시 (키 누를 때마다 new Audio() 하던 것 제거)
+ * - 선택된 축의 파일을 미리 로드해 캐시 (키 누를 때마다 new Audio() 하던 것 제거)
  * - cloneNode 로 재생해서 연타 시 소리가 잘리지 않음
- * - 브라우저 자동재생 정책 때문에 첫 사용자 상호작용 시 한 번 unlock
+ * - 브라우저 자동재생 정책 때문에 첫 상호작용 시 한 번 unlock
  */
-export function useKeySound({ volume = 1 } = {}) {
+export function useKeySound({ switchId = DEFAULT_SWITCH_ID, volume = 1 } = {}) {
   const cacheRef = useRef({});
   const unlockedRef = useRef(false);
 
-  // 프리로드
+  const sw = getSwitch(switchId);
+  const baseDir = `${import.meta.env.BASE_URL}sounds/${sw.dir}/`;
+
+  // 축이 바뀌면 캐시를 새로 만듦
   useEffect(() => {
-    const cache = cacheRef.current;
+    const cache = {};
     ALL_SOUND_FILES.forEach((file) => {
-      const audio = new Audio(BASE + file);
+      const audio = new Audio(baseDir + file);
       audio.preload = 'auto';
       audio.volume = volume;
       cache[file] = audio;
     });
+    cacheRef.current = cache;
+
     return () => {
       Object.values(cache).forEach((a) => {
         a.pause();
@@ -29,9 +38,8 @@ export function useKeySound({ volume = 1 } = {}) {
       });
       cacheRef.current = {};
     };
-  }, [volume]);
+  }, [baseDir, volume]);
 
-  // 자동재생 정책 해제 — 최초 상호작용 때 무음으로 한 번 찔러줌
   const unlock = useCallback(() => {
     if (unlockedRef.current) return;
     unlockedRef.current = true;
