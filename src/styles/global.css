@@ -308,8 +308,8 @@ nav ul li:last-child a {
 
 .keyboard-item img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--bg-elev);

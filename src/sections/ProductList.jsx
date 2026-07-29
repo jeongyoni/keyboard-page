@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { PRODUCTS } from '../data/products';
-import { getSwitch, formatSwitchLabel } from '../data/switches';
+import { getDesign } from '../data/keyboardDesigns';
+import { getLayout } from '../data/keyLayouts';
 
-/** 제품 목록. 각 카드에서 해당 제품의 축으로 바로 체험을 시작할 수 있다. */
-function ProductList({ onTrySwitch }) {
+/** 제품 목록. 각 카드에서 해당 구성(축·배열·디자인) 그대로 체험을 시작할 수 있다. */
+function ProductList({ onExperience }) {
   const [search, setSearch] = useState('');
 
   const filtered = useMemo(() => {
@@ -30,20 +31,19 @@ function ProductList({ onTrySwitch }) {
         {filtered.length === 0 ? <p>검색 결과가 없습니다.</p> : null}
 
         {filtered.map((product) => {
-          const sw = getSwitch(product.switchId);
+          const design = getDesign(product.designId);
+          const layout = getLayout(product.layoutKey);
           return (
             <div className="keyboard-item" key={product.id}>
-              <img src={product.image} alt={product.name} />
+              <img src={product.image} alt={product.name} loading="lazy" />
               <h3>{product.name}</h3>
-              <p className="switch-tag">{formatSwitchLabel(sw)}</p>
+              <p className="switch-tag">
+                {design.name} · {layout.name.split(' · ')[0]}
+              </p>
               <p>{product.description}</p>
               <div className="card-actions">
-                <button
-                  type="button"
-                  onClick={() => onTrySwitch(product.switchId)}
-                  disabled={!sw.available}
-                >
-                  {sw.available ? '이 축 소리 듣기' : '사운드 준비중'}
+                <button type="button" onClick={() => onExperience(product)}>
+                  이 키보드 체험
                 </button>
                 <a href={product.link} target="_blank" rel="noreferrer">
                   <button type="button">제품 보기</button>
@@ -58,7 +58,7 @@ function ProductList({ onTrySwitch }) {
 }
 
 ProductList.propTypes = {
-  onTrySwitch: PropTypes.func.isRequired,
+  onExperience: PropTypes.func.isRequired,
 };
 
 export default ProductList;
