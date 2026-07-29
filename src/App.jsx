@@ -6,7 +6,6 @@ import ExperienceSection from './sections/ExperienceSection';
 import SiteFooter from './sections/SiteFooter';
 import { useKeySound } from './hooks/useKeySound';
 import { DEFAULT_SWITCH_ID, getSwitch } from './data/switches';
-import { createImeRouter, createPlayGate, diffComposition } from './utils/ime';
 
 function App() {
   const [switchId, setSwitchId] = useState(DEFAULT_SWITCH_ID);
@@ -29,18 +28,16 @@ function App() {
 
   const handleKeyUp = useCallback(() => setPressedKey(''), []);
 
-  // 한글 입력을 keydown / compositionupdate 중 한 경로로만 보낸다.
-  // 양쪽 다 재생하면 같은 소리가 겹쳐 찢어진다. utils/ime.js 참고
-  const imeRef = useRef(createImeRouter());
-  // 그래도 새어나오는 중복을 막는 최후 방어선
-  const gateRef = useRef(createPlayGate());
-
-  // 물리 키보드 입력 — 이 사이트의 핵심 상호작용
+  // 물리 키보드 입력 — 이 사이트의 핵심 상호작용.
+  //
+  // 소리는 물리 키(e.code) 하나로만 결정한다. code 는 한글 IME 조합 중에도
+  // ('Process' keydown 이어도) 항상 실제 물리 키를 담고 있어, 한글·영문·겹자모를
+  // 구분 없이 이 한 경로로 처리한다. compositionupdate 를 함께 쓰던 예전 구조는
+  // 같은 키가 두 번 울리거나(찢어짐) 완성형 음절이 매핑되지 않아 무음이 새는
+  // 문제가 있어 걷어냈다. 텍스트 입력 자체는 textarea 가 controlled 로 처리한다.
   useEffect(() => {
     const onDown = (e) => {
       if (e.repeat) return; // 길게 누를 때 연속 재생 방지
-      if (!imeRef.current.acceptKeydown(e)) return;
-      if (!gateRef.current()) return;
       play(e.key, e.code);
       setPressedKey(e.key);
     };
@@ -51,34 +48,6 @@ function App() {
     return () => {
       window.removeEventListener('keydown', onDown);
       window.removeEventListener('keyup', onUp);
-    };
-  }, [play]);
-
-  // 한글 IME: keydown 의 e.key 가 'Process' 로 오는 환경을 위한 보조 경로
-  useEffect(() => {
-    const el = inputRef.current;
-    if (!el) return undefined;
-
-    let prev = '';
-    const onUpdate = (e) => {
-      const added = diffComposition(prev, e.data || '');
-      prev = e.data || '';
-      if (!added) return;
-      if (!imeRef.current.acceptComposition()) return;
-      if (!gateRef.current()) return;
-      play(added);
-      setPressedKey(added);
-    };
-    const onEnd = () => {
-      prev = '';
-      setPressedKey('');
-    };
-
-    el.addEventListener('compositionupdate', onUpdate);
-    el.addEventListener('compositionend', onEnd);
-    return () => {
-      el.removeEventListener('compositionupdate', onUpdate);
-      el.removeEventListener('compositionend', onEnd);
     };
   }, [play]);
 

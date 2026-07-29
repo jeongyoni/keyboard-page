@@ -79,11 +79,42 @@ export function getSoundFile(key) {
 }
 
 /**
- * 좌/우 쉬프트를 구분할 때 사용. KeyboardEvent.code 기반.
- * @returns {string|null}
+ * 물리 키(KeyboardEvent.code)를 사운드 파일명으로 변환.
+ *
+ * 사운드가 행(row) 단위라, 어떤 문자가 입력됐는지가 아니라 "어느 물리 키를
+ * 눌렀는지"만 알면 된다. code 는 한글 IME 조합 중에도('Process' keydown 이어도)
+ * 항상 실제 물리 키를 담고 있어, 한글·영문·겹자모를 구분 없이 한 경로로 처리한다.
+ * 이 방식이 keydown/compositionupdate 이중 경로(이중재생·무음 누락)를 원천 차단한다.
+ *
+ * @returns {string|null} 매칭되는 소리가 없으면 null
  */
 export function getSoundFileByCode(code) {
-  if (code === 'ShiftLeft') return SOUND_FILES.shiftLeft;
-  if (code === 'ShiftRight') return SOUND_FILES.shiftRight;
-  return null;
+  if (!code) return null;
+  return CODE_TO_FILE[code] || null;
+}
+
+// 물리 키 code -> 사운드 파일. ANSI 배열 기준, 행/특수키를 그대로 반영한다.
+const CODE_ROWS = {
+  function: ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'],
+  number: ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'IntlYen'],
+  r3: ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'IntlBackslash'],
+  r2: ['KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote'],
+  r1: ['KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash'],
+  control: ['ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft', 'MetaRight'],
+};
+
+const CODE_SPECIAL = {
+  Space: SOUND_FILES.space,
+  Enter: SOUND_FILES.enter,
+  NumpadEnter: SOUND_FILES.enter,
+  Backspace: SOUND_FILES.backspace,
+  Tab: SOUND_FILES.tab,
+  CapsLock: SOUND_FILES.capslock,
+  ShiftLeft: SOUND_FILES.shiftLeft,
+  ShiftRight: SOUND_FILES.shiftRight,
+};
+
+const CODE_TO_FILE = { ...CODE_SPECIAL };
+for (const [name, codes] of Object.entries(CODE_ROWS)) {
+  for (const code of codes) CODE_TO_FILE[code] = SOUND_FILES[name];
 }

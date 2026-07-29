@@ -78,23 +78,29 @@ docs/SPEC.md                    요구사항 / 로드맵
 
 `App.jsx`의 `useEffect`가 `window`에 `keydown`/`keyup`을 건다. 화면의 키캡 클릭은 보조 수단이다. 이 우선순위를 뒤집지 말 것 — 사용자가 자기 키보드를 두드리는 게 이 사이트의 요점이다.
 
-### 한글 IME 처리 — 여기서 제일 많이 깨진다
+### 한글 IME 처리 — 소리는 물리 키(e.code) 하나로만 결정한다
 
-**`if (e.isComposing) return` 로 막으면 안 된다.** macOS 두벌식 IME 는 첫 자모부터 `isComposing` 이 계속 true 라, 이렇게 짜면 맥에서 한글 타이핑 중 소리가 전혀 안 난다. 실제로 그렇게 짰다가 맥에서 무음이 되는 문제가 있었다.
+**소리는 입력된 문자가 아니라 눌린 물리 키로 정한다.** `KeyboardEvent.code` 는 한글 IME 조합 중에도 — keydown 의 `e.key` 가 `'Process'` 로 와도 — 항상 실제 물리 키(`KeyA`, `KeyD`…)를 담는다. 사운드가 행(row) 단위라 "어느 물리 키를 눌렀는지"만 알면 충분하므로, `data/soundMap.js` 의 `getSoundFileByCode(code)` 가 code 를 행/특수키 사운드로 바로 바꾼다. 한글·영문·겹자모가 **구분 없이 이 한 경로**로 흐른다.
 
-판정은 `utils/ime.js` 의 `shouldIgnoreKeydown()` 이 담당한다:
+`App.jsx` 의 전역 `keydown` 리스너는 이게 전부다:
 
-- 조합 중이어도 **자모와 특수키(Backspace, Space, Enter…)는 통과**시킨다
-- 실제 키를 알 수 없는 경우(`Process`, `Unidentified`)만 무시하고 `compositionupdate` 에 맡긴다
-- `e.repeat` 은 항상 차단 (길게 누를 때 연속 재생 방지)
+```js
+if (e.repeat) return;       // 길게 누를 때 연속 재생 방지
+play(e.key, e.code);        // useKeySound 가 code 우선으로 해결
+```
 
-**두 경로를 동시에 쓰면 안 된다.** 맥 한글 입력에서는 keydown 과 compositionupdate 가 같은 키에 대해 함께 발생해, 양쪽 다 재생하면 같은 샘플이 겹쳐 진폭이 두 배가 되고 소리가 찢어진다. 영어는 compositionupdate 가 없어 멀쩡하므로 증상이 한글에서만 나타난다.
+`useKeySound` 의 재생 해결 순서는 `getSoundFileByCode(code) || getSoundFile(key)` 다. 물리 입력은 code 로, 화면 키캡 클릭은 문자 legend(`getSoundFile`)로 처리된다.
 
-`createImeRouter()` 가 런타임에 어느 경로를 쓸지 한 번 판별해 고정한다. keydown 이 자모를 실어 주면 keydown 만, `Process` 만 주면 compositionupdate 만 쓴다. `createPlayGate()` 는 그래도 새어나오는 중복을 막는 최후 방어선이다.
+**과거의 이중 경로(keydown + compositionupdate)로 되돌리지 말 것.** 예전엔 한글을 `compositionupdate` 로도 재생했는데 두 가지 문제가 있었다:
 
-`diffComposition()` 은 자모 수가 늘었을 때만 소리를 낸다. 글자 수로 세면 안 된다 — "마"→"만" 과 "만"→"마" 가 둘 다 1글자라 추가인지 삭제인지 구분되지 않는다. NFD 로 분해하되 **겹자모(ㄶ, ㅘ 등)는 2로 세야** 한다. `countJamo()` 참고.
+- **이중재생(찢어짐):** 맥에서 같은 키에 keydown 과 compositionupdate 가 함께 발생해 같은 샘플이 겹쳐 진폭이 두 배가 되고 소리가 찢어졌다.
+- **무음 누락:** `compositionupdate.data` 는 조합 문자열 전체("아", "안")로 오는데 `getSoundFile` 은 낱개 자모만 매핑할 수 있어, 음절의 첫 자모만 소리가 나고 모음·받침은 무음이었다. "안녕"이 6타건 중 2번만 울렸다.
 
-이 로직은 브라우저·OS 마다 동작이 달라 눈으로 확인하기 어렵다. `npm test` 로 검증한다.
+물리 키(code)만 보면 이 두 문제가 원천적으로 사라진다 — IME 상태·조합 문자열을 아예 참조하지 않으니 겹자모(ㅘ, ㄶ)도 매 타건 정확히 한 번 울린다. 라우터·게이트·조합 diff 로직은 그래서 전부 제거했다.
+
+**`compositionupdate` 를 소리에 다시 끌어들이지 말 것.** 텍스트 입력은 `TypingArea` 의 textarea 가 controlled(`value`/`onChange`)로 이미 처리하므로 소리 목적의 composition 리스너는 필요 없다.
+
+`getSoundFileByCode` 의 code→행 매핑은 `npm test`(`src/utils/__tests__/soundMap.test.mjs`)로 검증한다. "안녕" 전 타건이 소리 나는지, 특수키가 맞게 매핑되는지 회귀 테스트가 있다.
 
 ### 사운드는 키 단위가 아니라 행 단위
 
@@ -105,9 +111,7 @@ row-function / row-number / row-r3 / row-r2 / row-r1 / row-control
 space / enter / backspace / tab / capslock / shift-left / shift-right
 ```
 
-`data/soundMap.js`의 `getSoundFile(key)`가 키 이름을 파일명으로 바꾼다. 한글·영문 각인을 모두 매핑에 넣어야 두벌식 입력에서도 소리가 난다.
-
-좌/우 쉬프트만 `KeyboardEvent.code`로 구분한다 (`getSoundFileByCode`).
+물리 키보드 입력은 `getSoundFileByCode(code)`가 code(`KeyQ`→r3, `KeyA`→r2…)를 행 사운드로 바꾼다. 화면 키캡 클릭은 code 가 없으므로 `getSoundFile(key)`가 문자 legend(한글·영문 각인, 특수키 이름)를 파일명으로 바꾼다. 둘 다 같은 행/특수키 사운드 세트를 가리킨다.
 
 ### 오디오 재생 규칙
 
@@ -160,16 +164,16 @@ mp3 를 한 번만 디코드해 `AudioBuffer` 로 들고 있다가, 재생할 �
 
 ## 변경 후 확인
 
-테스트가 없으므로 최소한 이건 돌린다.
-
 ```bash
+npm test       # code -> 행 매핑 / 한글 회귀 테스트
 npm run build
 ```
 
-그리고 `npm run dev`로 직접 확인:
+그리고 `npm run dev`로 직접 확인 (특히 한글은 브라우저·OS 마다 달라 귀로 확인해야 한다):
 
 - 키보드를 두드렸을 때 소리가 나는가
-- 한글 입력 시 소리가 두 번 나지 않는가
+- **한글 입력 시 매 타건마다 소리가 나는가** (음절 중간 모음·받침이 무음이 되지 않는가)
+- 한글 입력 시 소리가 두 번 겹쳐 찢어지지 않는가
 - 키를 길게 눌렀을 때 연속 재생되지 않는가
 - 축을 바꿨을 때 소리가 실제로 달라지는가
 - 화면 키캡을 클릭했을 때도 소리가 나는가
