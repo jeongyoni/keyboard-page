@@ -40,12 +40,14 @@ const ExperienceSection = forwardRef(function ExperienceSection(
         <p className="sound-status">사운드 불러오는 중...</p>
       ) : null}
 
-      <Keyboard
-        layoutKey="9009_wkltkl"
-        pressedKey={pressedKey}
-        onKeyDown={onKeyDown}
-        onKeyUp={onKeyUp}
-      />
+      <div className="keyboard-deck">
+        <Keyboard
+          layoutKey="9009_wkltkl"
+          pressedKey={pressedKey}
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+        />
+      </div>
 
       <TypingArea value={text} onChange={onTextChange} inputRef={inputRef} />
     </section>

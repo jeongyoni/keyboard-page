@@ -2,10 +2,15 @@
   position: absolute;
   padding: 0;
   border: none;
-  background: #d4d4d4;
+  background: linear-gradient(180deg, #cfc9bf 0%, #a9a297 100%);
   border-radius: 6px;
   cursor: pointer;
-  transition: transform 60ms ease, filter 60ms ease;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+  transition: transform 60ms ease, filter 60ms ease, box-shadow 60ms ease;
+}
+
+.keycap:hover {
+  filter: brightness(1.05);
 }
 
 .keytop {
@@ -16,7 +21,7 @@
   justify-content: center;
   gap: 1px;
   border-radius: 4px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.22);
   font-family: inherit;
   user-select: none;
   transition: box-shadow 60ms ease, filter 60ms ease;
@@ -25,20 +30,21 @@
 .legend {
   font-size: 13px;
   line-height: 1.1;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .sublegend {
   font-size: 10px;
   line-height: 1.1;
-  opacity: 0.65;
+  opacity: 0.6;
 }
 
 .keycap.pressed {
-  transform: translateY(1px);
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .keycap.pressed .keytop {
-  box-shadow: none;
-  filter: brightness(0.88);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  filter: brightness(0.9);
 }

@@ -1,33 +1,58 @@
 .wrapper {
   text-align: center;
-  margin: 20px 0 24px;
+  margin: 4px 0 8px;
 }
 
 .label {
   display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #666;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .select {
-  padding: 9px 16px;
+  padding: 11px 40px 11px 18px;
+  font-family: var(--font-sans);
   font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
+  font-weight: 600;
+  color: var(--text);
+  background-color: var(--card);
+  background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+    linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+  background-position: calc(100% - 20px) center, calc(100% - 14px) center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.select:hover {
+  border-color: var(--accent);
 }
 
 .select:focus-visible {
-  outline: 2px solid #ffc107;
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* 드롭다운 옵션은 브라우저 렌더라 다크 표면만 지정 */
+.select option {
+  background: var(--bg-elev);
+  color: var(--text);
 }
 
 .description {
-  margin: 10px auto 0;
+  margin: 14px auto 0;
   max-width: 460px;
   font-size: 13px;
   line-height: 1.6;
-  color: #777;
+  color: var(--text-dim);
 }
