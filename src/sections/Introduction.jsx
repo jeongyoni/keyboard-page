@@ -8,7 +8,6 @@ function Introduction() {
       <div className="pix-hero-copy">
         <div className="pix-badges">
           <span className="pix-badge pix-badge--green">★ NEW</span>
-          <span className="pix-badge">■ 8-BIT</span>
           <span className="pix-badge">▤ 72 DESIGNS</span>
         </div>
 

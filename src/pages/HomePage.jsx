@@ -32,7 +32,7 @@ function HomePage() {
         </div>
         <div className="pix-cta-actions">
           <button type="button" className="pix-btn pix-btn--green" onClick={() => navigate('experience')}>
-            ▶ 체험 시작
+            ▶ START
           </button>
           <button type="button" className="pix-btn pix-btn--amber" onClick={() => navigate('designs')}>
             ▧ 디자인 구경
