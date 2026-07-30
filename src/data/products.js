@@ -56,14 +56,4 @@ export const PRODUCTS = [
     description: '올블랙 단색에 은은한 그레이 각인. 미니멀 다크. 저소음 밀키축.',
     link: 'https://rooky.co.kr/shop/product_detail.html?pd_no=19485',
   },
-  {
-    id: 'gs104-milky',
-    name: 'GS104-R 밀키 화이트',
-    switchId: 'milky-v2-45g',
-    designId: 'milky',
-    layoutKey: 'full-104',
-    image: './images/kbd-milky.png',
-    description: '올 화이트 키캡에 실버 하우징. 깔끔한 풀배열 기본기.',
-    link: 'https://www.rooky.co.kr/',
-  },
 ];

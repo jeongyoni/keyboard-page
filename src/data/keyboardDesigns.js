@@ -19,16 +19,6 @@ const MOD_LEGENDS = new Set([
 
 export const KEYBOARD_DESIGNS = [
   {
-    id: 'milky',
-    name: '밀키 화이트',
-    description: '그루브스톤 밀키 라인. 전체 화이트 키캡 + 실버 케이스로 깔끔하게.',
-    case: '#c7cad0',
-    base: { cap: '#f5f4f1', text: '#4a4a4a' },
-    mod: { cap: '#e4e3df', text: '#4a4a4a' },
-    accent: { cap: '#f5f4f1', text: '#4a4a4a' },
-    accentKeys: [],
-  },
-  {
     id: 'purpler',
     name: 'GV8 퍼플러',
     description: '라벤더 하우징 + 화이트 알파 + 라일락 모디 + 핑크 포인트. GV8M-8K 퍼플러 실측.',
@@ -90,7 +80,7 @@ export const KEYBOARD_DESIGNS = [
   },
 ];
 
-export const DEFAULT_DESIGN_ID = 'milky';
+export const DEFAULT_DESIGN_ID = 'gs85-light';
 
 export function getDesign(id) {
   return KEYBOARD_DESIGNS.find((d) => d.id === id) || KEYBOARD_DESIGNS[0];

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Key from './Key';
 import { getLayout, DEFAULT_LAYOUT_KEY } from '../../data/keyLayouts';
 import { flattenKleLayout } from '../../utils/kle';
-import { getDesign, resolveKeyColors } from '../../data/keyboardDesigns';
+import { getDesign, resolveKeyColors, DEFAULT_DESIGN_ID } from '../../data/keyboardDesigns';
 import { getKoreanLegend } from '../../data/koreanLegends';
 import styles from './Keyboard.module.css';
 
@@ -26,7 +26,7 @@ function osLegend(legend, os) {
  * 로 잡아, 키보드 전체 폭이 컨테이너를 절대 넘지 않는다(=잘리지 않는다).
  * 넓으면 54px(원래 크기), 좁으면 그만큼 작아진다. JS 측정에 의존하지 않는다.
  */
-function Keyboard({ layoutKey = DEFAULT_LAYOUT_KEY, designId = 'milky', os = 'win', pressedKey = '', onKeyDown, onKeyUp }) {
+function Keyboard({ layoutKey = DEFAULT_LAYOUT_KEY, designId = DEFAULT_DESIGN_ID, os = 'win', pressedKey = '', onKeyDown, onKeyUp }) {
   const layout = getLayout(layoutKey);
   const design = getDesign(designId);
 
