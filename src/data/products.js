@@ -7,16 +7,6 @@
  */
 export const PRODUCTS = [
   {
-    id: 'gv10-purple-crayon',
-    name: 'GV10 수제윤활 퍼플크레용 V2',
-    switchId: 'milky-v2-45g',
-    designId: 'purple-crayon',
-    layoutKey: 'compact-84',
-    image: './images/milky-crayon-v2.png',
-    description: '라벤더 하우징에 파스텔 크레용 각인. 부드러운 수제윤활 타건감.',
-    link: 'https://www.rooky.co.kr/shop/product_detail.html?pd_no=18701',
-  },
-  {
     id: 'gv8-purpler',
     name: 'GV8M-8K 수제윤활 퍼플러',
     switchId: 'milky-v2-45g',
@@ -47,14 +37,24 @@ export const PRODUCTS = [
     link: 'https://rooky.co.kr/shop/product_detail.html?pd_no=19031',
   },
   {
-    id: 'gv10-smoky',
-    name: 'GV10 스모키',
+    id: 'gv10-blackcat',
+    name: 'GV10 수제윤활 검은고양이',
     switchId: 'milky-v2-45g',
-    designId: 'smoky',
-    layoutKey: 'compact-84',
-    image: './images/kbd-smoky.png',
-    description: '반투명 차콜 그레이 단색. 어디에도 어울리는 다크 톤.',
-    link: 'https://www.rooky.co.kr/',
+    designId: 'blackcat',
+    layoutKey: 'full-104',
+    image: './images/gv10-blackcat.jpg',
+    description: '아이보리 크림에 오렌지 포인트. 검은고양이 노벨티. 저소음 갈축.',
+    link: 'https://rooky.co.kr/shop/product_detail.html?pd_no=19154',
+  },
+  {
+    id: 'gv10-darkcity',
+    name: 'GV10M-8K 수제윤활 다크시티',
+    switchId: 'milky-v2-45g',
+    designId: 'darkcity',
+    layoutKey: 'full-104',
+    image: './images/gv10-darkcity.jpg',
+    description: '올블랙 단색에 은은한 그레이 각인. 미니멀 다크. 저소음 밀키축.',
+    link: 'https://rooky.co.kr/shop/product_detail.html?pd_no=19485',
   },
   {
     id: 'gs104-milky',

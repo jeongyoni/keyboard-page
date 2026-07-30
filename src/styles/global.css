@@ -678,6 +678,32 @@ footer p:first-child {
   letter-spacing: -0.01em;
 }
 
+/* 카탈로그 검색창 */
+.catalog-search {
+  display: block;
+  width: min(100%, 420px);
+  margin: 0 auto clamp(16px, 2.4vw, 22px);
+  padding: 12px 20px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.catalog-search::placeholder {
+  color: var(--muted);
+}
+
+.catalog-search:focus {
+  border-color: var(--accent);
+  background: var(--card-hover);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
 /* 시리즈 필터 칩 */
 .catalog-filter {
   display: flex;

@@ -29,16 +29,6 @@ export const KEYBOARD_DESIGNS = [
     accentKeys: [],
   },
   {
-    id: 'purple-crayon',
-    name: 'GV10 퍼플크레용',
-    description: '라벤더 케이스에 화이트 키캡, 파스텔 퍼플 각인과 핑크 포인트.',
-    case: '#bfb0da',
-    base: { cap: '#f6f3fa', text: '#8a6fb8' },
-    mod: { cap: '#e9e1f5', text: '#7d61ac' },
-    accent: { cap: '#f2b6d2', text: '#7a4a68' },
-    accentKeys: ['ESC'],
-  },
-  {
     id: 'purpler',
     name: 'GV8 퍼플러',
     description: '라벤더 하우징 + 화이트 알파 + 라일락 모디 + 핑크 포인트. GV8M-8K 퍼플러 실측.',
@@ -66,16 +56,6 @@ export const KEYBOARD_DESIGNS = [
     base: { cap: '#e6e0cc', text: '#6a5f48' },
     mod: { cap: '#dcd6c1', text: '#6a5f48' },
     accent: { cap: '#e6e0cc', text: '#6a5f48' },
-    accentKeys: [],
-  },
-  {
-    id: 'smoky',
-    name: '스모키',
-    description: 'GV10 스모키. 반투명 차콜 그레이 단색의 어두운 톤.',
-    case: '#26282b',
-    base: { cap: '#3b3e42', text: '#d9dbde' },
-    mod: { cap: '#2f3237', text: '#c2c5ca' },
-    accent: { cap: '#3b3e42', text: '#d9dbde' },
     accentKeys: [],
   },
   {

@@ -14,6 +14,7 @@ const noop = () => {};
  */
 function DesignGalleryPage() {
   const [series, setSeries] = useState('all');
+  const [query, setQuery] = useState('');
 
   // 각 상품에 시리즈를 붙이고, 시리즈별 개수를 센다
   const catalog = useMemo(
@@ -25,7 +26,12 @@ function DesignGalleryPage() {
     for (const item of catalog) c[item.series] = (c[item.series] || 0) + 1;
     return c;
   }, [catalog]);
-  const filtered = series === 'all' ? catalog : catalog.filter((i) => i.series === series);
+  const q = query.trim().toLowerCase();
+  const filtered = catalog.filter(
+    (i) =>
+      (series === 'all' || i.series === series) &&
+      (!q || i.name.toLowerCase().includes(q))
+  );
 
   return (
     <>
@@ -76,6 +82,15 @@ function DesignGalleryPage() {
           그루브스톤 실제 키캡·키보드 디자인 전부. 사진을 누르면 공식 스토어 상품으로 이동해요.
         </p>
 
+        <input
+          className="catalog-search"
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="디자인 이름으로 검색 (예: 칸딘스키, 크레용, 고양이)"
+          aria-label="디자인 검색"
+        />
+
         <div className="catalog-filter" role="tablist" aria-label="시리즈 필터">
           {CATALOG_SERIES.filter((s) => s.id === 'all' || counts[s.id]).map((s) => (
             <button
@@ -90,6 +105,10 @@ function DesignGalleryPage() {
             </button>
           ))}
         </div>
+
+        {filtered.length === 0 ? (
+          <p className="gallery-lead">검색 결과가 없습니다.</p>
+        ) : null}
 
         <div className="catalog-grid">
           {filtered.map((item) => (
