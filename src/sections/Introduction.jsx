@@ -30,21 +30,6 @@ function Introduction() {
             ▧ 디자인 구경
           </button>
         </div>
-
-        <div className="pix-stats">
-          <div className="pix-stat">
-            <span className="pix-stat-num">72</span>
-            <span className="pix-stat-label">키캡 디자인</span>
-          </div>
-          <div className="pix-stat">
-            <span className="pix-stat-num">2</span>
-            <span className="pix-stat-label">배열 (104·84)</span>
-          </div>
-          <div className="pix-stat">
-            <span className="pix-stat-num">WIN·MAC</span>
-            <span className="pix-stat-label">각인 전환</span>
-          </div>
-        </div>
       </div>
 
       {/* HUD 카드 (QUEST.LOG 느낌) */}
@@ -66,12 +51,12 @@ function Introduction() {
           <SegBar label="정숙성" value={7} max={16} tone="red" />
           <div className="pix-hud-cells">
             <div className="pix-cell">
-              <b>72</b>
-              <span>디자인</span>
+              <b>45g</b>
+              <span>무게</span>
             </div>
             <div className="pix-cell">
-              <b>2</b>
-              <span>배열</span>
+              <b>리니어</b>
+              <span>타입</span>
             </div>
             <div className="pix-cell">
               <b>∞</b>
