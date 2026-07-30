@@ -1115,3 +1115,6 @@ footer p:first-child {
 @media (max-width: 1179px) {
   .pixel .switch-note { margin: 4px auto 22px; transform: rotate(-1.5deg); }
 }
+
+/* 헤더 브랜드 로고 이미지 (그루브스톤 실제 로고) */
+.pixel .pix-logo-img { width: 24px; height: 24px; image-rendering: auto; display: block; }

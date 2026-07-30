@@ -6,17 +6,7 @@ function SiteHeader() {
   return (
     <header className="pix-header">
       <a className="pix-logo" href="#/">
-        <svg className="pix-logo-ico" width="22" height="22" viewBox="0 0 3 3" aria-hidden="true">
-          <rect x="0" y="0" width="1" height="1" fill="#6aa63a" />
-          <rect x="1" y="0" width="1" height="1" fill="#e0a63c" />
-          <rect x="2" y="0" width="1" height="1" fill="#c74b3f" />
-          <rect x="0" y="1" width="1" height="1" fill="#e0a63c" />
-          <rect x="1" y="1" width="1" height="1" fill="#4f93c9" />
-          <rect x="2" y="1" width="1" height="1" fill="#6aa63a" />
-          <rect x="0" y="2" width="1" height="1" fill="#c74b3f" />
-          <rect x="1" y="2" width="1" height="1" fill="#6aa63a" />
-          <rect x="2" y="2" width="1" height="1" fill="#e0a63c" />
-        </svg>
+        <img className="pix-logo-img" src="./favicon.png" width="24" height="24" alt="" />
         GROOVESTONE
       </a>
 
