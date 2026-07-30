@@ -6,11 +6,6 @@ function Introduction() {
   return (
     <section id="introduction" className="pix-hero">
       <div className="pix-hero-copy">
-        <div className="pix-badges">
-          <span className="pix-badge pix-badge--green">★ NEW</span>
-          <span className="pix-badge">▤ 72 DESIGNS</span>
-        </div>
-
         <h1 className="pix-title">
           내 키보드로 듣는
           <br />
