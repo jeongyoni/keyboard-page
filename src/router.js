@@ -21,12 +21,16 @@ export function parseHash(hash) {
     const [k, v = ''] = pair.split('=');
     params[decodeURIComponent(k)] = decodeURIComponent(v);
   }
-  const name = path.startsWith('/experience') ? 'experience' : 'home';
+  let name = 'home';
+  if (path.startsWith('/experience')) name = 'experience';
+  else if (path.startsWith('/designs')) name = 'designs';
   return { name, params };
 }
 
+const PATHS = { experience: '/experience', designs: '/designs' };
+
 export function buildHash(name, params = {}) {
-  const path = name === 'experience' ? '/experience' : '/';
+  const path = PATHS[name] || '/';
   const query = Object.entries(params)
     .filter(([, v]) => v != null && v !== '')
     .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)

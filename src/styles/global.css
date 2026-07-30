@@ -581,6 +581,94 @@ footer p:first-child {
 }
 
 /* =========================================================================
+   키캡 디자인 갤러리 (#/designs)
+   ========================================================================= */
+
+.gallery {
+  width: min(94%, 1200px);
+  margin: 0 auto clamp(56px, 9vw, 100px);
+  text-align: center;
+}
+
+.gallery h2 {
+  font-size: clamp(24px, 3.4vw, 34px);
+  letter-spacing: -0.02em;
+}
+
+.gallery h2::before {
+  content: 'GROOVESTONE';
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.gallery-lead {
+  margin: 10px auto clamp(28px, 5vw, 48px);
+  color: var(--text-dim);
+  max-width: 520px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: clamp(18px, 2.5vw, 26px);
+}
+
+.design-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.design-card:hover,
+.design-card:focus-visible {
+  outline: none;
+  transform: translateY(-6px);
+  background: var(--card-hover);
+  border-color: var(--accent);
+  box-shadow: var(--shadow), 0 0 0 1px var(--accent-glow);
+}
+
+/* 미니 키보드 프리뷰. 클릭은 카드가 받도록 키캡 이벤트는 막는다. */
+.design-card-preview {
+  pointer-events: none;
+  padding: 10px 6px 4px;
+}
+
+.design-card-info h3 {
+  margin: 14px 0 0;
+  font-size: 17px;
+  color: var(--text);
+}
+
+.design-card-info p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.design-card-cta {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-bright);
+}
+
+/* =========================================================================
    반응형 / 접근성
    ========================================================================= */
 
