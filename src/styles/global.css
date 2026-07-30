@@ -856,6 +856,29 @@ footer p:first-child {
   --p-muted: #8a8266;
   --p-soft: #4a463a;
 
+  /* 다크 테마 토큰을 픽셀 값으로 재정의 → 기존 컴포넌트(모듈)들이 자동으로 픽셀화된다 */
+  --bg: var(--p-bg);
+  --bg-elev: var(--p-panel);
+  --card: var(--p-panel);
+  --card-hover: var(--p-panel2);
+  --border: var(--p-line);
+  --border-strong: var(--p-line);
+  --text: var(--p-ink);
+  --text-dim: var(--p-soft);
+  --muted: var(--p-muted);
+  --accent: var(--p-green);
+  --accent-bright: var(--p-green-d);
+  --accent-ink: #0e2a06;
+  --accent-glow: rgba(106, 166, 58, 0.3);
+  --danger: var(--p-red);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-pill: 0px;
+  --shadow: 5px 5px 0 var(--p-line);
+  --shadow-sm: 3px 3px 0 var(--p-line);
+  --font-sans: 'Galmuri11', 'DungGeunMo', monospace;
+  --font-mono: 'Galmuri11', 'DungGeunMo', monospace;
+
   min-height: 100vh;
   color: var(--p-ink);
   background-color: var(--p-bg);
@@ -1025,3 +1048,38 @@ footer p:first-child {
   .pixel #introduction { grid-template-columns: 1fr; }
   .pixel .pix-hud { order: -1; }
 }
+
+/* 체험/디자인 페이지 픽셀 통일 — 헤더 바 / 패널 / 헤딩 */
+.pixel .exp-header {
+  background: var(--p-ink);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 4px solid #000;
+}
+.pixel .back-link {
+  font-family: 'Galmuri11', monospace;
+  color: var(--p-panel);
+  background: transparent;
+  border: 2px solid var(--p-panel);
+  border-radius: 0;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+.pixel .back-link:hover { color: var(--p-ink); background: var(--p-panel); border-color: var(--p-panel); }
+.pixel .exp-title { color: #cfc8ad; font-family: 'Galmuri11', monospace; }
+.pixel .store-link { color: #8fd15a; font-family: 'Galmuri11', monospace; }
+.pixel .store-link:hover { color: #a8e07a; }
+
+.pixel #tactile-experience {
+  background: var(--p-panel);
+  border: 3px solid var(--p-line);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--p-line);
+}
+.pixel #tactile-experience > h2,
+.pixel .gallery h2,
+.pixel .gallery h3,
+.pixel .catalog-title { font-family: 'Galmuri14', monospace; }
+
+/* 키캡 legend 는 픽셀 폰트로 (테마 통일) */
+.pixel .keyboard-stage .legend,
+.pixel .keyboard-stage .sublegend { font-family: 'Galmuri11', monospace; }

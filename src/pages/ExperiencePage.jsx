@@ -58,7 +58,7 @@ function ExperiencePage({ initialSwitchId, initialDesignId, initialLayoutKey, in
   }, [play]);
 
   return (
-    <>
+    <div className="pixel">
       <header className="exp-header">
         <button type="button" className="back-link" onClick={() => navigate('home')}>
           ← 홈으로
@@ -96,7 +96,7 @@ function ExperiencePage({ initialSwitchId, initialDesignId, initialLayoutKey, in
       />
 
       <SiteFooter />
-    </>
+    </div>
   );
 }
 

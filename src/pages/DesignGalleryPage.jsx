@@ -34,7 +34,7 @@ function DesignGalleryPage() {
   );
 
   return (
-    <>
+    <div className="pixel">
       <header className="exp-header">
         <button type="button" className="back-link" onClick={() => navigate('home')}>
           ← 홈으로
@@ -130,7 +130,7 @@ function DesignGalleryPage() {
       </section>
 
       <SiteFooter />
-    </>
+    </div>
   );
 }
 
