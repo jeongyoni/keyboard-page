@@ -6,6 +6,9 @@
  *   2. 아래 배열에 항목을 추가하고 available: true 로 둔다
  *
  * 사운드가 아직 없는 축은 available: false 로 두면 UI에서 "준비중"으로 표시된다.
+ *
+ * stats: 체험 화면의 '스탯 포스트잇'에 쓰는 값 (0~16).
+ *   tactile 타건감(걸림/키감) · sound 소리 깊이(통울림) · quiet 정숙성(조용함)
  */
 export const SWITCHES = [
   {
@@ -16,6 +19,7 @@ export const SWITCHES = [
     dir: 'milky-v2-45g',
     description: '부드럽고 걸림 없는 리니어. 조용한 편이라 사무실에서도 무난.',
     available: true,
+    stats: { tactile: 6, sound: 9, quiet: 13 },
   },
   {
     id: 'coral',
@@ -25,6 +29,7 @@ export const SWITCHES = [
     dir: 'coral',
     description: '',
     available: false,
+    stats: { tactile: 8, sound: 11, quiet: 11 },
   },
   {
     id: 'hani',
@@ -34,6 +39,7 @@ export const SWITCHES = [
     dir: 'hani',
     description: '',
     available: false,
+    stats: { tactile: 13, sound: 11, quiet: 8 },
   },
   {
     id: 'jaejal',
@@ -43,6 +49,7 @@ export const SWITCHES = [
     dir: 'jaejal',
     description: '',
     available: false,
+    stats: { tactile: 15, sound: 14, quiet: 3 },
   },
 ];
 

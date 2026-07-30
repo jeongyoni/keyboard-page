@@ -19,9 +19,8 @@ function HomePage() {
     <div className="pixel">
       <SiteHeader />
       <Introduction />
-      <ProductList onExperience={goExperience} />
 
-      {/* 하단 CTA — "PRESS START" 패널 */}
+      {/* "PRESS START" 패널 — 히어로 바로 아래 상단 배치 */}
       <section className="pix-cta-panel">
         <div className="pix-cta-copy">
           <h2>
@@ -41,6 +40,7 @@ function HomePage() {
         </div>
       </section>
 
+      <ProductList onExperience={goExperience} />
       <SiteFooter />
     </div>
   );

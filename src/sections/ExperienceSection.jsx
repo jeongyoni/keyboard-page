@@ -8,6 +8,8 @@ import OsToggle from '../components/OsToggle/OsToggle';
 import ModeToggle from '../components/ModeToggle/ModeToggle';
 import TypingArea from '../components/TypingArea/TypingArea';
 import TypingPractice from '../components/TypingPractice/TypingPractice';
+import SwitchNote from '../components/SwitchNote/SwitchNote';
+import { getSwitch } from '../data/switches';
 
 /**
  * 이 사이트의 핵심 섹션.
@@ -39,6 +41,7 @@ const ExperienceSection = forwardRef(function ExperienceSection(
 ) {
   return (
     <section id="tactile-experience" ref={ref}>
+      <SwitchNote sw={getSwitch(switchId)} />
       <h2>키감 체험하기</h2>
       <p>
         축·배열·디자인·각인을 고르고 키보드를 두드려보세요. 화면의 키를 눌러도 같은 소리가 납니다.
