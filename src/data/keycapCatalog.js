@@ -509,3 +509,23 @@ export const KEYCAP_CATALOG = [
     "link": "https://www.groovestone.co.kr/products/1"
   }
 ];
+
+/**
+ * 시리즈(카테고리) 분류. 그루브스톤 공식 시리즈 기준.
+ * 이름에 시리즈 키워드가 있으면 해당 시리즈로, 없으면 'etc'.
+ */
+export const CATALOG_SERIES = [
+  { id: 'all', label: '전체' },
+  { id: 'masterpiece', label: '명작', re: /명작|칸딘스키|별이빛나는밤|키스/ },
+  { id: 'ours', label: '우리의 것', re: /우리의|훈민정음|혜원|단원|칠칠|표훈사/ },
+  { id: 'crayon', label: '크레용', re: /크레용/ },
+  { id: 'pets', label: '댕냥이', re: /고양이|냥|호랑이|까치|행복하개|게으르냥/ },
+  { id: 'etc', label: '기타', re: null },
+];
+
+export function getSeries(name) {
+  for (const s of CATALOG_SERIES) {
+    if (s.re && s.re.test(name)) return s.id;
+  }
+  return 'etc';
+}

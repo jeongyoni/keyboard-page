@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Keyboard from '../components/Keyboard/Keyboard';
 import SiteFooter from '../sections/SiteFooter';
 import { KEYBOARD_DESIGNS } from '../data/keyboardDesigns';
-import { KEYCAP_CATALOG } from '../data/keycapCatalog';
+import { KEYCAP_CATALOG, CATALOG_SERIES, getSeries } from '../data/keycapCatalog';
 import { navigate } from '../router';
 
 const noop = () => {};
@@ -13,6 +13,20 @@ const noop = () => {};
  * - 아래: 전체 라인업 — 그루브스톤 실제 제품 사진 카탈로그(노벨티/아트 포함).
  */
 function DesignGalleryPage() {
+  const [series, setSeries] = useState('all');
+
+  // 각 상품에 시리즈를 붙이고, 시리즈별 개수를 센다
+  const catalog = useMemo(
+    () => KEYCAP_CATALOG.map((item) => ({ ...item, series: getSeries(item.name) })),
+    []
+  );
+  const counts = useMemo(() => {
+    const c = { all: catalog.length };
+    for (const item of catalog) c[item.series] = (c[item.series] || 0) + 1;
+    return c;
+  }, [catalog]);
+  const filtered = series === 'all' ? catalog : catalog.filter((i) => i.series === series);
+
   return (
     <>
       <header className="exp-header">
@@ -62,8 +76,23 @@ function DesignGalleryPage() {
           그루브스톤 실제 키캡·키보드 디자인 전부. 사진을 누르면 공식 스토어 상품으로 이동해요.
         </p>
 
+        <div className="catalog-filter" role="tablist" aria-label="시리즈 필터">
+          {CATALOG_SERIES.filter((s) => s.id === 'all' || counts[s.id]).map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              role="tab"
+              aria-selected={series === s.id}
+              className={`catalog-chip ${series === s.id ? 'is-active' : ''}`}
+              onClick={() => setSeries(s.id)}
+            >
+              {s.label} <span className="catalog-chip-count">{counts[s.id] || 0}</span>
+            </button>
+          ))}
+        </div>
+
         <div className="catalog-grid">
-          {KEYCAP_CATALOG.map((item) => (
+          {filtered.map((item) => (
             <a
               key={item.id}
               className="catalog-card"
