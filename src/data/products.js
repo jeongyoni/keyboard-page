@@ -17,6 +17,16 @@ export const PRODUCTS = [
     link: 'https://www.rooky.co.kr/shop/product_detail.html?pd_no=18701',
   },
   {
+    id: 'gv8-purpler',
+    name: 'GV8M-8K 수제윤활 퍼플러',
+    switchId: 'milky-v2-45g',
+    designId: 'purpler',
+    layoutKey: 'compact-84',
+    image: './images/gv8-purpler.jpg',
+    description: '라벤더 하우징에 화이트 알파·핑크 포인트. 밀키V2축 38g.',
+    link: 'https://rooky.co.kr/shop/product_detail.html?pd_no=19740',
+  },
+  {
     id: 'gs85-light',
     name: 'GS85 표준윤활 라이트',
     switchId: 'milky-v2-45g',

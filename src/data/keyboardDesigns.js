@@ -39,6 +39,16 @@ export const KEYBOARD_DESIGNS = [
     accentKeys: ['ESC'],
   },
   {
+    id: 'purpler',
+    name: 'GV8 퍼플러',
+    description: '라벤더 하우징 + 화이트 알파 + 라일락 모디 + 핑크 포인트. GV8M-8K 퍼플러 실측.',
+    case: '#bda9e2',
+    base: { cap: '#f6f3fb', text: '#6f52a6' },
+    mod: { cap: '#dccbf0', text: '#6a4f9e' },
+    accent: { cap: '#f3bcd8', text: '#7d3f66' },
+    accentKeys: ['ESC', 'Enter'],
+  },
+  {
     id: 'gs85-light',
     name: 'GS85 라이트',
     description: '크림 알파 + 웜그레이 모디 + 세이지 그린 포인트. 차분한 라이트 톤.',
