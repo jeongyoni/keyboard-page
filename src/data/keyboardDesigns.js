@@ -78,6 +78,16 @@ export const KEYBOARD_DESIGNS = [
     accent: { cap: '#e39a4e', text: '#fff5ea' },
     accentKeys: ['ESC'],
   },
+  {
+    id: 'whitecat',
+    name: '흰고양이',
+    description: '블랙 하우징 + 크림 알파 + 블랙 모디 + 오렌지 포인트. 흰고양이 노벨티. GV10M-8K 흰고양이 실측.',
+    case: '#17171b',
+    base: { cap: '#e9e3d2', text: '#35322c' },
+    mod: { cap: '#26262a', text: '#c9c4b6' },
+    accent: { cap: '#eaa85e', text: '#2a1c0e' },
+    accentKeys: ['ESC'],
+  },
 ];
 
 export const DEFAULT_DESIGN_ID = 'milky';
