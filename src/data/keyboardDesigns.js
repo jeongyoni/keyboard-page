@@ -78,6 +78,26 @@ export const KEYBOARD_DESIGNS = [
     accent: { cap: '#3b3e42', text: '#d9dbde' },
     accentKeys: [],
   },
+  {
+    id: 'darkcity',
+    name: '다크시티',
+    description: '올블랙 단색에 은은한 그레이 각인. 미니멀 다크. GV10M-8K 다크시티 실측.',
+    case: '#1a1a1c',
+    base: { cap: '#3c3c3f', text: '#8f8f93' },
+    mod: { cap: '#2b2b2e', text: '#7c7c80' },
+    accent: { cap: '#3c3c3f', text: '#8f8f93' },
+    accentKeys: [],
+  },
+  {
+    id: 'blackcat',
+    name: '검은고양이',
+    description: '아이보리 크림 + 오렌지 포인트. 검은고양이 노벨티. GV10 검은고양이 실측.',
+    case: '#d7d2bf',
+    base: { cap: '#e8e2d0', text: '#45423a' },
+    mod: { cap: '#cfc9b6', text: '#45423a' },
+    accent: { cap: '#e39a4e', text: '#fff5ea' },
+    accentKeys: ['ESC'],
+  },
 ];
 
 export const DEFAULT_DESIGN_ID = 'milky';
